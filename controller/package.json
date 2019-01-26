@@ -1,0 +1,25 @@
+{
+  "name": "shello-controller",
+  "version": "1.0.0",
+  "description": "Controller for Shello Project for GGJ19",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html --out-dir ../Assets/HTML/"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^5.12.1",
+    "parcel-bundler": "^1.11.0",
+    "prettier": "^1.16.1"
+  },
+  "dependencies": {
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-easy-swipe": "0.0.17"
+  },
+  "alias": {
+    "air-console": "./vendor/airconsole-1.7.0.js"
+  }
+}
