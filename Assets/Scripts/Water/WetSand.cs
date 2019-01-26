@@ -45,4 +45,37 @@ public class WetSand : MonoBehaviour
         yield break;
     }
 
+
+
+  // private void Update()
+    //{
+    //float step = speed * Time.deltaTime;
+    // if (baseWave)
+    // {
+    //   if (comingIn)
+    //    {
+    //     if (transform.position == endPos.position)
+    //     {
+    //        Instantiate(wetSandPrefab, transform.position, transform.rotation);
+    //        comingIn = false;
+    //     }
+    //   }
+    //
+    ///   if (transform.position == startPos.position)
+    //    {
+    //        comingIn = true;
+    //    }
+    //  }
+
+    //  float pingPong = Mathf.PingPong(Time.time * speed, 1);
+    //   transform.position = Vector3.Lerp(startPos.position, endPos.position, pingPong);
+//}
+
+    //public Transform startPos; 
+    //public Transform endPos;
+    //public bool baseWave;
+    //public bool comingIn;
+    //public GameObject wetSandPrefab;
+    // public float waveCrest;
+
 }
