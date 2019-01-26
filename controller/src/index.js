@@ -7,6 +7,8 @@ import AirConsole from "air-console";
 
 const airconsole = new AirConsole();
 
+airconsole.setOrientation(AirConsole.ORIENTATION_LANDSCAPE);
+
 ReactDOM.render(
   <div id="app">
     <Flipper airconsole={airconsole} side="Left" />
