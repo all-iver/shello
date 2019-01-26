@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import AirConsole from "air-console";
 
-import egg from "../../assets/images/egg_1.png";
+import Egg from "./Egg";
 
 class ReadyView extends Component {
   render() {
     const { airconsole, unready } = this.props;
 
     return (
-      <div>
-        <image src={egg} />
+      <div id="readyView">
+        <Egg />
         <div className="unready">
           <label>Click to Un-Ready</label>
           <button

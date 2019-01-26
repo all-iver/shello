@@ -54,3 +54,7 @@ body {
 #introView button.ready {
   background-color: green;
 }
+
+#readyView img {
+  height: 80vh;
+}
