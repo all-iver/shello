@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8265377315100657381}
-  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 55.6, y: 1, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!212 &8265377315100657380
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -95,5 +95,6 @@ MonoBehaviour:
   startPos: {fileID: 0}
   endPos: {fileID: 0}
   speed: 2
+  comingIn: 0
   wetSandPrefab: {fileID: 7246693406795377357, guid: 8cb72e3ac20364c699b569a0e35c5799,
     type: 3}
