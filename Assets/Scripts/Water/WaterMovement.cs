@@ -34,7 +34,7 @@ public class WaterMovement : MonoBehaviour
                 if (prevPos < transform.position.y)
                 {
                     isGoingOut = true;
-                    Debug.Log("water is NOW going out");
+                    //Debug.Log("water is NOW going out");
                     Instantiate(wetSandPrefab, transform.position, transform.rotation);
                 }
             }
@@ -44,7 +44,7 @@ public class WaterMovement : MonoBehaviour
                 if (prevPos > transform.position.y)
                 {
                     isGoingOut = false;
-                    Debug.Log("water is NOW going in");
+                    //Debug.Log("water is NOW going in");
                 }
             }
 
