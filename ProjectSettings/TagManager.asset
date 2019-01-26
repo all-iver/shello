@@ -42,9 +42,12 @@ TagManager:
   - name: Sand
     uniqueID: 3406702649
     locked: 0
+  - name: Water
+    uniqueID: 3021086781
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Water
-    uniqueID: 3021086781
+  - name: foreground
+    uniqueID: 1914821571
     locked: 0
