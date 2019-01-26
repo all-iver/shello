@@ -124,6 +124,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: OceanPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 926180657940416717, guid: 02fadbdeec98b4a3581ed398843d7295,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 926180657940416715, guid: 02fadbdeec98b4a3581ed398843d7295,
         type: 3}
       propertyPath: m_RootOrder
@@ -147,7 +152,12 @@ PrefabInstance:
     - target: {fileID: 926180657940416715, guid: 02fadbdeec98b4a3581ed398843d7295,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.5
+      value: 11.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 926180657940416715, guid: 02fadbdeec98b4a3581ed398843d7295,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5963454826972133252, guid: 02fadbdeec98b4a3581ed398843d7295,
         type: 3}
@@ -157,6 +167,11 @@ PrefabInstance:
     - target: {fileID: 6980370916247969176, guid: 02fadbdeec98b4a3581ed398843d7295,
         type: 3}
       propertyPath: delta
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5560595799886292903, guid: 02fadbdeec98b4a3581ed398843d7295,
+        type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 675977213192384862, guid: 02fadbdeec98b4a3581ed398843d7295,
@@ -197,7 +212,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &808141401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,8 +225,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e37d83ebce05ad74683fd3228dde9e7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  browserStartMode: 3
-  controllerHtml: {fileID: 102900000, guid: d48fd1000e0484b70a6a50db67788a11, type: 3}
+  browserStartMode: 4
+  controllerHtml: {fileID: 102900000, guid: ee824ee7942893849b3f368bad6fb82e, type: 3}
   autoScaleCanvas: 1
 --- !u!4 &808141402
 Transform:
@@ -247,7 +262,7 @@ PrefabInstance:
     - target: {fileID: 4531967275482231485, guid: b5dc683d5b883624390699992e1bb706,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 6.4
       objectReference: {fileID: 0}
     - target: {fileID: 4531967275482231485, guid: b5dc683d5b883624390699992e1bb706,
         type: 3}
@@ -294,6 +309,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4531967275482231486, guid: b5dc683d5b883624390699992e1bb706,
+        type: 3}
+      propertyPath: orthographic size
+      value: 7.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5dc683d5b883624390699992e1bb706, type: 3}
 --- !u!1001 &1500799497
@@ -307,6 +327,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Controller
+      objectReference: {fileID: 0}
+    - target: {fileID: 2213912264283038772, guid: 3053b17ad9e28ef4db0091c4883fd2f4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2213912264283038774, guid: 3053b17ad9e28ef4db0091c4883fd2f4,
         type: 3}
