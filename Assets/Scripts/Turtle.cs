@@ -8,6 +8,8 @@ public class Turtle : MonoBehaviour {
 	Rigidbody2D rb;
     public float lurchForce = 1;
     public Transform leftFlipper, rightFlipper;
+    [System.NonSerialized]
+    public bool useKeyboardInput;
 
 	void Start (){
 		rb = GetComponent<Rigidbody2D>();
@@ -25,19 +27,19 @@ public class Turtle : MonoBehaviour {
 	}
 
     void Update() {
-        if (Input.GetKeyDown("right"))
-            swipedRightSide = true;
-        if (Input.GetKeyDown("left"))
-            swipedLeftSide = true;
+        if (useKeyboardInput) {
+            if (Input.GetKeyDown("right"))
+                swipedRightSide = true;
+            if (Input.GetKeyDown("left"))
+                swipedLeftSide = true;
+        }
     }
 
 	void FixedUpdate() {
 		if (swipedLeftSide) {
-            Debug.Log(transform.up * lurchForce);
 			rb.AddForceAtPosition(transform.up * lurchForce, leftFlipper.position, ForceMode2D.Impulse);
         }
 		if (swipedRightSide) {
-            Debug.Log(transform.up * lurchForce);
 			rb.AddForceAtPosition(transform.up * lurchForce, rightFlipper.position, ForceMode2D.Impulse);
         }
         swipedLeftSide = swipedRightSide = false;
