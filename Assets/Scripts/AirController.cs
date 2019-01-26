@@ -19,7 +19,7 @@ public class AirController : MonoBehaviour {
         Waiting,
         InProgress
     }
-    public GameState gameState;
+    GameState gameState;
 
     public GameObject playerPrefab;
     public Dictionary<int, Player> players = new Dictionary<int, Player> (); 
@@ -136,7 +136,6 @@ public class AirController : MonoBehaviour {
     }
 
     void OnMessage(int from, JToken data){
-        Debug.Log(data);
         if (!players.ContainsKey(from) || data["action"] == null)
             return;
         Debug.Log("here");
