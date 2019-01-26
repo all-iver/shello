@@ -1,7 +1,8 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import AirConsole from "air-console";
 
-import egg from "../../assets/images/egg_1.png";
+import ReadyView from "../components/ReadyView";
+import EggView from "../components/EggView";
 
 class IntroView extends Component {
   constructor(props) {
@@ -17,37 +18,23 @@ class IntroView extends Component {
     return (
       <div id="introView">
         {this.state.ready ? (
-          <div className="unready">
-            <label>Click to Un-Ready</label>
-            <button
-              onClick={() => {
-                this.setState({
-                  ready: false
-                });
-
-                airconsole.message(AirConsole.SCREEN, {
-                  action: "unready"
-                });
-              }}
-            >
-              X
-            </button>
-          </div>
+          <ReadyView
+            airconsole={airconsole}
+            unready={() =>
+              this.setState({
+                ready: false
+              })
+            }
+          />
         ) : (
-          <button
-            onClick={() => {
+          <EggView
+            airconsole={airconsole}
+            ready={() =>
               this.setState({
                 ready: true
-              });
-
-              airconsole.message(AirConsole.SCREEN, {
-                action: "ready"
-              });
-            }}
-            className="ready"
-          >
-            Click to Ready!
-          </button>
+              })
+            }
+          />
         )}
       </div>
     );
