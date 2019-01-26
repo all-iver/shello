@@ -3,36 +3,52 @@ using UnityEngine;
 
 public class WaterMovement : MonoBehaviour
 {
-    public Transform startPos;
-    public Transform endPos;
+    [Range(0, 5)]
     public float speed;
-    public bool comingIn;
+    public float yShift = 1.5f;  // Amount to move left and right from the start point
+    public float xShift = 0f;
+    private Vector3 startV3Pos;
 
+    [Header("Wet Sand")]
     public GameObject wetSandPrefab;
+    public bool baseWaterLayer;
+    public bool isGoingOut;
+    private float prevPos;
+
+    void Start()
+    {
+        startV3Pos = transform.position;
+    }
 
     void Update()
     {
-        float step = speed * Time.deltaTime;
+        Vector3 v = startV3Pos;
+        v.y += yShift * Mathf.Sin(Time.time * speed);
+        v.x += xShift * Mathf.Sin(Time.time * speed);
+        transform.position = v;
 
-        if (comingIn)
+        if (baseWaterLayer)
         {
-            transform.position = Vector3.MoveTowards(transform.position, endPos.position, step);
-        }
-        if (transform.position == endPos.position)
-        {
-            comingIn = false;
-            Instantiate(wetSandPrefab,transform.position, transform.rotation);
-        }
-        if (!comingIn)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, startPos.position, step);
-        }
-        if (transform.position == startPos.position)
-        {
-            comingIn = true;
+            if (!isGoingOut)
+            {
+                if (prevPos < transform.position.y)
+                {
+                    isGoingOut = true;
+                    Debug.Log("water is NOW going out");
+                    Instantiate(wetSandPrefab, transform.position, transform.rotation);
+                }
+            }
+
+            if (isGoingOut)
+            {
+                if (prevPos > transform.position.y)
+                {
+                    isGoingOut = false;
+                    Debug.Log("water is NOW going in");
+                }
+            }
+
+            prevPos = v.y;
         }
     }
-
-   
-
 }
