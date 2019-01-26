@@ -4,7 +4,7 @@ import AirConsole from "air-console";
 
 class Flipper extends Component {
   render() {
-    const { airconsole } = this.props;
+    const { airconsole, side } = this.props;
 
     return (
       <Swipe
@@ -12,7 +12,7 @@ class Flipper extends Component {
         onSwipeMove={console.log}
         onSwipeEnd={() => {
           airconsole.message(AirConsole.SCREEN, {
-            action: "swipeEnd"
+            action: `swipe${side}End`
           });
         }}
       >

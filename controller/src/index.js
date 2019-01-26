@@ -9,8 +9,8 @@ const airconsole = new AirConsole();
 
 ReactDOM.render(
   <div id="app">
-    <Flipper airconsole={airconsole} />
-    <Flipper airconsole={airconsole} />
+    <Flipper airconsole={airconsole} side="Left" />
+    <Flipper airconsole={airconsole} side="Right" />
   </div>,
   document.getElementById("root")
 );
