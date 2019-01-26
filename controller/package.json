@@ -18,7 +18,8 @@
   "dependencies": {
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "react-easy-swipe": "0.0.17"
+    "react-easy-swipe": "0.0.17",
+    "webfontloader": "^1.6.28"
   },
   "alias": {
     "air-console": "./vendor/airconsole-1.7.0.js"
