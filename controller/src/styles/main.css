@@ -17,15 +17,28 @@ body {
 }
 
 #introView {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 10px;
   background-color: darkgreen;
   padding: 10px;
+  height: calc(100vh - 20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #introView button {
-  height: calc(100vh - 20px);
+  height: 50vh;
+  width: 50vw;
   background-color: green;
   border-radius: 12px;
+  font-size: 40px;
+  color: white;
+  font-weight: bold;
+}
+
+#introView button.ready {
+  background-color: red;
+}
+
+#introView button.unready {
+  background-color: green;
 }
