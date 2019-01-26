@@ -7,7 +7,7 @@ class EggView extends Component {
   render() {
     const { airconsole, ready } = this.props;
     return (
-      <div id="readyView">
+      <div id="eggView">
         <Egg
           ready={() => {
             ready();

@@ -56,6 +56,10 @@ body {
   background-color: green;
 }
 
-#readyView img {
+#eggView img {
   height: 80vh;
+}
+
+#readyView img {
+  height: 90vh;
 }
