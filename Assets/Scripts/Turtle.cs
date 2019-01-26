@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Turtle : MonoBehaviour {
 
+    private Animator turtleAnimController;
+
     bool swipedRightSide, swipedLeftSide;
 	Rigidbody2D rb;
     public float lurchForce = 1;
@@ -19,7 +21,9 @@ public class Turtle : MonoBehaviour {
 
 	void Start (){
 		rb = GetComponent<Rigidbody2D>();
-	}
+        turtleAnimController = GetComponent<Animator>();
+
+    }
 
     public void Reset() {
         playerIDText.text = "";
@@ -48,10 +52,15 @@ public class Turtle : MonoBehaviour {
 
 	void FixedUpdate() {
 		if (swipedLeftSide) {
-			rb.AddForceAtPosition(transform.up * lurchForce, leftFlipper.position, ForceMode2D.Impulse);
+            turtleAnimController.ResetTrigger("RightFlipper");
+            turtleAnimController.SetTrigger("LeftFlipper");
+            rb.AddForceAtPosition(transform.up * lurchForce, leftFlipper.position, ForceMode2D.Impulse);
         }
 		if (swipedRightSide) {
-			rb.AddForceAtPosition(transform.up * lurchForce, rightFlipper.position, ForceMode2D.Impulse);
+            turtleAnimController.ResetTrigger("LeftFlipper");
+            turtleAnimController.SetTrigger("RightFlipper");
+            rb.AddForceAtPosition(transform.up * lurchForce, rightFlipper.position, ForceMode2D.Impulse);
+
         }
         swipedLeftSide = swipedRightSide = false;
 	}
