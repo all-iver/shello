@@ -5,9 +5,9 @@ import "./styles/main.css";
 import Flipper from "./components/Flipper";
 import AirConsole from "air-console";
 
-const airconsole = new AirConsole();
-
-airconsole.setOrientation(AirConsole.ORIENTATION_LANDSCAPE);
+const airconsole = new AirConsole({
+  orientation: AirConsole.ORIENTATION_LANDSCAPE
+});
 
 ReactDOM.render(
   <div id="app">
