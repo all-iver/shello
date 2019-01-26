@@ -10,7 +10,21 @@ body {
   padding: 10px;
 }
 
-.flipper {
+#playView .flipper {
+  height: calc(100vh - 20px);
+  background-color: green;
+  border-radius: 12px;
+}
+
+#introView {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+  background-color: darkgreen;
+  padding: 10px;
+}
+
+#introView button {
   height: calc(100vh - 20px);
   background-color: green;
   border-radius: 12px;

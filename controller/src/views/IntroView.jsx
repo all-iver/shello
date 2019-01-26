@@ -1,17 +1,35 @@
 import React, { Component } from "react";
-import Flipper from "../components/Flipper";
+import AirConsole from "air-console";
 
-class PlayView extends Component {
+class IntroView extends Component {
   render() {
-    this.props = { airconsole };
+    const { airconsole } = this.props;
 
     return (
-      <div>
-        <Flipper airconsole={airconsole} side="Left" />
-        <Flipper airconsole={airconsole} side="Right" />
+      <div id="introView">
+        <button
+          onClick={() => {
+            console.log("ready");
+            airconsole.message(AirConsole.SCREEN, {
+              action: `ready`
+            });
+          }}
+        >
+          Ready
+        </button>
+        <button
+          onClick={() => {
+            console.log("unready");
+            airconsole.message(AirConsole.SCREEN, {
+              action: `unready`
+            });
+          }}
+        >
+          Un-Ready
+        </button>
       </div>
     );
   }
 }
 
-export default PlayView;
+export default IntroView;

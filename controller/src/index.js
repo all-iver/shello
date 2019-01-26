@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import "./styles/main.css";
 import PlayView from "./views/PlayView";
 import AirConsole from "air-console";
+import IntroView from "./views/IntroView";
 
 const airconsole = new AirConsole({
   orientation: AirConsole.ORIENTATION_LANDSCAPE
@@ -11,7 +12,7 @@ const airconsole = new AirConsole({
 
 ReactDOM.render(
   <div id="app">
-    <PlayView airconsole={airconsole} />
+    <IntroView airconsole={airconsole} />
   </div>,
   document.getElementById("root")
 );
