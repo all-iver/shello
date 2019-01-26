@@ -17,7 +17,8 @@ body {
 }
 
 #introView {
-  background-color: darkgreen;
+  background-image: url("../../assets/images/sand.png");
+  background-repeat: repeat;
   padding: 10px;
   height: calc(100vh - 20px);
   display: flex;
@@ -28,17 +29,28 @@ body {
 #introView button {
   height: 50vh;
   width: 50vw;
-  background-color: green;
   border-radius: 12px;
   font-size: 40px;
   color: white;
   font-weight: bold;
 }
 
-#introView button.ready {
-  background-color: red;
+#introView .unready {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
-#introView button.unready {
+#introView .unready button {
+  background-color: red;
+  height: 20vh;
+  width: 20vh;
+}
+
+#introView .unready label {
+  font-weight: bold;
+}
+
+#introView button.ready {
   background-color: green;
 }

@@ -1,5 +1,7 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import AirConsole from "air-console";
+
+import egg from "../../assets/images/egg_1.png";
 
 class IntroView extends Component {
   constructor(props) {
@@ -14,20 +16,39 @@ class IntroView extends Component {
 
     return (
       <div id="introView">
-        <button
-          onClick={() => {
-            this.setState({
-              ready: !this.state.ready
-            });
+        {this.state.ready ? (
+          <div className="unready">
+            <label>Click to Un-Ready</label>
+            <button
+              onClick={() => {
+                this.setState({
+                  ready: false
+                });
 
-            airconsole.message(AirConsole.SCREEN, {
-              action: this.state.ready ? "unready" : "ready"
-            });
-          }}
-          className={this.state.ready ? "ready" : "unready"}
-        >
-          Click to {this.state.ready ? "Un-Ready" : "Ready"}!
-        </button>
+                airconsole.message(AirConsole.SCREEN, {
+                  action: "unready"
+                });
+              }}
+            >
+              X
+            </button>
+          </div>
+        ) : (
+          <button
+            onClick={() => {
+              this.setState({
+                ready: true
+              });
+
+              airconsole.message(AirConsole.SCREEN, {
+                action: "ready"
+              });
+            }}
+            className="ready"
+          >
+            Click to Ready!
+          </button>
+        )}
       </div>
     );
   }
