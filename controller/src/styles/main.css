@@ -2,13 +2,12 @@ body {
   margin: 0;
 }
 
-#app {
+#playView {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 10px;
   background-color: darkgreen;
   padding: 10px;
-  margin: 0;
 }
 
 .flipper {
