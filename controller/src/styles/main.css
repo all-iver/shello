@@ -17,15 +17,40 @@ body {
 }
 
 #introView {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 10px;
-  background-color: darkgreen;
+  background-image: url("../../assets/images/sand.png");
+  background-repeat: repeat;
   padding: 10px;
+  height: calc(100vh - 20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #introView button {
-  height: calc(100vh - 20px);
-  background-color: green;
+  height: 50vh;
+  width: 50vw;
   border-radius: 12px;
+  font-size: 40px;
+  color: white;
+  font-weight: bold;
+}
+
+#introView .unready {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+#introView .unready button {
+  background-color: red;
+  height: 20vh;
+  width: 20vh;
+}
+
+#introView .unready label {
+  font-weight: bold;
+}
+
+#introView button.ready {
+  background-color: green;
 }

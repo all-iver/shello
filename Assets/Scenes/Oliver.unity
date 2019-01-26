@@ -207,8 +207,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e37d83ebce05ad74683fd3228dde9e7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  browserStartMode: 3
-  controllerHtml: {fileID: 102900000, guid: d48fd1000e0484b70a6a50db67788a11, type: 3}
+  browserStartMode: 4
+  controllerHtml: {fileID: 102900000, guid: 47ba8437c4160b142bfd6bbbe49400d1, type: 3}
   autoScaleCanvas: 1
 --- !u!4 &808141402
 Transform:

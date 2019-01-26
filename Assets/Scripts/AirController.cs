@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class AirController : MonoBehaviour {
 
-    public struct Player {
+    public class Player {
         public Turtle turtle;
         public bool isReady;
         public int deviceID; // air console's ID for the device, stays the same if they disconnect and reconnect 
@@ -37,6 +37,7 @@ public class AirController : MonoBehaviour {
         AirConsole.instance.onDisconnect += OnDisconnect;
         cam = FindObjectOfType<TrackingCamera>();
         instructionsText.text = "Loading...";
+        gameState = GameState.Waiting;
     }
 
     string GetStatusText() {
@@ -74,15 +75,23 @@ public class AirController : MonoBehaviour {
         ReMapPlayerIDs();
     }
 
+    Dictionary<string, string> GetGameStateData() {
+        Dictionary<string, string> data = new Dictionary<string, string>();
+        data.Add("action", "gameState");
+        data.Add("view", "PlayView");
+        return data;
+    }
+
     void BeginGame() {
         gameState = GameState.InProgress;
+        AirConsole.instance.Broadcast(GetGameStateData());
     }
 
     void Update() {
         instructionsText.text = GetStatusText();
         if (Input.GetKeyDown("space"))
             AddNewPlayer(-1, true);
-        if (AllPlayersAreReady() && gameState == GameState.Waiting) {
+        if (players.Count > 0 && AllPlayersAreReady() && gameState == GameState.Waiting) {
             readyTimer -= Time.deltaTime;
             if (readyTimer <= 0)
                 BeginGame();
@@ -127,10 +136,20 @@ public class AirController : MonoBehaviour {
     }
 
     void OnMessage(int from, JToken data){
-        //When I get a message, I check if it's from any of the devices stored in my device Id dictionary
-        if (players.ContainsKey(from) && data["action"] != null) {
-            //I forward the command to the relevant player script, assigned by device ID
-            players[from].turtle.ButtonInput(data["action"].ToString());
+        Debug.Log(data);
+        if (!players.ContainsKey(from) || data["action"] == null)
+            return;
+        Debug.Log("here");
+        if (gameState == GameState.Waiting) {
+            Debug.Log("here2");
+            if (data["action"].ToString() == "ready")
+                players[from].isReady = true;
+            if (data["action"].ToString() == "unready")
+                players[from].isReady = false;
+        } else {
+            if (players.ContainsKey(from) && data["action"] != null) {
+                players[from].turtle.ButtonInput(data["action"].ToString());
+            }
         }
     }
 
