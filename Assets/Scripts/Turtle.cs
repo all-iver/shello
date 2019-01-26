@@ -10,10 +10,20 @@ public class Turtle : MonoBehaviour {
     public Transform leftFlipper, rightFlipper;
     [System.NonSerialized]
     public bool useKeyboardInput;
+    public TMPro.TMP_Text playerIDText;
+    public int playerID {
+        set {
+            playerIDText.text = "" + value;
+        }
+    }
 
 	void Start (){
 		rb = GetComponent<Rigidbody2D>();
 	}
+
+    public void Reset() {
+        playerIDText.text = "";
+    }
 
 	public void ButtonInput(string input) {
 		switch (input) {
@@ -28,6 +38,7 @@ public class Turtle : MonoBehaviour {
 
     void Update() {
         if (useKeyboardInput) {
+            playerIDText.text = "K";
             if (Input.GetKeyDown("right"))
                 swipedRightSide = true;
             if (Input.GetKeyDown("left"))
