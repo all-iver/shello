@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import AirConsole from "air-console";
 
 import ReadyView from "../components/ReadyView";
+import EggView from "../components/EggView";
 
 class IntroView extends Component {
   constructor(props) {
@@ -26,20 +27,14 @@ class IntroView extends Component {
             }
           />
         ) : (
-          <button
-            onClick={() => {
+          <EggView
+            airconsole={airconsole}
+            ready={() =>
               this.setState({
                 ready: true
-              });
-
-              airconsole.message(AirConsole.SCREEN, {
-                action: "ready"
-              });
-            }}
-            className="ready"
-          >
-            Click to Ready!
-          </button>
+              })
+            }
+          />
         )}
       </div>
     );
