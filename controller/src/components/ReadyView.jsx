@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import AirConsole from "air-console";
 
-import Egg from "./Egg";
+import Turtle from "./Turtle";
 
 class ReadyView extends Component {
   render() {
@@ -9,7 +9,7 @@ class ReadyView extends Component {
 
     return (
       <div id="readyView">
-        <Egg />
+        <Turtle />
         <div className="unready">
           <label>Click to Un-Ready</label>
           <button
