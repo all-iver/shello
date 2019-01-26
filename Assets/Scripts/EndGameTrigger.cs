@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class EndGameTrigger : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("Trigger Entered by " + other);
+    AirController controller;
 
-        if (other.CompareTag("Player"))
-        {
-            Debug.Log("PLAYER " + other + " won the game");
-        }
+    void Start() {
+        controller = FindObjectOfType<AirController>();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Turtle turtle = other.gameObject.GetComponent<Turtle>();
+        if (!turtle)
+            return;
+        if (controller)
+            controller.OnTurtleCrossedFinishLine(turtle);        
     }
 }
