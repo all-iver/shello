@@ -162,6 +162,7 @@ img {
   position: absolute;
   left: 0;
   margin-left: -120px;
+  transform: scaleY(-1);
 }
 
 .flip {

@@ -45,9 +45,11 @@ class Turtle extends Component {
     );
   }
   render() {
+    const { swipeArrowsFlipped } = this.state;
     const { showSwipeArrows, body, number, hidden } = this.props;
 
     const style = hidden ? { display: "none" } : {};
+    const swipeArrowStyle = swipeArrowsFlipped ? { display: "none" } : {};
 
     return (
       <div className={`turtle ${hidden ? "" : "slideInUp"}`} style={style}>
@@ -60,9 +62,8 @@ class Turtle extends Component {
         {showSwipeArrows ? (
           <img
             src={swipeArrows}
-            className={`swipe-arrows ${
-              this.state.swipeArrowsFlipped ? "flip" : ""
-            }`}
+            style={swipeArrowStyle}
+            className={"swipe-arrows"}
           />
         ) : (
           ""
