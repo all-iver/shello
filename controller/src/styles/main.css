@@ -36,22 +36,6 @@ body {
   font-weight: bold;
 }
 
-#introView .unready {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-}
-
-#introView .unready button {
-  background-color: red;
-  height: 20vh;
-  width: 20vh;
-}
-
-#introView .unready label {
-  font-weight: bold;
-}
-
 #introView button.ready {
   background-color: green;
 }
@@ -83,4 +67,26 @@ body {
 
 #readyView img {
   height: 90vh;
+}
+
+#readyView button {
+  border: none;
+}
+
+#readyView .unready {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 10px;
+}
+
+#readyView .unready button {
+  background-color: red;
+  height: 20vh;
+  width: 20vh;
+}
+
+#readyView .unready label {
+  font-weight: bold;
+  margin-right: 10px;
 }

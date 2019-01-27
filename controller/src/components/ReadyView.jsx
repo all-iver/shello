@@ -11,7 +11,7 @@ class ReadyView extends Component {
       <div id="readyView">
         <Turtle />
         <div className="unready">
-          <label>Click to Un-Ready</label>
+          <label>Click to Un-Hatch</label>
           <button
             onClick={() => {
               unready();
