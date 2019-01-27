@@ -8,35 +8,56 @@ using UnityEngine.UI;
 public class AirController : MonoBehaviour {
 
     public class Player {
-        public Turtle turtle;
-        public bool isReady;
-        public int deviceID; // air console's ID for the device, stays the same if they disconnect and reconnect 
-        public bool isKeyboard;
-        public int place = -1; // the place this turtle finished in the race
-        public bool isInCurrentRace;
-
-        public void GetReadyForNextRace() {
-            place = -1;
-            isReady = false;
-            isInCurrentRace = false;
+        public enum PlayerState {
+            Initial,
+            InEgg,
+            Hatched,
+            InGame,
+            Finished,
+            TooManyPlayers,
+            Dropped
         }
 
-        public void SetConnected() {
+        public PlayerState state = PlayerState.Initial;
+        public int eggIndex = -1;
+        public GameObject egg;
+        public Turtle turtle;
+        public int deviceID; // air console's ID for the device, stays the same if they disconnect and reconnect 
+        public bool isKeyboard;
+        public bool isInCurrentRace; // in case the player drops, this will let us know if they were in the race
+        public float finishTime;
+
+        public bool IsAbleToPlay() {
+            return state != Player.PlayerState.Dropped && state != Player.PlayerState.TooManyPlayers;
+        }
+
+        public void GetReadyForNextRace() {
+            state = PlayerState.Initial;
+            finishTime = -1;
+        }
+
+        public bool HasEgg() {
+            return eggIndex >= 0;
+        }
+
+        public void ShowEgg() {
+            if (!HasEgg())
+                throw new System.Exception("Turtle has no egg");
+            egg.SetActive(true);
+        }
+
+        public void HideEgg() {
+            if (!HasEgg())
+                throw new System.Exception("Turtle has no egg");
+            egg.SetActive(false);
+        }
+
+        public void ShowTurtle() {
             turtle.gameObject.SetActive(true);
         }
 
-        public void SetDisconnected() {
+        public void HideTurtle() {
             turtle.gameObject.SetActive(false);
-        }
-
-        public bool IsConnected() {
-            return turtle.gameObject.activeSelf;
-        }
-
-        public bool hasFinished {
-            get {
-                return place != -1;
-            }
         }
     }
 
@@ -53,9 +74,11 @@ public class AirController : MonoBehaviour {
     public Image instructionsPanel;
     public TMPro.TMP_Text instructionsText;
     string code;
-    public float secondsToWaitWhenAllPlayersAreReady = 10;
+    public float secondsToWaitWhenAllPlayersAreHatched = 10;
     public float secondsToWaitForPlayersToFinish = 30;
-    float readyTimer, finishTimer;
+    float hatchTimer, finishTimer;
+    Nest nest;
+    float currentGameStartTime;
 
     void Awake () {
         AirConsole.instance.onMessage += OnMessage;		
@@ -65,22 +88,23 @@ public class AirController : MonoBehaviour {
         cam = FindObjectOfType<TrackingCamera>();
         instructionsText.text = "Loading...";
         gameState = GameState.WaitingToStart;
+        nest = FindObjectOfType<Nest>();
     }
 
     string GetStatusText() {
         string join = "\nTo join, go to airconsole.com on your phone and enter code " + code + ".";
         if (GetConnectedPlayerCount() == 0)
             return "Waiting for players." + join;
-        if (!AllPlayersAreReady())
+        if (gameState == GameState.WaitingToStart && !AllPlayersAreHatched())
             return "The game will start when everyone hatches!" + join;
         if (gameState == GameState.WaitingToStart)
-            return "The game will start in " + Mathf.CeilToInt(readyTimer) + " seconds!" + join;
+            return "The game will start in " + Mathf.CeilToInt(hatchTimer) + " seconds!" + join;
         if (gameState == GameState.WaitingToFinish)
             return "You have " + Mathf.CeilToInt(finishTimer) + " seconds to reach the ocean!" + join;
         return "Make for the waves!" + join;
     }
 
-    // this is airconsole's ready message, not related to player.isReady
+    // this is airconsole's ready message, not related to the player's ready/hatched state
     void OnReady(string code){
         this.code = code;
         //Since people might be coming to the game from the AirConsole store once the game is live, 
@@ -92,19 +116,61 @@ public class AirController : MonoBehaviour {
 
     void OnConnect(int device){
         Debug.Log("on connect for " + device);
-        AddNewPlayer(device, device == -1);
+        if (!players.ContainsKey(device))
+            AddNewPlayer(device, device == -1);
         Player player = players[device];
-        player.SetConnected();
-        if (cam)
-            cam.AddCameraTarget(player.turtle.transform);
+        // initialize this player into the nest.  note that this player could have already existed but just dropped
+        // and reconnected.  either way we put them into an egg.
+        PutPlayerInEgg(player);
     }
 
     void OnDisconnect(int device) {
         Debug.Log("on disconnect for " + device);
         Player player = players[device];
-        player.SetDisconnected();
+        player.state = Player.PlayerState.Dropped;
+        ReleaseEgg(player);
+        player.HideTurtle();
         if (cam)
             cam.RemoveCameraTarget(player.turtle.transform);
+    }
+
+    void PutPlayerInEgg(Player player) {
+        player.GetReadyForNextRace();
+        player.HideTurtle();
+        // the player may already have an egg if they have hatched and are just waiting for the game to play - in that
+        // case we put them back into the same egg they hatched from
+        if (!player.HasEgg()) {
+            try {
+                player.eggIndex = nest.GetRandomEggIndex();
+            } catch {
+                player.state = Player.PlayerState.TooManyPlayers;
+                return;
+            }
+        }
+        player.state = Player.PlayerState.InEgg;
+        player.egg = nest.GetEggAtIndex(player.eggIndex);
+        player.ShowEgg();
+    }
+
+    // this makes it so a player is ready to play and their turtle is visible rather than their egg
+    void HatchPlayer(Player player) {
+        if (player.state != Player.PlayerState.InEgg)
+            throw new System.Exception("Player is not in an egg");
+        player.state = Player.PlayerState.Hatched;
+        player.HideEgg();
+        player.ShowTurtle();
+        player.turtle.transform.position = player.egg.transform.position;
+        player.turtle.transform.rotation = Quaternion.identity;
+    }
+
+    void ReleaseEgg(Player player) {
+        if (player.state == Player.PlayerState.InEgg)
+            throw new System.Exception("Can't release an egg when the player is in it");
+        if (!player.HasEgg())
+            return;
+        nest.ReleaseEgg(player.eggIndex);
+        player.eggIndex = -1;
+        player.egg = null;
     }
 
     Dictionary<string, string> GetGameStateData() {
@@ -117,29 +183,53 @@ public class AirController : MonoBehaviour {
         return data;
     }
 
+    void ResetGame() {
+        // put everybody who hasn't dropped into an egg
+        gameState = GameState.WaitingToStart;
+        foreach (Player player in players.Values) {
+            if (player.state == Player.PlayerState.Dropped)
+                continue;
+            PutPlayerInEgg(player);
+            player.isInCurrentRace = false;
+        }
+        if (cam) {
+            cam.targets.Clear();
+            cam.AddCameraTarget(nest.transform);
+        }
+    }
+
     void BeginGame() {
-        foreach (Player player in players.Values)
-            if (player.IsConnected() && player.isReady)
-                player.isInCurrentRace = true;
+        if (cam)
+            cam.targets.Clear();
+        // all players currently ready/hatched are considered in the game
+        foreach (Player player in players.Values) {
+            if (player.state == Player.PlayerState.Hatched) {
+                player.state = Player.PlayerState.InGame;
+                player.isInCurrentRace = true; // this will keep track of whether they were playing even if they drop
+                // at this point if the player returns to an egg we'll generate a new random one
+                ReleaseEgg(player);
+                if (cam)
+                    cam.AddCameraTarget(player.turtle.transform);
+            }
+        }
+        currentGameStartTime = Time.time;
         gameState = GameState.InProgress;
+        // tell the various devices to let the players start moving
         AirConsole.instance.Broadcast(GetGameStateData());
     }
 
     void FinishGame() {
-        gameState = GameState.WaitingToStart;
-        foreach (Player player in players.Values) {
-            player.GetReadyForNextRace();
-            player.turtle.transform.position = Vector3.zero;
-        }
+        ResetGame();
+        // tell the various devices to switch back to the intro screen
         AirConsole.instance.Broadcast(GetGameStateData());
     }
 
     public void OnTurtleCrossedFinishLine(Turtle turtle) {
-        Debug.Log("Called");
         foreach (Player player in players.Values) {
             if (player.turtle == turtle) {
-                player.place = GetNextFinishingPlace();
-                Debug.Log(string.Format("Turtle {0} finished with place {1}", player.deviceID, player.place));
+                player.finishTime = Time.time;
+                player.state = Player.PlayerState.Finished; // set this after doing the above!
+                Debug.Log(string.Format("Turtle {0} finished at time {1}", player.deviceID, player.finishTime));
                 if (AllPlayersHaveFinished())
                     FinishGame();
                 else
@@ -152,20 +242,32 @@ public class AirController : MonoBehaviour {
         instructionsText.text = GetStatusText();
 
         // testing keyboard player stuff
-        if (gameState == GameState.WaitingToStart && Input.GetKeyDown("r") && players.ContainsKey(-1))
-            players[-1].isReady = !players[-1].isReady;
-        if (Input.GetKeyDown("c") && (!players.ContainsKey(-1) || !players[-1].IsConnected()))
+        if (gameState == GameState.WaitingToStart && Input.GetKeyDown("r") && players.ContainsKey(-1) 
+                && players[-1].state == Player.PlayerState.InEgg)
+            HatchPlayer(players[-1]);
+        if (gameState == GameState.WaitingToStart && Input.GetKeyDown("u") && players.ContainsKey(-1) 
+                && players[-1].state == Player.PlayerState.Hatched)
+            PutPlayerInEgg(players[-1]);
+        if (Input.GetKeyDown("c") && (!players.ContainsKey(-1) || players[-1].state == Player.PlayerState.Dropped))
             OnConnect(-1);
-        if (players.ContainsKey(-1) && Input.GetKeyDown("d") && players[-1].IsConnected())
+        if (players.ContainsKey(-1) && Input.GetKeyDown("d") && players[-1].state != Player.PlayerState.Dropped)
             OnDisconnect(-1);
+        // end test keyboard stuff
 
-        if (players.Count > 0 && AllPlayersAreReady() && gameState == GameState.WaitingToStart) {
-            readyTimer -= Time.deltaTime;
-            if (readyTimer <= 0)
+        // if everyone has hatched then start the game
+        if (GetConnectedPlayerCount() > 0 && AllPlayersAreHatched() && gameState == GameState.WaitingToStart) {
+            hatchTimer -= Time.deltaTime;
+            if (hatchTimer <= 0)
                 BeginGame();
         } else {
-            readyTimer = secondsToWaitWhenAllPlayersAreReady;
+            hatchTimer = secondsToWaitWhenAllPlayersAreHatched;
         }
+
+        // if everyone who was playing has dropped then finish the game
+        if (gameState == GameState.InProgress && GetInGamePlayerCount() == 0)
+            FinishGame();
+
+        // if everyone has finished or the timer is up then finish the game
         if (gameState == GameState.WaitingToFinish) {
             finishTimer -= Time.deltaTime;
             if (finishTimer <= 0 || AllPlayersHaveFinished())
@@ -175,32 +277,40 @@ public class AirController : MonoBehaviour {
         }
     }
 
-    bool AllPlayersAreReady() {
-        foreach (Player p in players.Values)
-            if (p.IsConnected() && !p.isReady)
+    // returns true if all non-dropped, able-to-play players are hatched
+    bool AllPlayersAreHatched() {
+        foreach (Player p in players.Values) {
+            if (!p.IsAbleToPlay())
+                continue;
+            if (p.state != Player.PlayerState.Hatched)
                 return false;
+        }
         return true;
     }
 
+    // returns true if all non-dropped players who are in the current race are finished -- anyone not InGame is either
+    // Finished or not in the race
     bool AllPlayersHaveFinished() {
-        foreach (Player p in players.Values)
-            if (p.IsConnected() && p.isInCurrentRace && !p.hasFinished)
+        foreach (Player p in players.Values) {
+            if (p.state == Player.PlayerState.InGame)
                 return false;
+        }
         return true;    
-    }
-
-    int GetNextFinishingPlace() {
-        int place = 1;
-        foreach (Player player in players.Values)
-            if (player.isInCurrentRace && player.hasFinished)
-                place ++;
-        return place;
     }
 
     int GetConnectedPlayerCount() {
         int count = 0;
         foreach (Player player in players.Values)
-            if (player.IsConnected())
+            if (player.state != Player.PlayerState.Dropped)
+                count ++;
+        return count;
+    }
+
+    // returns the number of users who are InGame (not finished, not dropped)
+    int GetInGamePlayerCount() {
+        int count = 0;
+        foreach (Player player in players.Values)
+            if (player.state == Player.PlayerState.InGame)
                 count ++;
         return count;
     }
@@ -224,12 +334,12 @@ public class AirController : MonoBehaviour {
         if (!players.ContainsKey(from) || data["action"] == null)
             return;
         if (gameState == GameState.WaitingToStart) {
-            if (data["action"].ToString() == "ready")
-                players[from].isReady = true;
-            if (data["action"].ToString() == "unready")
-                players[from].isReady = false;
+            if (data["action"].ToString() == "ready" && players[from].state == Player.PlayerState.InEgg)
+                HatchPlayer(players[from]);
+            if (data["action"].ToString() == "unready" && players[from].state == Player.PlayerState.Hatched)
+                PutPlayerInEgg(players[from]);
         } else {
-            if (!players[from].hasFinished) {
+            if (players[from].state == Player.PlayerState.InGame) {
                 players[from].turtle.ButtonInput(data["action"].ToString());
             }
         }
