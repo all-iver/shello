@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 7c8368899af1f43789df607cc55f109e
+=======
+guid: 2b723b9999e949240b7ef9178a0c2ca5
+>>>>>>> Ungodly metas
 TextureImporter:
   fileIDToRecycleName: {}
   externalObjects: {}
@@ -75,7 +79,11 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
+<<<<<<< HEAD
     spriteID: 337a28ecddc534d8bbbc7d10c2091153
+=======
+    spriteID: 5351afc49fb891f42a9a5458773061c8
+>>>>>>> Ungodly metas
     vertices: []
     indices: 
     edges: []
