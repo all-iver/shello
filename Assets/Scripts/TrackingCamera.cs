@@ -18,28 +18,20 @@ public class TrackingCamera : MonoBehaviour
     float zoomVelocity;
     Vector2 panVelocity;
 
-    public Vector3 StartFrame = new Vector3(0f, 0f, 0f);
-    public Vector3 OutFrame = new Vector3(0f,7f,0f);
-
     void Start()
     {
         cam = GetComponent<Camera>();
     }
 
-    Vector4 GetMinMax()
+    void LateUpdate()
     {
-        float minX = targets[0].position.x, 
-                minY = targets[0].position.y, 
-                maxX = targets[0].position.x, 
-                maxY = targets[0].position.y;
-        foreach (Transform t in targets)
-        {
-            minX = Mathf.Min(minX, t.position.x);
-            minY = Mathf.Min(minY, t.position.y);
-            maxX = Mathf.Max(maxX, t.position.x);
-            maxY = Mathf.Max(maxY, t.position.y);
-        }
-        return new Vector4(minX - padding, minY - padding, maxX + padding, maxY + padding);
+        if (targets.Count == 0)
+            return;
+        desiredOrtho = GetDesiredOrtho();
+        desiredPos = GetDesiredPosition();
+        cam.orthographicSize = Mathf.SmoothDamp(cam.orthographicSize, desiredOrtho, ref zoomVelocity, zoomSmoothing);
+        Vector2 newPos = Vector2.SmoothDamp(transform.position, desiredPos, ref panVelocity, panSmoothing);
+        cam.transform.position = new Vector3(newPos.x, newPos.y, cam.transform.position.z);
     }
 
     float GetDesiredOrtho()
@@ -55,6 +47,24 @@ public class TrackingCamera : MonoBehaviour
         return ortho;
     }
 
+    Vector4 GetMinMax()
+    {
+        float minX = targets[0].position.x,
+                minY = targets[0].position.y,
+                maxX = targets[0].position.x,
+                maxY = targets[0].position.y;
+        foreach (Transform t in targets)
+        {
+            minX = Mathf.Min(minX, t.position.x);
+            minY = Mathf.Min(minY, t.position.y);
+            maxX = Mathf.Max(maxX, t.position.x);
+            maxY = Mathf.Max(maxY, t.position.y);
+        }
+        return new Vector4(minX - padding, minY - padding, maxX + padding, maxY + padding);
+    }
+
+   
+
     Vector2 GetDesiredPosition()
     {
         if (targets.Count == 0)
@@ -64,18 +74,6 @@ public class TrackingCamera : MonoBehaviour
         float y = Mathf.Lerp(minMax.y, minMax.w, 0.5f);
         return new Vector2(x, y);
     }
-
-    void LateUpdate()
-    {
-        if (targets.Count == 0)
-            return;
-        desiredOrtho = GetDesiredOrtho();
-        desiredPos = GetDesiredPosition();
-        cam.orthographicSize = Mathf.SmoothDamp(cam.orthographicSize, desiredOrtho, ref zoomVelocity, zoomSmoothing);
-        Vector2 newPos = Vector2.SmoothDamp(transform.position, desiredPos, ref panVelocity, panSmoothing);
-        cam.transform.position = new Vector3(0f, newPos.y, cam.transform.position.z);
-    }
-
     // call this to make sure a target doesn't go outside the camera's bounds when zoomed all the way out
     public Vector2 ClampInsideCamera(Vector2 pos, float padding = 0.5f)
     {
