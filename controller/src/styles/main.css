@@ -1,6 +1,8 @@
 body {
   margin: 0;
   font-family: Londrina Solid;
+  color: #058700;
+  text-shadow: -1.5px 0 white, 0 1.5px white, 1.5px 0 white, 0 -1.5px white;
 }
 
 p,
