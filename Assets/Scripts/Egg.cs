@@ -53,6 +53,7 @@ public class Egg : MonoBehaviour
             sr.sprite = s;
             yield return new WaitForSeconds(hatchInterval);
         }
+        GameSounds.instance.PlayEggCrack();
         shaking = false;
         spawn.SetActive(true);
     }

@@ -252,7 +252,7 @@ public class AirController : MonoBehaviour {
         StartCoroutine(BlinkExcitingText(logoText));
         introMusic.Stop();
         StartCoroutine(PlayRaceMusic());
-        nest.spawnAI = true;
+        nest.StartSpawning();
     }
 
     IEnumerator PlayRaceMusic() {
@@ -273,6 +273,7 @@ public class AirController : MonoBehaviour {
     public void OnTurtleCrossedFinishLine(Turtle turtle) {
         foreach (Player player in players.Values) {
             if (player.turtle == turtle) {
+                player.HideTurtle();
                 player.finishTime = Time.time;
                 player.state = Player.PlayerState.Finished; // set this after doing the above!
                 Debug.Log(string.Format("Turtle {0} finished at time {1}", player.deviceID, player.finishTime));

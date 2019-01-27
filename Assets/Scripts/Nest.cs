@@ -6,7 +6,8 @@ public class Nest : MonoBehaviour
 {
     Dictionary<int, int> ownership = new Dictionary<int, int>();
     public Transform eggs, ai;
-    public float aiSpawnRate = 0.5f;
+    public float aiSpawnMinRate = 0.5f;
+    public float aiSpawnMaxRate = 1f;
     public bool spawnAI;
     public GameObject aiPrefab;
     float spawnTimer;
@@ -15,10 +16,15 @@ public class Nest : MonoBehaviour
         return eggs.childCount;
     }
 
+    public void StartSpawning() {
+        spawnTimer = Random.Range(aiSpawnMinRate, aiSpawnMaxRate);
+        spawnAI = true;
+    }
+
     public void ResetAI() {
         Debug.Log("Reset nest");
         spawnAI = false;
-        spawnTimer = 0;
+        spawnTimer = Random.Range(aiSpawnMinRate, aiSpawnMaxRate);
         for (int i = 0; i < eggs.childCount; i++) {
             eggs.GetChild(i).GetComponent<Egg>().Reset();
             // eggs.GetChild(i).gameObject.SetActive(false);
@@ -66,8 +72,8 @@ public class Nest : MonoBehaviour
     void Update() {
         if (!spawnAI)
             return;
-        spawnTimer += Time.deltaTime;
-        if (spawnTimer >= aiSpawnRate) {
+        spawnTimer -= Time.deltaTime;
+        if (spawnTimer <= 0) {
             int e;
             try {
                 e = ClaimRandomEgg(true);
@@ -78,7 +84,7 @@ public class Nest : MonoBehaviour
             go.transform.SetParent(ai, true);
             GameObject egg = GetEggAtIndex(e);
             egg.GetComponent<Egg>().Hatch(go);
-            spawnTimer = 0;
+            spawnTimer = Random.Range(aiSpawnMinRate, aiSpawnMaxRate);
         }
     }
 

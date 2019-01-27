@@ -121,6 +121,7 @@ MonoBehaviour:
   sounds:
     beep: {fileID: 8300000, guid: 6ed0413a442d2934a911df23e0722ab8, type: 3}
     goBeep: {fileID: 8300000, guid: 859a8f4933f213c46b2dced6b4665cbd, type: 3}
+    eggCrack: {fileID: 8300000, guid: eb54429a0afa03f4c90f646b928a0ff8, type: 3}
   sourcePrefab: {fileID: 7611927474195599319, guid: c51f068270b82364ebf1706a2254c167,
     type: 3}
 --- !u!1 &667162245
