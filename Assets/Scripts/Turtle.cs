@@ -6,7 +6,7 @@ public class Turtle : MonoBehaviour {
 
     private Animator turtleAnimController;
 
-    bool swipedRightSide, swipedLeftSide;
+    public bool swipedRightSide, swipedLeftSide;
 	Rigidbody2D rb;
     public float lurchForce = 1;
     public Transform leftFlipper, rightFlipper;
