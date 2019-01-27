@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SeagulShadow : MonoBehaviour
+public class SeagullShadow : MonoBehaviour
 {
-    public GameObject seagulShadow;
+    public GameObject seagullShadow;
     private SpriteRenderer spriteRenderer;
 
     public Transform[] positions;
@@ -21,7 +21,7 @@ public class SeagulShadow : MonoBehaviour
     void Start()
     {
         StartCoroutine("WaitAndFly");
-        spriteRenderer = seagulShadow.GetComponent<SpriteRenderer>();
+        spriteRenderer = seagullShadow.GetComponent<SpriteRenderer>();
     }
 
 
@@ -82,7 +82,7 @@ public class SeagulShadow : MonoBehaviour
     private void Update()
     {
         step = speed * Time.deltaTime; // calculate distance to move
-        seagulShadow.transform.position = Vector3.MoveTowards(seagulShadow.transform.position, target.position, step);
+        seagullShadow.transform.position = Vector3.MoveTowards(seagullShadow.transform.position, target.position, step);
     }
 }
 
