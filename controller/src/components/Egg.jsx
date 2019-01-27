@@ -7,6 +7,17 @@ import egg4 from "../../assets/images/egg_4.png";
 import eggShatter from "../../assets/images/egg_shatter.png";
 import shadow from "../../assets/images/egg_shadow.png";
 
+import tap1sfx from "../../assets/audio/egg/EggTap1.mp3";
+import tap2sfx from "../../assets/audio/egg/EggTap2.mp3";
+import tap3sfx from "../../assets/audio/egg/EggTap3.mp3";
+import tap4sfx from "../../assets/audio/egg/EggTap4.mp3";
+import tap5sfx from "../../assets/audio/egg/EggTap5.mp3";
+import tap6sfx from "../../assets/audio/egg/EggTap6.mp3";
+import tap7sfx from "../../assets/audio/egg/EggTap7.mp3";
+import tap8sfx from "../../assets/audio/egg/EggTap8.mp3";
+import tap9sfx from "../../assets/audio/egg/EggTap9.mp3";
+import eggShatterSfx from "../../assets/audio/egg/EggCrack1.mp3";
+
 function pickRandomlyFromArray(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
@@ -20,6 +31,18 @@ class Egg extends Component {
       cracks: 0,
       wobbling: false,
       shattering: false
+    };
+
+    this.audio = {
+      tap0: new Audio(tap1sfx),
+      tap1: new Audio(tap2sfx),
+      tap2: new Audio(tap3sfx),
+      tap3: new Audio(tap4sfx),
+      tap4: new Audio(tap5sfx),
+      tap5: new Audio(tap6sfx),
+      tap6: new Audio(tap7sfx),
+      tap7: new Audio(tap8sfx),
+      tap8: new Audio(eggShatterSfx)
     };
   }
   render() {
@@ -64,6 +87,8 @@ class Egg extends Component {
               setTimeout(() => ready(), 1000);
               // ready();
             }
+
+            this.audio[`tap${taps}`].play();
 
             this.setState(prevState => ({
               wobbling: true,
