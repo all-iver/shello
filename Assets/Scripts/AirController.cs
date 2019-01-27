@@ -34,6 +34,7 @@ public class AirController : MonoBehaviour {
         public void GetReadyForNextRace() {
             state = PlayerState.Initial;
             finishTime = -1;
+            turtle.GetComponentInChildren<TrailRenderer>().Clear();
         }
 
         public bool HasEgg() {
@@ -132,6 +133,13 @@ public class AirController : MonoBehaviour {
         // initialize this player into the nest.  note that this player could have already existed but just dropped
         // and reconnected.  either way we put them into an egg.
         PutPlayerInEgg(player);
+        // if we're already in a game, tell the controller it needs to wait
+        if (gameState != GameState.WaitingToStart) {
+            Dictionary<string, string> data = new Dictionary<string, string>();
+            data.Add("action", "gameState");
+            data.Add("view", "WaitingView");
+            AirConsole.instance.Message(player.deviceID, data);
+        }
     }
 
     void OnDisconnect(int device) {
