@@ -8,6 +8,7 @@ class PlayView extends Component {
 
     return (
       <div id="playView">
+        <p>Swipe to move!</p>
         <div id="playViewTurtles">
           <Turtle showSwipeArrows={true} body={body} number={number} />
         </div>
