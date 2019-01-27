@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import AirConsole from "air-console";
 
 import ReadyView from "../components/ReadyView";
 import EggView from "../components/EggView";
@@ -34,6 +33,7 @@ class IntroView extends Component {
                 ready: true
               })
             }
+            text="Tap to Hatch!"
           />
         )}
       </div>

@@ -6,7 +6,6 @@ import egg3 from "../../assets/images/egg_3.png";
 import egg4 from "../../assets/images/egg_4.png";
 import eggShatter from "../../assets/images/egg_shatter.png";
 import shadow from "../../assets/images/egg_shadow.png";
-import { read } from "fs";
 
 function pickRandomlyFromArray(array) {
   return array[Math.floor(Math.random() * array.length)];
@@ -24,7 +23,7 @@ class Egg extends Component {
     };
   }
   render() {
-    const { ready } = this.props;
+    const { ready, crackable = true } = this.props;
     const { taps, wobbling, cracks, shattering } = this.state;
 
     let frame;
@@ -68,7 +67,7 @@ class Egg extends Component {
 
             this.setState(prevState => ({
               wobbling: true,
-              taps: prevState.taps + 1
+              taps: crackable ? prevState.taps + 1 : prevState.taps
             }));
           }}
           className={

@@ -45,6 +45,7 @@ body {
   border-radius: 12px;
 }
 
+#waitingView,
 #introView {
   background-image: url("../../assets/images/sand.png");
   background-repeat: repeat;
@@ -159,3 +160,13 @@ body {
 .shattering {
   display: block;
 }
+
+/* #waitingView {
+  background-image: url("../../assets/images/sand.png");
+  background-repeat: repeat;
+  padding: 10px;
+  height: calc(100vh - 20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */

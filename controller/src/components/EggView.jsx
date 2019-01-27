@@ -5,7 +5,7 @@ import Egg from "./Egg";
 
 class EggView extends Component {
   render() {
-    const { airconsole, ready } = this.props;
+    const { airconsole, ready, crackable, text } = this.props;
     return (
       <div id="eggView">
         <Egg
@@ -16,8 +16,9 @@ class EggView extends Component {
               action: "ready"
             });
           }}
+          crackable={crackable}
         />
-        <p>Tap to Hatch!</p>
+        <p>{text}</p>
       </div>
     );
   }

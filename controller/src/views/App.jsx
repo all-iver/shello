@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import AirConsole from "air-console";
 import IntroView from "./IntroView";
 import PlayView from "./PlayView";
+import WaitingView from "./WaitingView";
 
 const views = {
   PlayView,
-  IntroView
+  IntroView,
+  WaitingView
 };
 
 class App extends Component {
