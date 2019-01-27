@@ -192,5 +192,6 @@ img {
   font-weight: bolder;
   font-size: 64px;
   color: white;
+  text-shadow: none;
   z-index: 10;
 }
