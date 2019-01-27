@@ -113,7 +113,7 @@ public class AirController : MonoBehaviour {
 
     string GetStatusText() {
         if (GetConnectedPlayerCount() == 0)
-            return "Waiting for players!";
+            return "Waiting for players...";
         if (gameState == GameState.WaitingToStart && !AllPlayersAreHatched())
             return "The game will start when everyone hatches (tap the egg on your phone)!";
         if (gameState == GameState.WaitingToStart)
@@ -167,7 +167,7 @@ public class AirController : MonoBehaviour {
         // case we put them back into the same egg they hatched from
         if (!player.HasEgg()) {
             try {
-                player.eggIndex = nest.GetRandomEggIndex();
+                player.eggIndex = nest.ClaimRandomEgg();
             } catch {
                 player.state = Player.PlayerState.TooManyPlayers;
                 return;
@@ -219,6 +219,7 @@ public class AirController : MonoBehaviour {
     }
 
     void ResetGame() {
+        nest.ResetAI(); // remove all the AI and release all the eggs
         // put everybody who hasn't dropped into an egg
         gameState = GameState.WaitingToStart;
         foreach (Player player in players.Values) {
@@ -264,6 +265,7 @@ public class AirController : MonoBehaviour {
         StartCoroutine(BlinkExcitingText(logoText));
         introMusic.Stop();
         raceMusic.Play();
+        nest.spawnAI = true;
     }
 
     void FinishGame() {
