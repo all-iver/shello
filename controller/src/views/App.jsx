@@ -29,8 +29,8 @@ class App extends Component {
           break;
         case "turtle":
           this.setState(prevState => ({
-            body: data.body,
-            number: data.number
+            body: data.color || prevState.body,
+            number: data.number || prevState.number
           }));
           break;
       }
