@@ -623,6 +623,7 @@ GameObject:
   - component: {fileID: 8773898146392556481}
   - component: {fileID: 286752413}
   - component: {fileID: 286752412}
+  - component: {fileID: 5400248552206871220}
   m_Layer: 0
   m_Name: FinishLineTrigger
   m_TagString: Untagged
@@ -730,6 +731,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &5400248552206871220
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5560595799886292903}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: caa8e5fac142143edaeacf72dea8648e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5737147084424902957
 GameObject:
   m_ObjectHideFlags: 0
