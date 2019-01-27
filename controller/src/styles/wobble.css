@@ -34,3 +34,49 @@
   animation-duration: 1s;
   animation-name: wobble;
 }
+
+@keyframes wobble-short-left {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  33% {
+    transform: translate3d(-10%, 0, 0) rotate3d(0, 0, 1, -3deg);
+  }
+
+  66% {
+    transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 3deg);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes wobble-short-right {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  33% {
+    transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 3deg);
+  }
+
+  66% {
+    transform: translate3d(-10%, 0, 0) rotate3d(0, 0, 1, -3deg);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.wobble-short-left {
+  animation-duration: 0.3s;
+  animation-name: wobble-short-left;
+}
+
+.wobble-short-right {
+  animation-duration: 0.3s;
+  animation-name: wobble-short-right;
+}

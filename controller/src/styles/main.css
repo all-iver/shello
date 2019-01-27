@@ -56,8 +56,25 @@ body {
   background-color: green;
 }
 
+#eggView .egg {
+  position: relative;
+}
+
+#eggView .eggSprite {
+  position: relative;
+  z-index: 2;
+}
+
 #eggView img {
   height: 80vh;
+}
+
+#eggView .shadow {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin-bottom: -25px;
+  z-index: 1;
 }
 
 #readyView img {
