@@ -225,7 +225,7 @@ MonoBehaviour:
   - {fileID: 6576285814708446393}
   speed: 10
   waitTime: 10
-  target: {fileID: 0}
+  target: {fileID: 1400790954870701328}
   step: 0
   x: 0
 --- !u!1 &4357065676292495886
