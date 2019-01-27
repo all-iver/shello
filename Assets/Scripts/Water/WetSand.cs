@@ -26,6 +26,7 @@ public class WetSand : MonoBehaviour
         {
             yield return new WaitForEndOfFrame();
             lerpProgress = Time.time - lerpStart_Time;
+            //Debug.Log("lerpProgress: " + lerpProgress);
             if (target_SpriteRenderer != null)
             {
                 target_SpriteRenderer.material.color = Color.Lerp(startLerp, targetLerp, lerpProgress / lerpDuration);
