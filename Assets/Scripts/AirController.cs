@@ -34,7 +34,9 @@ public class AirController : MonoBehaviour {
         public void GetReadyForNextRace() {
             state = PlayerState.Initial;
             finishTime = -1;
-            turtle.GetComponentInChildren<TrailRenderer>().Clear();
+            turtle.GetComponentInChildren<TurtleTrailManager>().sandTrail.Clear();
+            turtle.GetComponentInChildren<TurtleTrailManager>().waterTrail.Clear();
+            turtle.GetComponentInChildren<TurtleTrailManager>().waterTrail.enabled = false;
         }
 
         public bool HasEgg() {
