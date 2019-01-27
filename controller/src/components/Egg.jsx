@@ -26,7 +26,7 @@ class Egg extends Component {
         <img
           src={egg}
           onClick={() => {
-            if (taps >= 15) {
+            if (taps >= 8) {
               ready();
             }
 
