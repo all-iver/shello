@@ -150,3 +150,12 @@ body {
 .flip {
   transform: scaleX(-1);
 }
+
+.eggShatter {
+  display: none;
+  position: absolute;
+}
+
+.shattering {
+  display: block;
+}

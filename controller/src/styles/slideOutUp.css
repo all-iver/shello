@@ -1,0 +1,20 @@
+/*
+ From Animate.css on Github
+*/
+
+@keyframes slideOutUp {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    visibility: hidden;
+    transform: translate3d(0, -100%, 0) scale(2);
+  }
+}
+
+.slideOutUp {
+  animation-name: slideOutUp;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+}

@@ -4,6 +4,7 @@ import WebFont from "webfontloader";
 
 import "./styles/main.css";
 import "./styles/wobble.css";
+import "./styles/slideOutUp.css";
 import AirConsole from "air-console";
 import App from "./views/App";
 
