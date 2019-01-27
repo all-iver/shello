@@ -4,6 +4,7 @@ using UnityEngine;
 using NDream.AirConsole;
 using Newtonsoft.Json.Linq;
 using UnityEngine.UI;
+using System.Linq;
 
 public class AirController : MonoBehaviour {
 
@@ -84,6 +85,9 @@ public class AirController : MonoBehaviour {
     float currentGameStartTime;
     public Transform startCameraPosition;
     public Sprite[] turtleBodies;
+    public Leaderboard leaderboard;
+    public float leaderboardUpdateInterval = 0.5f;
+    float leaderboardUpdateTimer;
 
     void Awake () {
         AirConsole.instance.onMessage += OnMessage;		
@@ -259,6 +263,7 @@ public class AirController : MonoBehaviour {
     }
 
     void FinishGame() {
+        UpdateLeaderboard();
         ResetGame();
         // tell the various devices to switch back to the intro screen
         AirConsole.instance.Broadcast(GetGameStateData());
@@ -315,6 +320,34 @@ public class AirController : MonoBehaviour {
                 FinishGame();
         } else {
             finishTimer = secondsToWaitForPlayersToFinish;
+        }
+
+        // update the leaderboard
+        if (gameState == GameState.InProgress || gameState == GameState.WaitingToFinish) {
+            leaderboardUpdateTimer += Time.deltaTime;
+            if (leaderboardUpdateTimer >= leaderboardUpdateInterval) {
+                leaderboardUpdateTimer = 0;
+                UpdateLeaderboard();
+            }
+        }
+    }
+
+    float GetRankForPlayer(Player p) {
+        if (p.state == Player.PlayerState.Finished)
+            return p.finishTime;
+        if (p.state == Player.PlayerState.InGame)
+            return -p.turtle.transform.position.y + 5000;
+        return 9999999;
+    }
+
+    void UpdateLeaderboard() {
+        Player[] sortedPlayers = players.Values.Where(
+                    p => p.state == Player.PlayerState.Finished || p.state == Player.PlayerState.InGame)
+                .OrderBy(p => GetRankForPlayer(p)).ToArray();
+        leaderboard.SetNumPlayers(sortedPlayers.Length);
+        for (int i = 0; i < sortedPlayers.Length; i++) {
+            leaderboard.SetRank(i, sortedPlayers[i].turtle.GetComponent<SpriteRenderer>().sprite, 
+                    sortedPlayers[i].deviceID, sortedPlayers[i].finishTime, sortedPlayers[i].isKeyboard);
         }
     }
 
