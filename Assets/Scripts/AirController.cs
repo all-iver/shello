@@ -81,6 +81,7 @@ public class AirController : MonoBehaviour {
     Nest nest;
     float currentGameStartTime;
     public Transform startCameraPosition;
+    public Sprite[] turtleBodies;
 
     void Awake () {
         AirConsole.instance.onMessage += OnMessage;		
@@ -176,9 +177,18 @@ public class AirController : MonoBehaviour {
             throw new System.Exception("Player is not in an egg");
         player.state = Player.PlayerState.Hatched;
         player.HideEgg();
+        player.turtle.GetComponent<SpriteRenderer>().sprite = turtleBodies[Random.Range(0, turtleBodies.Length)];
         player.ShowTurtle();
         player.turtle.transform.position = player.egg.transform.position;
         player.turtle.transform.rotation = Quaternion.identity;
+        // send the controller what their turtle color and number is
+        if (!player.isKeyboard) {
+            Dictionary<string, string> data = new Dictionary<string, string>();
+            data.Add("action", "turtle");
+            data.Add("color", player.turtle.GetComponent<SpriteRenderer>().sprite.name.Split('_')[2]);
+            data.Add("number", "" + player.deviceID);
+            AirConsole.instance.Message(player.deviceID, data);
+        }
     }
 
     void ReleaseEgg(Player player) {
@@ -352,6 +362,7 @@ public class AirController : MonoBehaviour {
         Player player = new Player();
         GameObject newPlayer = Instantiate(playerPrefab, transform.position, transform.rotation) as GameObject;
         player.turtle = newPlayer.GetComponent<Turtle>();
+        player.turtle.playerID = deviceID;
         player.deviceID = deviceID;
         player.isKeyboard = isKeyboard;
         if (isKeyboard)
