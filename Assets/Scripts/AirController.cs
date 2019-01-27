@@ -88,6 +88,7 @@ public class AirController : MonoBehaviour {
     public Leaderboard leaderboard;
     public float leaderboardUpdateInterval = 0.5f;
     float leaderboardUpdateTimer;
+    public AudioSource introMusic, raceMusic;
 
     void Awake () {
         AirConsole.instance.onMessage += OnMessage;		
@@ -260,6 +261,8 @@ public class AirController : MonoBehaviour {
         // tell the various devices to let the players start moving
         AirConsole.instance.Broadcast(GetGameStateData());
         StartCoroutine(BlinkExcitingText("Make for the waves!"));
+        introMusic.Stop();
+        raceMusic.Play();
     }
 
     void FinishGame() {
@@ -267,6 +270,8 @@ public class AirController : MonoBehaviour {
         ResetGame();
         // tell the various devices to switch back to the intro screen
         AirConsole.instance.Broadcast(GetGameStateData());
+        raceMusic.Stop();
+        introMusic.Play();
     }
 
     public void OnTurtleCrossedFinishLine(Turtle turtle) {
