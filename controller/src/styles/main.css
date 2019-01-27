@@ -4,16 +4,44 @@ body {
 }
 
 #playView {
+  background-image: url("../../assets/images/sand.png");
+  background-repeat: repeat;
+}
+
+#flippers {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 10px;
-  background-color: darkgreen;
+  /* background-color: darkgreen; */
   padding: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100vw - 20px);
+  z-index: 100;
 }
 
-#playView .flipper {
+#playViewTurtles {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.turtle {
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+}
+
+.turtle img {
+  height: 80vh;
+}
+
+#flippers .flipper {
   height: calc(100vh - 20px);
-  background-color: green;
+  /* background-color: green; */
   border-radius: 12px;
 }
 
@@ -112,4 +140,14 @@ body {
 .turtle .right-legs {
   position: absolute;
   right: 0;
+}
+
+.turtle .swipe-arrows {
+  position: absolute;
+  left: 0;
+  margin-left: -120px;
+}
+
+.flip {
+  transform: scaleX(-1);
 }
