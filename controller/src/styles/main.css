@@ -60,6 +60,10 @@ body {
   position: relative;
 }
 
+#eggView {
+  text-align: center;
+}
+
 #eggView .eggSprite {
   position: relative;
   z-index: 2;
