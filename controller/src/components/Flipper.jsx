@@ -10,7 +10,9 @@ class Flipper extends Component {
       <Swipe
         onSwipeStart={console.log}
         onSwipeMove={console.log}
-        onSwipeEnd={() => {
+        onSwipeEnd={evt => {
+          evt.preventDefault();
+
           airconsole.message(AirConsole.SCREEN, {
             action: `swipe${side}End`
           });

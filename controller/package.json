@@ -17,6 +17,7 @@
     "prettier": "^1.16.1"
   },
   "dependencies": {
+    "body-scroll-lock": "^2.6.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-easy-swipe": "0.0.17",
