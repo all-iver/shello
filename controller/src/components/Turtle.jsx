@@ -45,11 +45,14 @@ class Turtle extends Component {
     );
   }
   render() {
-    const { showSwipeArrows, body } = this.props;
+    const { showSwipeArrows, body, number } = this.props;
 
     return (
       <div className="turtle">
         <img src={turtles[body]} className="body" />
+        <div className="numberContainer">
+          <p className="number">{number}</p>
+        </div>
         <img src={turtleLegsLeft} className="left-legs" />
         <img src={turtleLegsRight} className="right-legs" />
         {showSwipeArrows ? (
