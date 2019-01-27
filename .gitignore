@@ -36,3 +36,4 @@ sysinfo.txt
 *.unitypackage
 .vscode/settings.json
 Assets/WebGLTemplates/AirConsole/controller/*.meta
+Assets/WebGLTemplates/AirConsole/controller.html
