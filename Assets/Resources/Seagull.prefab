@@ -214,10 +214,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1400790956034613410}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c646c22eb0e304b499a9a38e4203df33, type: 3}
+  m_Script: {fileID: 11500000, guid: df8d1f74a3d2347b989492a1f7eb43d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seagulShadow: {fileID: 1400790954255127793}
+  seagullShadow: {fileID: 1400790954255127793}
   positions:
   - {fileID: 1400790954870701328}
   - {fileID: 1400790954732477705}
@@ -225,7 +225,7 @@ MonoBehaviour:
   - {fileID: 6576285814708446393}
   speed: 10
   waitTime: 10
-  target: {fileID: 1400790954870701328}
+  target: {fileID: 0}
   step: 0
   x: 0
 --- !u!1 &4357065676292495886
