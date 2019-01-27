@@ -72,13 +72,14 @@ public class AirController : MonoBehaviour {
     public Dictionary<int, Player> players = new Dictionary<int, Player> (); 
     TrackingCamera cam;
     public Image instructionsPanel;
-    public TMPro.TMP_Text instructionsText;
+    public TMPro.TMP_Text statusText, joiningText, excitingText;
     string code;
     public float secondsToWaitWhenAllPlayersAreHatched = 10;
     public float secondsToWaitForPlayersToFinish = 30;
     float hatchTimer, finishTimer;
     Nest nest;
     float currentGameStartTime;
+    public Transform startCameraPosition;
 
     void Awake () {
         AirConsole.instance.onMessage += OnMessage;		
@@ -86,22 +87,31 @@ public class AirController : MonoBehaviour {
         AirConsole.instance.onConnect += OnConnect;		
         AirConsole.instance.onDisconnect += OnDisconnect;
         cam = FindObjectOfType<TrackingCamera>();
-        instructionsText.text = "Loading...";
+        statusText.text = "Loading...";
+        joiningText.text = "";
+        excitingText.text = "";
         gameState = GameState.WaitingToStart;
         nest = FindObjectOfType<Nest>();
+
+        ResetGame();
+    }
+
+    string GetJoiningText() {
+        if (string.IsNullOrEmpty(code) || code == "0")
+            return "To join, go to airconsole.com and enter the code.";
+        return "To join, go to airconsole.com on your phone and enter code " + code + ".";
     }
 
     string GetStatusText() {
-        string join = "\nTo join, go to airconsole.com on your phone and enter code " + code + ".";
         if (GetConnectedPlayerCount() == 0)
-            return "Waiting for players." + join;
+            return "Waiting for players!";
         if (gameState == GameState.WaitingToStart && !AllPlayersAreHatched())
-            return "The game will start when everyone hatches!" + join;
+            return "The game will start when everyone hatches (tap the egg on your phone)!";
         if (gameState == GameState.WaitingToStart)
-            return "The game will start in " + Mathf.CeilToInt(hatchTimer) + " seconds!" + join;
+            return "Get ready! The game is starting in " + Mathf.CeilToInt(hatchTimer) + " seconds!";
         if (gameState == GameState.WaitingToFinish)
-            return "You have " + Mathf.CeilToInt(finishTimer) + " seconds to reach the ocean!" + join;
-        return "Make for the waves!" + join;
+            return "Hurry up! " + Mathf.CeilToInt(finishTimer) + "s";
+        return "";
     }
 
     // this is airconsole's ready message, not related to the player's ready/hatched state
@@ -194,7 +204,16 @@ public class AirController : MonoBehaviour {
         }
         if (cam) {
             cam.targets.Clear();
-            cam.AddCameraTarget(nest.transform);
+            cam.AddCameraTarget(startCameraPosition);
+        }
+    }
+
+    IEnumerator BlinkExcitingText(string text, int times = 5, float onDuration = 0.5f, float offDuration = 0.1f) {
+        for (int i = 0; i < times; i++) {
+            excitingText.text = text;
+            yield return new WaitForSeconds(onDuration);
+            excitingText.text = "";
+            yield return new WaitForSeconds(offDuration);
         }
     }
 
@@ -216,6 +235,7 @@ public class AirController : MonoBehaviour {
         gameState = GameState.InProgress;
         // tell the various devices to let the players start moving
         AirConsole.instance.Broadcast(GetGameStateData());
+        StartCoroutine(BlinkExcitingText("Make for the waves!"));
     }
 
     void FinishGame() {
@@ -239,7 +259,8 @@ public class AirController : MonoBehaviour {
     }
 
     void Update() {
-        instructionsText.text = GetStatusText();
+        statusText.text = GetStatusText();
+        joiningText.text = GetJoiningText();
 
         // testing keyboard player stuff
         if (gameState == GameState.WaitingToStart && Input.GetKeyDown("r") && players.ContainsKey(-1) 
