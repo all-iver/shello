@@ -3,6 +3,12 @@ import Flipper from "../components/Flipper";
 import Turtle from "../components/Turtle";
 
 class PlayView extends Component {
+  constructor(props) {
+    super(props);
+
+    props.airconsole.vibrate(500);
+  }
+
   render() {
     const { airconsole, body, number } = this.props;
 
