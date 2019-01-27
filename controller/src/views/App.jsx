@@ -18,7 +18,7 @@ class App extends Component {
       currentView: "IntroView",
       body: "green",
       number: "?",
-      turtleHidden: false
+      turtleHidden: true
     };
 
     props.airconsole.onMessage = (id, data) => {
