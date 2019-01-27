@@ -4,7 +4,7 @@ import Turtle from "../components/Turtle";
 
 class PlayView extends Component {
   render() {
-    const { airconsole } = this.props;
+    const { airconsole, body, number } = this.props;
 
     return (
       <div id="playView">
