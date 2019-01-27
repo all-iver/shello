@@ -44,18 +44,6 @@ public class AirController : MonoBehaviour {
             return eggIndex >= 0;
         }
 
-        public void ShowEgg() {
-            if (!HasEgg())
-                throw new System.Exception("Turtle has no egg");
-            egg.SetActive(true);
-        }
-
-        public void HideEgg() {
-            if (!HasEgg())
-                throw new System.Exception("Turtle has no egg");
-            egg.SetActive(false);
-        }
-
         public void ShowTurtle() {
             turtle.gameObject.SetActive(true);
         }
@@ -175,7 +163,7 @@ public class AirController : MonoBehaviour {
         }
         player.state = Player.PlayerState.InEgg;
         player.egg = nest.GetEggAtIndex(player.eggIndex);
-        player.ShowEgg();
+        player.egg.GetComponent<Egg>().Reset();
     }
 
     // this makes it so a player is ready to play and their turtle is visible rather than their egg
@@ -183,11 +171,10 @@ public class AirController : MonoBehaviour {
         if (player.state != Player.PlayerState.InEgg)
             throw new System.Exception("Player is not in an egg");
         player.state = Player.PlayerState.Hatched;
-        player.HideEgg();
         player.turtle.GetComponent<SpriteRenderer>().sprite = turtleBodies[Random.Range(0, turtleBodies.Length)];
         player.ShowTurtle();
-        player.turtle.transform.position = player.egg.transform.position;
         player.turtle.transform.rotation = Quaternion.identity;
+        player.egg.GetComponent<Egg>().Hatch(player.turtle.gameObject);
         // send the controller what their turtle color and number is
         if (!player.isKeyboard) {
             Dictionary<string, string> data = new Dictionary<string, string>();
@@ -225,6 +212,8 @@ public class AirController : MonoBehaviour {
         foreach (Player player in players.Values) {
             if (player.state == Player.PlayerState.Dropped)
                 continue;
+            if (player.HasEgg())
+                ReleaseEgg(player);
             PutPlayerInEgg(player);
             player.isInCurrentRace = false;
         }
@@ -252,8 +241,6 @@ public class AirController : MonoBehaviour {
             if (player.state == Player.PlayerState.Hatched) {
                 player.state = Player.PlayerState.InGame;
                 player.isInCurrentRace = true; // this will keep track of whether they were playing even if they drop
-                // at this point if the player returns to an egg we'll generate a new random one
-                ReleaseEgg(player);
                 if (cam)
                     cam.AddCameraTarget(player.turtle.transform);
             }

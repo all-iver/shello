@@ -20,6 +20,7 @@ public class Nest : MonoBehaviour
         spawnAI = false;
         spawnTimer = 0;
         for (int i = 0; i < eggs.childCount; i++) {
+            eggs.GetChild(i).GetComponent<Egg>().Reset();
             // eggs.GetChild(i).gameObject.SetActive(false);
             if (!ownership.ContainsKey(i))
                 ownership[i] = 0;
@@ -58,6 +59,7 @@ public class Nest : MonoBehaviour
             throw new System.Exception("Trying to release an AI egg");
         Debug.Log("Released egg at " + egg);
         ownership[egg] = 0;
+        eggs.GetChild(egg).GetComponent<Egg>().Reset();
         // eggs.GetChild(egg).gameObject.SetActive(false);
     }
 
@@ -73,9 +75,9 @@ public class Nest : MonoBehaviour
                 return; // no eggs left
             }
             GameObject go = Instantiate(aiPrefab);
-            GameObject egg = GetEggAtIndex(e);
-            go.transform.position = egg.transform.position;
             go.transform.SetParent(ai, true);
+            GameObject egg = GetEggAtIndex(e);
+            egg.GetComponent<Egg>().Hatch(go);
             spawnTimer = 0;
         }
     }
