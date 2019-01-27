@@ -100,4 +100,4 @@ MonoBehaviour:
   panSmoothing: 1
   padding: 4
   minOrtho: 5
-  maxOrtho: 10
+  maxOrtho: 500
