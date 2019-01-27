@@ -89,6 +89,7 @@ public class AirController : MonoBehaviour {
     public float leaderboardUpdateInterval = 0.5f;
     float leaderboardUpdateTimer;
     public AudioSource introMusic, raceMusic;
+    string logoText = "Make for the waves!";
 
     void Awake () {
         AirConsole.instance.onMessage += OnMessage;		
@@ -98,7 +99,6 @@ public class AirController : MonoBehaviour {
         cam = FindObjectOfType<TrackingCamera>();
         statusText.text = "Loading...";
         joiningText.text = "";
-        excitingText.text = "";
         gameState = GameState.WaitingToStart;
         nest = FindObjectOfType<Nest>();
 
@@ -231,6 +231,7 @@ public class AirController : MonoBehaviour {
             cam.targets.Clear();
             cam.AddCameraTarget(startCameraPosition);
         }
+        excitingText.text = logoText;
     }
 
     IEnumerator BlinkExcitingText(string text, int times = 5, float onDuration = 0.5f, float offDuration = 0.1f) {
@@ -260,7 +261,7 @@ public class AirController : MonoBehaviour {
         gameState = GameState.InProgress;
         // tell the various devices to let the players start moving
         AirConsole.instance.Broadcast(GetGameStateData());
-        StartCoroutine(BlinkExcitingText("Make for the waves!"));
+        StartCoroutine(BlinkExcitingText(logoText));
         introMusic.Stop();
         raceMusic.Play();
     }
