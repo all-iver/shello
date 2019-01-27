@@ -95,9 +95,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1914821571
+  m_SortingLayer: 1
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: df1a237369226451d8f53b3509af8c57, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -133,7 +133,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1400790954732477704}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 40, y: 5, z: 0}
+  m_LocalPosition: {x: 40, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1400790956034613412}
@@ -163,7 +163,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1400790954870701359}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -40, y: 15, z: 0}
+  m_LocalPosition: {x: -40, y: 25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1400790956034613412}
@@ -218,10 +218,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seagulShadow: {fileID: 1400790954255127793}
-  pos1: {fileID: 1400790954870701328}
-  pos2: {fileID: 1400790954732477705}
-  pos3: {fileID: 6855025117067505176}
-  pos4: {fileID: 6576285814708446393}
+  positions:
+  - {fileID: 1400790954870701328}
+  - {fileID: 1400790954732477705}
+  - {fileID: 6855025117067505176}
+  - {fileID: 6576285814708446393}
   speed: 10
   waitTime: 10
   target: {fileID: 1400790954870701328}
@@ -251,7 +252,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4357065676292495886}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -40, y: 15, z: 0}
+  m_LocalPosition: {x: -40, y: 30, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1400790956034613412}

@@ -7,10 +7,7 @@ public class SeagulShadow : MonoBehaviour
     public GameObject seagulShadow;
     private SpriteRenderer spriteRenderer;
 
-    public Transform pos1;
-    public Transform pos2;
-    public Transform pos3;
-    public Transform pos4;
+    public Transform[] positions;
 
     public float speed;
     public float waitTime;
@@ -41,35 +38,42 @@ public class SeagulShadow : MonoBehaviour
 
     void UpdateSeagull()
     {
-        if (x == 5)
+        if (x >= positions.Length)
         {
             x = 0;
         }
 
         if (x == 0)
         {
-            target = pos1;
+            target = positions[x];
             spriteRenderer.flipX = false;
             spriteRenderer.flipY = false;
         }
 
         if (x == 1)
         {
-            target = pos2;
+            target = positions[x];
             spriteRenderer.flipX = true;
+            spriteRenderer.flipY = true;
+        }
+
+        if (x == 2)
+        {
+            target = positions[x];
+            spriteRenderer.flipX = false;
             spriteRenderer.flipY = false;
         }
 
         if (x == 3)
         {
-            target = pos3;
-            spriteRenderer.flipX = false;
-            spriteRenderer.flipY = false;
+            target = positions[x];
+            spriteRenderer.flipX = true;
+            spriteRenderer.flipY = true;
         }
 
         if (x == 4)
         {
-            target = pos4;
+            target = positions[x];
             spriteRenderer.flipX = true;
             spriteRenderer.flipY = false;
         }
