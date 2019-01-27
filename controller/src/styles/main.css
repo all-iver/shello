@@ -94,3 +94,22 @@ body {
   font-weight: bold;
   margin-right: 10px;
 }
+
+.turtle {
+  position: relative;
+}
+
+.turtle .body {
+  position: relative;
+  z-index: 1;
+}
+
+.turtle .left-legs {
+  position: absolute;
+  left: 0;
+}
+
+.turtle .right-legs {
+  position: absolute;
+  right: 0;
+}
