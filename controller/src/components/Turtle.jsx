@@ -50,7 +50,7 @@ class Turtle extends Component {
     const style = hidden ? { display: "none" } : {};
 
     return (
-      <div className="turtle" style={style}>
+      <div className={`turtle ${hidden ? "" : "slideInUp"}`} style={style}>
         <img src={turtles[body]} className="body" />
         <div className="numberContainer">
           <p className="number">{number}</p>
