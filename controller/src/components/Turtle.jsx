@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
 import turtleBody from "../../assets/images/turtle_body_teal.png";
-import turtleLegsLeft from "../../assets/images/Turtle_legs_left 1.png";
-import turtleLegsRight from "../../assets/images/Turtle_legs_right 1.png";
-import swipeArrows from "../../assets/images/swipe arrows.png";
+import turtleLegsLeft from "../../assets/images/Turtle_legs_left_1.png";
+import turtleLegsRight from "../../assets/images/Turtle_legs_right_1.png";
+import swipeArrows from "../../assets/images/swipe_arrows.png";
 
 class Turtle extends Component {
   constructor(props) {
