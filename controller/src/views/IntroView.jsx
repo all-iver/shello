@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import ReadyView from "../components/ReadyView";
 import EggView from "../components/EggView";
+import sand from "../../assets/images/sand.png";
 
 class IntroView extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class IntroView extends Component {
 
     return (
       <div id="introView">
+        <img src={sand} />
         {this.state.ready ? (
           <ReadyView
             airconsole={airconsole}
