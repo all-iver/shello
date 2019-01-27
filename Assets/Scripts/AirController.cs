@@ -206,6 +206,7 @@ public class AirController : MonoBehaviour {
     }
 
     void ResetGame() {
+        StopAllCoroutines();
         nest.ResetAI(); // remove all the AI and release all the eggs
         // put everybody who hasn't dropped into an egg
         gameState = GameState.WaitingToStart;
@@ -273,7 +274,9 @@ public class AirController : MonoBehaviour {
     public void OnTurtleCrossedFinishLine(Turtle turtle) {
         foreach (Player player in players.Values) {
             if (player.turtle == turtle) {
-                player.HideTurtle();
+                // player.HideTurtle(); // this hides the trails too :/
+                player.turtle.transform.position = new Vector3(0, -5000, 0); // hack!  get them away
+                GameSounds.instance.PlayWinSound();
                 player.finishTime = Time.time;
                 player.state = Player.PlayerState.Finished; // set this after doing the above!
                 Debug.Log(string.Format("Turtle {0} finished at time {1}", player.deviceID, player.finishTime));
@@ -281,6 +284,12 @@ public class AirController : MonoBehaviour {
                     FinishGame();
                 else
                     gameState = GameState.WaitingToFinish;
+                if (cam) {
+                    try {
+                        cam.RemoveCameraTarget(player.turtle.transform);
+                    } catch {
+                    }
+                }
             }
         }
     }
