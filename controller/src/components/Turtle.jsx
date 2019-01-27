@@ -45,10 +45,12 @@ class Turtle extends Component {
     );
   }
   render() {
-    const { showSwipeArrows, body, number } = this.props;
+    const { showSwipeArrows, body, number, hidden } = this.props;
+
+    const style = hidden ? { display: "none" } : {};
 
     return (
-      <div className="turtle">
+      <div className="turtle" style={style}>
         <img src={turtles[body]} className="body" />
         <div className="numberContainer">
           <p className="number">{number}</p>

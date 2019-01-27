@@ -12,20 +12,23 @@ class IntroView extends Component {
     };
   }
   render() {
-    const { airconsole, body, number } = this.props;
+    const { airconsole, body, number, turtleHidden, hideTurtle } = this.props;
 
     return (
       <div id="introView">
         {this.state.ready ? (
           <ReadyView
             airconsole={airconsole}
-            unready={() =>
+            unready={() => {
+              hideTurtle();
+
               this.setState({
                 ready: false
-              })
-            }
+              });
+            }}
             body={body}
             number={number}
+            turtleHidden={turtleHidden}
           />
         ) : (
           <EggView
