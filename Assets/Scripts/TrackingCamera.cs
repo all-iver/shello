@@ -14,9 +14,12 @@ public class TrackingCamera : MonoBehaviour
     public float panSmoothing = 1;
     public float padding = 4;
     public float minOrtho = 5;
-    public float maxOrtho = 7;
+    public float maxOrtho = 7.5f;
     float zoomVelocity;
     Vector2 panVelocity;
+
+    public Vector3 StartFrame = new Vector3(0f, 0f, 0f);
+    public Vector3 OutFrame = new Vector3(0f,7f,0f);
 
     void Start()
     {
@@ -70,7 +73,7 @@ public class TrackingCamera : MonoBehaviour
         desiredPos = GetDesiredPosition();
         cam.orthographicSize = Mathf.SmoothDamp(cam.orthographicSize, desiredOrtho, ref zoomVelocity, zoomSmoothing);
         Vector2 newPos = Vector2.SmoothDamp(transform.position, desiredPos, ref panVelocity, panSmoothing);
-        cam.transform.position = new Vector3(newPos.x, newPos.y, cam.transform.position.z);
+        cam.transform.position = new Vector3(0f, newPos.y, cam.transform.position.z);
     }
 
     // call this to make sure a target doesn't go outside the camera's bounds when zoomed all the way out
