@@ -3,6 +3,14 @@ body {
   font-family: Londrina Solid;
 }
 
+p,
+body,
+button,
+label,
+img {
+  user-select: none;
+}
+
 #playView {
   background-image: url("../../assets/images/sand.png");
   background-repeat: repeat;
