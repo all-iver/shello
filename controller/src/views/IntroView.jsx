@@ -13,7 +13,7 @@ class IntroView extends Component {
     };
   }
   render() {
-    const { airconsole } = this.props;
+    const { airconsole, body, number } = this.props;
 
     return (
       <div id="introView">
@@ -26,6 +26,8 @@ class IntroView extends Component {
                 ready: false
               })
             }
+            body={body}
+            number={number}
           />
         ) : (
           <EggView

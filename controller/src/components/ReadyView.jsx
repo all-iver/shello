@@ -5,12 +5,12 @@ import Turtle from "./Turtle";
 
 class ReadyView extends Component {
   render() {
-    const { airconsole, unready } = this.props;
+    const { airconsole, unready, body, number } = this.props;
 
     return (
       <div id="readyView">
         <p>Waiting for the game to start!</p>
-        <Turtle showSwipeArrows={false} />
+        <Turtle showSwipeArrows={false} body={body} number={number} />
         <div className="unready">
           <label>Click to Un-Hatch</label>
           <button

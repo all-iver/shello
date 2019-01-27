@@ -15,7 +15,9 @@ class App extends Component {
     super(props);
 
     this.state = {
-      currentView: "IntroView"
+      currentView: "IntroView",
+      body: "green",
+      number: "?"
     };
 
     props.airconsole.onMessage = (id, data) => {
@@ -25,15 +27,22 @@ class App extends Component {
             currentView: data.view
           }));
           break;
+        case "turtle":
+          this.setState(prevState => ({
+            body: data.body,
+            number: data.number
+          }));
+          break;
       }
     };
   }
 
   render() {
+    const { body, number } = this.state;
     const { airconsole } = this.props;
     const View = views[this.state.currentView];
 
-    return <View airconsole={airconsole} />;
+    return <View airconsole={airconsole} body={body} number={number} />;
   }
 }
 
