@@ -378,9 +378,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94f8f4732737b4043b80a0023db55d61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameState: 0
   playerPrefab: {fileID: 4256836259451432330, guid: 89b01b732b42ed94ab787b7d685d8957,
     type: 3}
   instructionsPanel: {fileID: 2213912264198487145}
   instructionsText: {fileID: 2213912263767565912}
-  secondsToWait: 10
+  secondsToWaitWhenAllPlayersAreHatched: 10
+  secondsToWaitForPlayersToFinish: 30
