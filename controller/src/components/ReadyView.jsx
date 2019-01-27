@@ -9,7 +9,7 @@ class ReadyView extends Component {
 
     return (
       <div id="readyView">
-        <p>Waiting for remaining players to hatch!</p>
+        <p>Waiting for the game to start!</p>
         <Turtle showSwipeArrows={false} />
         <div className="unready">
           <label>Click to Un-Hatch</label>

@@ -23,7 +23,7 @@ class IntroView extends Component {
             })
           }
           crackable={false}
-          text="Waiting for other players to finished the race!"
+          text="Waiting for other players to finish the race!"
         />
       </div>
     );
