@@ -251,8 +251,14 @@ public class AirController : MonoBehaviour {
         AirConsole.instance.Broadcast(GetGameStateData());
         StartCoroutine(BlinkExcitingText(logoText));
         introMusic.Stop();
-        raceMusic.Play();
+        StartCoroutine(PlayRaceMusic());
         nest.spawnAI = true;
+    }
+
+    IEnumerator PlayRaceMusic() {
+        yield return new WaitForSeconds(2);
+        if (gameState == GameState.InProgress)
+            raceMusic.Play();
     }
 
     void FinishGame() {
@@ -297,9 +303,20 @@ public class AirController : MonoBehaviour {
 
         // if everyone has hatched then start the game
         if (GetConnectedPlayerCount() > 0 && AllPlayersAreHatched() && gameState == GameState.WaitingToStart) {
+            float oldHatchTimer = hatchTimer;
             hatchTimer -= Time.deltaTime;
-            if (hatchTimer <= 0)
+            if (oldHatchTimer > 3 && hatchTimer <= 3) {
+                introMusic.Stop();
+                GameSounds.instance.PlayBeep();
+            }
+            if (oldHatchTimer > 2 && hatchTimer <= 2)
+                GameSounds.instance.PlayBeep();
+            if (oldHatchTimer > 1 && hatchTimer <= 1)
+                GameSounds.instance.PlayBeep();
+            if (hatchTimer <= 0) {
+                GameSounds.instance.PlayGoBeep();
                 BeginGame();
+            }
         } else {
             hatchTimer = secondsToWaitWhenAllPlayersAreHatched;
         }
