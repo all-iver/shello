@@ -803,3 +803,14 @@ MonoBehaviour:
   secondsToWaitWhenAllPlayersAreHatched: 10
   secondsToWaitForPlayersToFinish: 30
   startCameraPosition: {fileID: 25843986}
+  turtleBodies:
+  - {fileID: 21300000, guid: 9b568d67fc7b04c429396c2923287879, type: 3}
+  - {fileID: 21300000, guid: f4f8edae8ff9f48398c8f59e52dadc30, type: 3}
+  - {fileID: 21300000, guid: 4c084bdf974244cda85f32772c4de416, type: 3}
+  - {fileID: 21300000, guid: b97dc0b9bd0ff49b88a101fdee116743, type: 3}
+  - {fileID: 21300000, guid: 0ab6e92864da6438ebe70b254b2ae99f, type: 3}
+  - {fileID: 21300000, guid: d8389f16bfeb349d884bddf114863ec1, type: 3}
+  - {fileID: 21300000, guid: a5f0ce0ab21b641e1a68781102c342e4, type: 3}
+  - {fileID: 21300000, guid: 6824da4d729d54e0d9fa7e0e3d975f94, type: 3}
+  - {fileID: 21300000, guid: ec546341cb2a74ce7aa93de3655d80d2, type: 3}
+  - {fileID: 21300000, guid: de0eeb00ac8df41aba9015344ff87a05, type: 3}
