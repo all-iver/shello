@@ -65,8 +65,12 @@ body {
   z-index: 1;
 }
 
+#readyView {
+  text-align: center;
+}
+
 #readyView img {
-  height: 90vh;
+  height: 80vh;
 }
 
 #readyView button {
