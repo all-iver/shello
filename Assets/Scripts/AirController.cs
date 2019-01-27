@@ -89,6 +89,7 @@ public class AirController : MonoBehaviour {
     public float leaderboardUpdateInterval = 0.5f;
     float leaderboardUpdateTimer;
     public AudioSource introMusic, raceMusic;
+    string logoText = "Make for the waves!";
 
     void Awake () {
         AirConsole.instance.onMessage += OnMessage;		
@@ -98,7 +99,6 @@ public class AirController : MonoBehaviour {
         cam = FindObjectOfType<TrackingCamera>();
         statusText.text = "Loading...";
         joiningText.text = "";
-        excitingText.text = "";
         gameState = GameState.WaitingToStart;
         nest = FindObjectOfType<Nest>();
 
@@ -113,7 +113,7 @@ public class AirController : MonoBehaviour {
 
     string GetStatusText() {
         if (GetConnectedPlayerCount() == 0)
-            return "Waiting for players!";
+            return "Waiting for players...";
         if (gameState == GameState.WaitingToStart && !AllPlayersAreHatched())
             return "The game will start when everyone hatches (tap the egg on your phone)!";
         if (gameState == GameState.WaitingToStart)
@@ -167,7 +167,7 @@ public class AirController : MonoBehaviour {
         // case we put them back into the same egg they hatched from
         if (!player.HasEgg()) {
             try {
-                player.eggIndex = nest.GetRandomEggIndex();
+                player.eggIndex = nest.ClaimRandomEgg();
             } catch {
                 player.state = Player.PlayerState.TooManyPlayers;
                 return;
@@ -219,6 +219,7 @@ public class AirController : MonoBehaviour {
     }
 
     void ResetGame() {
+        nest.ResetAI(); // remove all the AI and release all the eggs
         // put everybody who hasn't dropped into an egg
         gameState = GameState.WaitingToStart;
         foreach (Player player in players.Values) {
@@ -231,6 +232,7 @@ public class AirController : MonoBehaviour {
             cam.targets.Clear();
             cam.AddCameraTarget(startCameraPosition);
         }
+        excitingText.text = logoText;
     }
 
     IEnumerator BlinkExcitingText(string text, int times = 5, float onDuration = 0.5f, float offDuration = 0.1f) {
@@ -260,9 +262,10 @@ public class AirController : MonoBehaviour {
         gameState = GameState.InProgress;
         // tell the various devices to let the players start moving
         AirConsole.instance.Broadcast(GetGameStateData());
-        StartCoroutine(BlinkExcitingText("Make for the waves!"));
+        StartCoroutine(BlinkExcitingText(logoText));
         introMusic.Stop();
         raceMusic.Play();
+        nest.spawnAI = true;
     }
 
     void FinishGame() {

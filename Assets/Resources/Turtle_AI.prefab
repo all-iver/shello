@@ -875,13 +875,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00d431dab6ac34cfe84f5ca178b44657, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finishLine: {fileID: 0}
-  currentTarget: {x: 0, y: 0, z: 0}
-  speed: 0.5
-  initialDegreeSpread: 45
-  distanceToAim: 15
-  turnSpeed: 10
-  timeBetweenResets: 10
+  initialDegreeSpread: 180
+  secondsBetweenMoves: 0.7
+  rotationSpeed: 0.5
+  timeReadjusting: 2
+  timeBetweenReorients: 20
   isResettingTarget: 0
 --- !u!1 &5108633467332682835
 GameObject:
