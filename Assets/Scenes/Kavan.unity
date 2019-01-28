@@ -1508,18 +1508,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 293733567, guid: 673c4c38f767b49c8bb1706492433a28, type: 3}
       propertyPath: m_havePropertiesChanged
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 293733567, guid: 673c4c38f767b49c8bb1706492433a28, type: 3}
       propertyPath: m_isInputParsingRequired
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5815185924164022760, guid: 673c4c38f767b49c8bb1706492433a28,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 0b7c158a25dcf40e3b0dac9400a82216,
-        type: 3}
     - target: {fileID: 6108382633452975794, guid: 673c4c38f767b49c8bb1706492433a28,
         type: 3}
       propertyPath: m_Sprite
