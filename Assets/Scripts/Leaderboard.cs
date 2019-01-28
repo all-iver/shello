@@ -23,15 +23,16 @@ public class Leaderboard : MonoBehaviour
         }
     }
 
-    public void SetRank(int rank, Sprite body, int number, float time, bool isKeyboard = false) {
+    public void SetRank(int rank, Sprite body, int number, float time, bool hasBow, bool isKeyboard = false) {
         if (rank >= 8)
             return; // hardcoded to 8 child turtles for now
         LeaderboardTurtle turtle = transform.GetChild(rank).GetComponent<LeaderboardTurtle>();
         turtle.gameObject.SetActive(true);
         turtle.body.sprite = body;
         turtle.number.text = isKeyboard ? "K" : ("" + number);
+        turtle.bow.gameObject.SetActive(false);
         if (time <= 0) {
-            turtle.time.gameObject.SetActive(false);
+            turtle.time.gameObject.SetActive(hasBow);
         } else {
             turtle.time.gameObject.SetActive(true);
             turtle.time.text = string.Format("{0:F2}s", time);
