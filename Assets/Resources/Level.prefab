@@ -2989,6 +2989,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3219519436198731875}
     m_Modifications:
+    - target: {fileID: 7490893616677103920, guid: b4a24af547a9c4da7bd144b243eeaa6b,
+        type: 3}
+      propertyPath: speed
+      value: 0.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 911710385726330525, guid: b4a24af547a9c4da7bd144b243eeaa6b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.9995066
+      objectReference: {fileID: 0}
+    - target: {fileID: 911710385726330525, guid: b4a24af547a9c4da7bd144b243eeaa6b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.03141073
+      objectReference: {fileID: 0}
+    - target: {fileID: 911710385726330525, guid: b4a24af547a9c4da7bd144b243eeaa6b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 911710385726330525, guid: b4a24af547a9c4da7bd144b243eeaa6b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 16.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 911710385726330525, guid: b4a24af547a9c4da7bd144b243eeaa6b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 183.6
+      objectReference: {fileID: 0}
     - target: {fileID: 7866272161108819559, guid: b4a24af547a9c4da7bd144b243eeaa6b,
         type: 3}
       propertyPath: m_Name
@@ -3048,6 +3078,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8691480106129801018, guid: b4a24af547a9c4da7bd144b243eeaa6b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 8691480106129801018, guid: b4a24af547a9c4da7bd144b243eeaa6b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 7866272161233417049, guid: b4a24af547a9c4da7bd144b243eeaa6b,
         type: 3}
