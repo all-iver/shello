@@ -12,7 +12,14 @@ class IntroView extends Component {
     };
   }
   render() {
-    const { airconsole, body, number, turtleHidden, hideTurtle } = this.props;
+    const {
+      airconsole,
+      body,
+      number,
+      turtleHidden,
+      hideTurtle,
+      showBow
+    } = this.props;
 
     return (
       <div id="introView">
@@ -29,6 +36,7 @@ class IntroView extends Component {
             body={body}
             number={number}
             turtleHidden={turtleHidden}
+            showBow={showBow}
           />
         ) : (
           <EggView

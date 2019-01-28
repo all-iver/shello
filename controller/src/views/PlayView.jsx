@@ -10,13 +10,18 @@ class PlayView extends Component {
   }
 
   render() {
-    const { airconsole, body, number } = this.props;
+    const { airconsole, body, number, showBow } = this.props;
 
     return (
       <div id="playView">
         <p>Swipe to move!</p>
         <div id="playViewTurtles">
-          <Turtle showSwipeArrows={true} body={body} number={number} />
+          <Turtle
+            showSwipeArrows={true}
+            body={body}
+            number={number}
+            showBow={showBow}
+          />
         </div>
         <div id="flippers">
           <Flipper airconsole={airconsole} side="Left" />

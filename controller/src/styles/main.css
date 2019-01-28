@@ -148,6 +148,13 @@ img {
   z-index: 1;
 }
 
+.turtle .bow {
+  position: absolute;
+  z-index: 100;
+  left: 0;
+  top: 0;
+}
+
 .turtle .left-legs {
   position: absolute;
   left: 0;

@@ -5,7 +5,14 @@ import Turtle from "./Turtle";
 
 class ReadyView extends Component {
   render() {
-    const { airconsole, unready, body, number, turtleHidden } = this.props;
+    const {
+      airconsole,
+      unready,
+      body,
+      number,
+      turtleHidden,
+      showBow
+    } = this.props;
 
     return (
       <div id="readyView">
@@ -15,6 +22,7 @@ class ReadyView extends Component {
           body={body}
           number={number}
           hidden={turtleHidden}
+          showBow={showBow}
         />
         <div className="unready">
           <label>Click to Un-Hatch</label>

@@ -18,7 +18,8 @@ class App extends Component {
       currentView: "IntroView",
       body: "green",
       number: "?",
-      turtleHidden: true
+      turtleHidden: true,
+      showBow: false
     };
 
     props.airconsole.onMessage = (id, data) => {
@@ -32,7 +33,8 @@ class App extends Component {
           this.setState(prevState => ({
             body: data.color || prevState.body,
             number: data.number || prevState.number,
-            turtleHidden: false
+            turtleHidden: false,
+            showBow: data.showBow || prevState.showBow
           }));
           break;
       }
@@ -40,7 +42,7 @@ class App extends Component {
   }
 
   render() {
-    const { body, number, turtleHidden } = this.state;
+    const { body, number, turtleHidden, showBow } = this.state;
     const { airconsole } = this.props;
     const View = views[this.state.currentView];
 
@@ -55,6 +57,7 @@ class App extends Component {
             turtleHidden: true
           });
         }}
+        showBow={showBow}
       />
     );
   }

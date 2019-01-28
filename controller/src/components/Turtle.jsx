@@ -15,6 +15,8 @@ import turtleLegsLeft from "../../assets/images/Turtle_legs_left_1.png";
 import turtleLegsRight from "../../assets/images/Turtle_legs_right_1.png";
 import swipeArrows from "../../assets/images/swipe_arrows.png";
 
+import bow from "../../assets/images/turtle_winner_bow.png";
+
 const turtles = {
   teal: turtleTeal,
   black: turtleBlack,
@@ -46,14 +48,16 @@ class Turtle extends Component {
   }
   render() {
     const { swipeArrowsFlipped } = this.state;
-    const { showSwipeArrows, body, number, hidden } = this.props;
+    const { showSwipeArrows, body, number, hidden, showBow } = this.props;
 
     const style = hidden ? { display: "none" } : {};
     const swipeArrowStyle = swipeArrowsFlipped ? { display: "none" } : {};
+    const showBowStyle = !showBow ? { display: "none" } : {};
 
     return (
       <div className={`turtle ${hidden ? "" : "slideInUp"}`} style={style}>
         <img src={turtles[body]} className="body" />
+        <img src={bow} style={showBowStyle} className="bow" />
         <div className="numberContainer">
           <p className="number">{number}</p>
         </div>
