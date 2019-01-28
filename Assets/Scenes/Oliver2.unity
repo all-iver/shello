@@ -410,27 +410,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1719813676, guid: 3053b17ad9e28ef4db0091c4883fd2f4, type: 3}
       propertyPath: m_havePropertiesChanged
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1719813676, guid: 3053b17ad9e28ef4db0091c4883fd2f4, type: 3}
       propertyPath: m_isInputParsingRequired
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1719813676, guid: 3053b17ad9e28ef4db0091c4883fd2f4, type: 3}
       propertyPath: m_fontSize
-      value: 84.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1719813676, guid: 3053b17ad9e28ef4db0091c4883fd2f4, type: 3}
-      propertyPath: m_textInfo.characterCount
       value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 1719813676, guid: 3053b17ad9e28ef4db0091c4883fd2f4, type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 1719813676, guid: 3053b17ad9e28ef4db0091c4883fd2f4, type: 3}
       propertyPath: m_firstOverflowCharacterIndex
-      value: -1
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1719813676, guid: 3053b17ad9e28ef4db0091c4883fd2f4, type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 1
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 1719813676, guid: 3053b17ad9e28ef4db0091c4883fd2f4, type: 3}
       propertyPath: m_text
