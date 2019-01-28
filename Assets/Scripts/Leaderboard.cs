@@ -30,9 +30,9 @@ public class Leaderboard : MonoBehaviour
         turtle.gameObject.SetActive(true);
         turtle.body.sprite = body;
         turtle.number.text = isKeyboard ? "K" : ("" + number);
-        turtle.bow.gameObject.SetActive(false);
+        turtle.bow.gameObject.SetActive(hasBow);
         if (time <= 0) {
-            turtle.time.gameObject.SetActive(hasBow);
+            turtle.time.gameObject.SetActive(false);
         } else {
             turtle.time.gameObject.SetActive(true);
             turtle.time.text = string.Format("{0:F2}s", time);
