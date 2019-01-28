@@ -103,7 +103,7 @@ SpriteRenderer:
   m_SortingLayerID: -1273880515
   m_SortingLayer: -1
   m_SortingOrder: 4
-  m_Sprite: {fileID: 21300000, guid: f859c5517a84b4ec098b22244986b5c0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7350d12c71a725c4999721684bb67a5f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -182,7 +182,7 @@ SpriteRenderer:
   m_SortingLayerID: -1273880515
   m_SortingLayer: -1
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 065570b262ed84f78a34bdb59ed49788, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fc679e845619a744885d29feeaea11aa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -261,7 +261,7 @@ SpriteRenderer:
   m_SortingLayerID: -1273880515
   m_SortingLayer: -1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 6d2c88ec7e8cb4080a47c1559260ed9c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 09f847f524276fe41b9315b938b5ed83, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -340,7 +340,7 @@ SpriteRenderer:
   m_SortingLayerID: -1273880515
   m_SortingLayer: -1
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 38a7bfebd3db0402f8ed79032ae61df5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 39a3e1d60eb6ff447972b8399d1d59d6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -418,8 +418,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1273880515
   m_SortingLayer: -1
-  m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: e0d915f125e4c4f30b2e17276123d99a, type: 3}
+  m_SortingOrder: 3
+  m_Sprite: {fileID: 21300000, guid: 5ccbc032ba7b9ed4e91631a62623e5bc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -548,8 +548,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1273880515
   m_SortingLayer: -1
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: c550c7a19f6ab4b60bc11b1da0742591, type: 3}
+  m_SortingOrder: 2
+  m_Sprite: {fileID: 21300000, guid: 56acae9218dcbb34a9b10b3879fcadbc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -928,7 +928,7 @@ GameObject:
   - component: {fileID: 5963454826972133252}
   - component: {fileID: 6980370916247969176}
   m_Layer: 0
-  m_Name: WaveLayer
+  m_Name: WaveLayer_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
