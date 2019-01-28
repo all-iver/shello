@@ -126,8 +126,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eggs: {fileID: 5962139752254233928}
   ai: {fileID: 0}
-  aiSpawnMinRate: 0.5
-  aiSpawnMaxRate: 1.5
+  aiSpawnMinRate: 0.3
+  aiSpawnMaxRate: 1
   spawnAI: 0
   aiPrefab: {fileID: 0}
 --- !u!1 &9122838684561558592
