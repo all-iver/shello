@@ -18,6 +18,7 @@ public class Turtle : MonoBehaviour {
             playerIDText.text = "" + value;
         }
     }
+    public GameObject bow;
 
 	void Start (){
 		rb = GetComponent<Rigidbody2D>();
@@ -39,6 +40,11 @@ public class Turtle : MonoBehaviour {
 			break;
 		}
 	}
+
+    public void SetHasBow(bool hasBow) {
+        bow.SetActive(hasBow);
+        playerIDText.gameObject.SetActive(!hasBow);
+    }
 
     void Update() {
         if (useKeyboardInput) {

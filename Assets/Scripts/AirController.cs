@@ -27,6 +27,14 @@ public class AirController : MonoBehaviour {
         public bool isKeyboard;
         public bool isInCurrentRace; // in case the player drops, this will let us know if they were in the race
         public float finishTime;
+        bool _isTheBest;
+        public bool isTheBest {
+            get { return _isTheBest; }
+            set { 
+                _isTheBest = value;
+                turtle.SetHasBow(_isTheBest);
+            }
+        }
 
         public bool IsAbleToPlay() {
             return state != Player.PlayerState.Dropped && state != Player.PlayerState.TooManyPlayers;
@@ -179,8 +187,9 @@ public class AirController : MonoBehaviour {
         if (!player.isKeyboard) {
             Dictionary<string, string> data = new Dictionary<string, string>();
             data.Add("action", "turtle");
-            data.Add("color", player.turtle.GetComponent<SpriteRenderer>().sprite.name.Split('_')[2]);
+            data.Add("color", player.turtle.GetComponent<SpriteRenderer>().sprite.name.Split('_')[1]);
             data.Add("number", "" + player.deviceID);
+            data.Add("showBow", player.isTheBest ? "true" : "false");
             AirConsole.instance.Message(player.deviceID, data);
         }
     }
@@ -263,7 +272,7 @@ public class AirController : MonoBehaviour {
     }
 
     void FinishGame() {
-        UpdateLeaderboard();
+        UpdateLeaderboard(true);
         ResetGame();
         // tell the various devices to switch back to the intro screen
         AirConsole.instance.Broadcast(GetGameStateData());
@@ -349,7 +358,7 @@ public class AirController : MonoBehaviour {
             leaderboardUpdateTimer += Time.deltaTime;
             if (leaderboardUpdateTimer >= leaderboardUpdateInterval) {
                 leaderboardUpdateTimer = 0;
-                UpdateLeaderboard();
+                UpdateLeaderboard(false);
             }
         }
     }
@@ -362,14 +371,21 @@ public class AirController : MonoBehaviour {
         return 9999999;
     }
 
-    void UpdateLeaderboard() {
+    void UpdateLeaderboard(bool setBow) {
+        if (setBow) {
+            foreach (Player p in players.Values)
+                p.isTheBest = false; 
+        }
         Player[] sortedPlayers = players.Values.Where(
                     p => p.state == Player.PlayerState.Finished || p.state == Player.PlayerState.InGame)
                 .OrderBy(p => GetRankForPlayer(p)).ToArray();
         leaderboard.SetNumPlayers(sortedPlayers.Length);
         for (int i = 0; i < sortedPlayers.Length; i++) {
+            if (i == 0 && setBow)
+                sortedPlayers[i].isTheBest = true;
             leaderboard.SetRank(i, sortedPlayers[i].turtle.GetComponent<SpriteRenderer>().sprite, 
-                    sortedPlayers[i].deviceID, sortedPlayers[i].finishTime, sortedPlayers[i].isKeyboard);
+                    sortedPlayers[i].deviceID, sortedPlayers[i].finishTime, sortedPlayers[i].isTheBest, 
+                    sortedPlayers[i].isKeyboard);
         }
     }
 
@@ -392,6 +408,13 @@ public class AirController : MonoBehaviour {
                 return false;
         }
         return true;    
+    }
+
+    bool AnyPlayersHaveFinished() {
+        foreach (Player p in players.Values)
+            if (p.state == Player.PlayerState.Finished)
+                return true;
+        return false;
     }
 
     int GetConnectedPlayerCount() {
