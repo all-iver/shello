@@ -34,7 +34,7 @@ class App extends Component {
             body: data.color || prevState.body,
             number: data.number || prevState.number,
             turtleHidden: false,
-            showBow: data.showBow === "true" ? true : false || prevState.showBow
+            showBow: data.showBow === "true" ? true : false
           }));
           break;
       }
