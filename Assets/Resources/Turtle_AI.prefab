@@ -878,8 +878,8 @@ MonoBehaviour:
   initialDegreeSpread: 90
   secondsBetweenMoves: 0.5
   rotationSpeed: 0.5
-  timeReadjusting: 2
-  timeBetweenReorients: 20
+  timeReadjusting: 3
+  timeBetweenReorients: 15
   isResettingTarget: 0
 --- !u!1 &5108633467332682835
 GameObject:

@@ -93,4 +93,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wetSandRenderer: {fileID: 7246693406795377359}
-  fadeDuration: 4
+  fadeDuration: 7
