@@ -710,8 +710,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00d431dab6ac34cfe84f5ca178b44657, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialDegreeSpread: 100
-  secondsBetweenMoves: 0.5
+  initialDegreeSpread: 168
+  secondsBetweenMoves: 0.4
   rotationSpeed: 0.5
   timeReadjusting: 3
   timeBetweenReorients: 15
