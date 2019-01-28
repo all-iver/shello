@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 
-import turtleTeal from "../../assets/images/bodies/turtle_body_teal.png";
-import turtleBlack from "../../assets/images/bodies/turtle_body_black.png";
-import turtleBlue from "../../assets/images/bodies/turtle_body_blue.png";
-import turtleBronze from "../../assets/images/bodies/turtle_body_bronze.png";
-import turtleGold from "../../assets/images/bodies/turtle_body_gold.png";
-import turtleGray from "../../assets/images/bodies/turtle_body_gray.png";
-import turtleGreen from "../../assets/images/bodies/turtle_body_green.png";
-import turtlePink from "../../assets/images/bodies/turtle_body_pink.png";
-import turtlePurple from "../../assets/images/bodies/turtle_body_purple.png";
-import turtleRed from "../../assets/images/bodies/turtle_body_red.png";
+import turtleTeal from "../../assets/images/bodies/turtle_teal_1.png";
+import turtleBlack from "../../assets/images/bodies/turtle_black_1.png";
+import turtleBlue from "../../assets/images/bodies/turtle_blue_1.png";
+import turtleBronze from "../../assets/images/bodies/turtle_bronze_1.png";
+import turtleGold from "../../assets/images/bodies/turtle_gold_1.png";
+import turtleGray from "../../assets/images/bodies/turtle_gray_1.png";
+import turtleGreen from "../../assets/images/bodies/turtle_green_1.png";
+import turtlePink from "../../assets/images/bodies/turtle_pink_1.png";
+import turtlePurple from "../../assets/images/bodies/turtle_purple_1.png";
+import turtleRed from "../../assets/images/bodies/turtle_red_1.png";
 
-import turtleLegsLeft from "../../assets/images/Turtle_legs_left_1.png";
-import turtleLegsRight from "../../assets/images/Turtle_legs_right_1.png";
+import turtleLegsLeft from "../../assets/images/turtle_legs_left_2.png";
+import turtleLegsRight from "../../assets/images/turtle_legs_right_2.png";
 import swipeArrows from "../../assets/images/swipe_arrows.png";
 
 import bow from "../../assets/images/turtle_winner_bow.png";
