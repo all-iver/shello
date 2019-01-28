@@ -391,7 +391,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 33.7
+  m_fontSize: 29.9
   m_fontSizeBase: 120.01
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -437,7 +437,7 @@ MonoBehaviour:
     spaceCount: 13
     wordCount: 15
     linkCount: 0
-    lineCount: 1
+    lineCount: 2
     pageCount: 1
     materialCount: 1
   m_havePropertiesChanged: 0
@@ -911,7 +911,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Make for the waves!
+  m_text: MAKE for the WAVES!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e3c83b40a5a17d74fb4ffd508b30dc5c, type: 2}
   m_sharedMaterial: {fileID: 21239326755589596, guid: e3c83b40a5a17d74fb4ffd508b30dc5c,
@@ -940,7 +940,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 124.8
+  m_fontSize: 84.7
   m_fontSizeBase: 120.01
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1134,7 +1134,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 91.4
+  m_fontSize: 18
   m_fontSizeBase: 120.01
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1180,7 +1180,7 @@ MonoBehaviour:
     spaceCount: 0
     wordCount: 1
     linkCount: 0
-    lineCount: 1
+    lineCount: 2
     pageCount: 1
     materialCount: 1
   m_havePropertiesChanged: 0

@@ -77,7 +77,7 @@ public class AirController : MonoBehaviour {
     public float leaderboardUpdateInterval = 0.5f;
     float leaderboardUpdateTimer;
     public AudioSource introMusic, raceMusic;
-    string logoText = "Make for the waves!";
+    string logoText = "MAKE for the WAVES!";
 
     void Awake () {
         AirConsole.instance.onMessage += OnMessage;		

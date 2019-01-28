@@ -366,20 +366,47 @@ PrefabInstance:
     - target: {fileID: 2213912263767565912, guid: 3053b17ad9e28ef4db0091c4883fd2f4,
         type: 3}
       propertyPath: m_havePropertiesChanged
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2213912263767565912, guid: 3053b17ad9e28ef4db0091c4883fd2f4,
         type: 3}
       propertyPath: m_isInputParsingRequired
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2213912263767565912, guid: 3053b17ad9e28ef4db0091c4883fd2f4,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 2213912263767565912, guid: 3053b17ad9e28ef4db0091c4883fd2f4,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2213912263767565912, guid: 3053b17ad9e28ef4db0091c4883fd2f4,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 898099125, guid: 3053b17ad9e28ef4db0091c4883fd2f4, type: 3}
       propertyPath: m_havePropertiesChanged
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 898099125, guid: 3053b17ad9e28ef4db0091c4883fd2f4, type: 3}
       propertyPath: m_isInputParsingRequired
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 898099125, guid: 3053b17ad9e28ef4db0091c4883fd2f4, type: 3}
+      propertyPath: m_fontSize
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 898099125, guid: 3053b17ad9e28ef4db0091c4883fd2f4, type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 898099125, guid: 3053b17ad9e28ef4db0091c4883fd2f4, type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 62
       objectReference: {fileID: 0}
     - target: {fileID: 1719813676, guid: 3053b17ad9e28ef4db0091c4883fd2f4, type: 3}
       propertyPath: m_havePropertiesChanged
@@ -388,6 +415,34 @@ PrefabInstance:
     - target: {fileID: 1719813676, guid: 3053b17ad9e28ef4db0091c4883fd2f4, type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1719813676, guid: 3053b17ad9e28ef4db0091c4883fd2f4, type: 3}
+      propertyPath: m_fontSize
+      value: 84.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1719813676, guid: 3053b17ad9e28ef4db0091c4883fd2f4, type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1719813676, guid: 3053b17ad9e28ef4db0091c4883fd2f4, type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1719813676, guid: 3053b17ad9e28ef4db0091c4883fd2f4, type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1719813676, guid: 3053b17ad9e28ef4db0091c4883fd2f4, type: 3}
+      propertyPath: m_text
+      value: MAKE for the WAVES!
+      objectReference: {fileID: 0}
+    - target: {fileID: 1719813676, guid: 3053b17ad9e28ef4db0091c4883fd2f4, type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1719813676, guid: 3053b17ad9e28ef4db0091c4883fd2f4, type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3053b17ad9e28ef4db0091c4883fd2f4, type: 3}
