@@ -1,10 +1,9 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class aiMovement : MonoBehaviour
 {
-
     //public Vector3 currentTarget;
     //private float currentRotation;
 
@@ -17,6 +16,7 @@ public class aiMovement : MonoBehaviour
     public float timeBetweenReorients;
 
     private Turtle turtleMotionController;
+	public List<Transform> targetTransformsArray = new List<Transform>();
     private Transform finishLineTarget;
     public bool isResettingTarget;
     private float distanceToAim;
@@ -26,34 +26,41 @@ public class aiMovement : MonoBehaviour
     void Start()
     {
         turtleMotionController = GetComponent<Turtle>();
-        finishLineTarget = FindObjectOfType<EndGameTrigger>().gameObject.transform;
+        //finishLineTarget = FindObjectOfType<EndGameTrigger>().gameObject.transform;
         RotateTurtle();
-        DrawTargetLine(transform.up, Color.red);
+		//DrawTargetLine(transform.up, Color.red);
+		SetTarget();
         StartCoroutine("Move");
         StartCoroutine("PeriodicallyReorientSelf");
     }
 
-    public void FixedUpdate()
+	public void FixedUpdate()
     {
         if (isResettingTarget)
         {
-            Debug.Log("ReSetting Target via UPDATE");
-
-            Vector3 targetDir = finishLineTarget.position - transform.position;
+			//Debug.Log("ReSetting Target via UPDATE");
+			//Set Direction
+			Vector3 targetDir = finishLineTarget.position - transform.position;
             rotationalStep = rotationSpeed * Time.deltaTime;
             Vector3 newDir = Vector3.RotateTowards(transform.up, targetDir, rotationalStep, 0.0f);
-
+			//Apply Direction
             transform.up = newDir;
-
-            //DrawTargetLine(newDir, Color.green);
-            //Vector3 desiredRot = new Vector3(0, 0, newDir.z);
-            //DrawTargetLine(desiredRot, Color.red);
-
-            //transform.rotation = Quaternion.LookRotation(desiredRot);
         }
     }
 
-    void RotateTurtle()
+	void SetTarget()
+	{
+		//Build Target List
+		foreach (AiTarget target in FindObjectsOfType<AiTarget>())
+		{
+			targetTransformsArray.Add(target.transform);
+		}
+		//Set Target
+		int randomTarget = Random.Range(0, targetTransformsArray.Count);
+		finishLineTarget = targetTransformsArray[randomTarget];
+	}
+
+	void RotateTurtle()
     {
         float zRot = Random.Range(-initialDegreeSpread, initialDegreeSpread);
         transform.Rotate(0.0f, 0.0f, zRot);
