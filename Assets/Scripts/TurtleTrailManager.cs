@@ -1,9 +1,11 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TurtleTrailManager : MonoBehaviour
 {
     public TrailRenderer sandTrail;
-    public TrailRenderer waterTrail;
+	public ParticleSystem rightTrail;
+	public ParticleSystem leftTrail;
+	public TrailRenderer waterTrail;
 }
