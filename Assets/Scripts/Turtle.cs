@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -60,14 +60,13 @@ public class Turtle : MonoBehaviour {
 		if (swipedLeftSide) {
             //turtleAnimController.ResetTrigger("RightFlipper");
             turtleAnimController.SetTrigger("LeftFlipper");
-            rb.AddForceAtPosition(transform.up * lurchForce, leftFlipper.position, ForceMode2D.Impulse);
-        }
+			rb.AddForceAtPosition(transform.up * lurchForce, rightFlipper.position, ForceMode2D.Impulse);
+		}
 		if (swipedRightSide) {
             //turtleAnimController.ResetTrigger("LeftFlipper");
             turtleAnimController.SetTrigger("RightFlipper");
-            rb.AddForceAtPosition(transform.up * lurchForce, rightFlipper.position, ForceMode2D.Impulse);
-
-        }
+			rb.AddForceAtPosition(transform.up * lurchForce, leftFlipper.position, ForceMode2D.Impulse);
+		}
         swipedLeftSide = swipedRightSide = false;
 	}
 }
