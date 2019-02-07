@@ -16,7 +16,6 @@ class ReadyView extends Component {
 
     return (
       <div id="readyView">
-        <p>Waiting for the game to start!</p>
         <Turtle
           showSwipeArrows={false}
           body={body}
@@ -24,7 +23,8 @@ class ReadyView extends Component {
           hidden={turtleHidden}
           showBow={showBow}
         />
-        <div className="unready">
+        <p>This is your turtle. Look for them in the nest!</p>
+        {/* <div className="unready">
           <label>Click to Un-Hatch</label>
           <button
             onClick={() => {
@@ -37,7 +37,7 @@ class ReadyView extends Component {
           >
             X
           </button>
-        </div>
+        </div> */}
       </div>
     );
   }

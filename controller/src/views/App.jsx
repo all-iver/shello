@@ -18,7 +18,7 @@ class App extends Component {
       currentView: "IntroView",
       body: "green",
       number: "?",
-      turtleHidden: true,
+      turtleHidden: false,
       showBow: false
     };
 
