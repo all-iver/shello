@@ -26,7 +26,7 @@ class PlayView extends Component {
           <Flipper airconsole={airconsole} side="Left" />
           <Flipper airconsole={airconsole} side="Right" />
         </div>
-        <p>Swipe to move!</p>
+        <p>Swipe to the rhythm to move faster!</p>
       </div>
     );
   }

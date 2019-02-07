@@ -64,11 +64,12 @@ class Turtle extends Component {
         <img src={turtleLegsLeft} className="left-legs" />
         <img src={turtleLegsRight} className="right-legs" />
         {showSwipeArrows ? (
-          <img
-            src={swipeArrows}
-            style={swipeArrowStyle}
-            className={"swipe-arrows"}
-          />
+          // <img
+          //   src={swipeArrows}
+          //   style={swipeArrowStyle}
+          //   className={"swipe-arrows"}
+          // />
+          <span className="dot swipe-arrows" />
         ) : (
           ""
         )}
