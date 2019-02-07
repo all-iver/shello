@@ -13,6 +13,7 @@ class PlayView extends Component {
   }
 
   sendMessage(swipe) {
+    const { airconsole } = this.props;
     const { previousInput } = this.state;
 
     if (previousInput === swipe.action) {
