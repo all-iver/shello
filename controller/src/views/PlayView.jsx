@@ -14,7 +14,6 @@ class PlayView extends Component {
 
     return (
       <div id="playView">
-        <p>Swipe to move!</p>
         <div id="playViewTurtles">
           <Turtle
             showSwipeArrows={true}
@@ -27,6 +26,7 @@ class PlayView extends Component {
           <Flipper airconsole={airconsole} side="Left" />
           <Flipper airconsole={airconsole} side="Right" />
         </div>
+        <p>Swipe to move!</p>
       </div>
     );
   }

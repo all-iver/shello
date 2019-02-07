@@ -15,10 +15,10 @@ class App extends Component {
     super(props);
 
     this.state = {
-      currentView: "IntroView",
+      currentView: "PlayView",
       body: "green",
       number: "?",
-      turtleHidden: false,
+      turtleHidden: true,
       showBow: false
     };
 
