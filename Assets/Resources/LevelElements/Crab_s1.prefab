@@ -104,7 +104,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5474393577787261752}
   m_Layer: 0
-  m_Name: Crab
+  m_Name: Crab_s1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -202,7 +202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  startMarker: {fileID: 8227352890870921307}
+  startMarker: {fileID: 3274826932197298133}
   endMarker: {fileID: 8227352890870921307}
   targetTransformsArray:
   - {fileID: 8227352890870921307}

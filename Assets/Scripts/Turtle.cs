@@ -6,7 +6,8 @@ public class Turtle : MonoBehaviour {
 
     private Animator turtleAnimController;
 
-    public bool swipedRightSide, swipedLeftSide;
+    public bool lastSwipe;
+    public bool swipedRightSide, swipedLeftSide, swipedStraight;
 	Rigidbody2D rb;
     public float lurchForce = 1;
     public Transform leftFlipper, rightFlipper;
@@ -32,6 +33,9 @@ public class Turtle : MonoBehaviour {
 
 	public void ButtonInput(string input) {
 		switch (input) {
+        case "swipeStraightEnd":
+            swipedStraight = true;
+            break;
 		case "swipeRightEnd":
 			swipedRightSide = true;
 			break;
@@ -53,6 +57,8 @@ public class Turtle : MonoBehaviour {
                 swipedRightSide = true;
             if (Input.GetKeyDown("left"))
                 swipedLeftSide = true;
+            if (Input.GetKeyDown("up"))
+                swipedStraight = true;
         }
     }
 
@@ -60,13 +66,18 @@ public class Turtle : MonoBehaviour {
 		if (swipedLeftSide) {
             //turtleAnimController.ResetTrigger("RightFlipper");
             turtleAnimController.SetTrigger("LeftFlipper");
-			rb.AddForceAtPosition(transform.up * lurchForce, rightFlipper.position, ForceMode2D.Impulse);
+			rb.AddForceAtPosition(transform.up * lurchForce * 0.5f, rightFlipper.position, ForceMode2D.Impulse);
 		}
 		if (swipedRightSide) {
             //turtleAnimController.ResetTrigger("LeftFlipper");
             turtleAnimController.SetTrigger("RightFlipper");
-			rb.AddForceAtPosition(transform.up * lurchForce, leftFlipper.position, ForceMode2D.Impulse);
+			rb.AddForceAtPosition(transform.up * lurchForce * 0.5f, leftFlipper.position, ForceMode2D.Impulse);
 		}
-        swipedLeftSide = swipedRightSide = false;
+		if (swipedStraight) {
+            turtleAnimController.SetTrigger("LeftFlipper");
+            turtleAnimController.SetTrigger("RightFlipper");
+			rb.AddForceAtPosition(transform.up * lurchForce, transform.position, ForceMode2D.Impulse);
+        }
+        swipedLeftSide = swipedRightSide = swipedStraight = false;
 	}
 }

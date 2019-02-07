@@ -1402,7 +1402,7 @@ MonoBehaviour:
   joiningText: {fileID: 898099125}
   excitingText: {fileID: 1719813676}
   secondsToWaitWhenAllPlayersAreHatched: 10
-  secondsToWaitForPlayersToFinish: 30
+  secondsToWaitForPlayersToFinish: 15
   startCameraPosition: {fileID: 25843986}
   turtleBodies:
   - {fileID: 21300000, guid: c8b00c5b2f74d4cdcba766188e9f57ad, type: 3}
