@@ -15,7 +15,7 @@ class Flipper extends Component {
   }
 
   render() {
-    const { airconsole, side } = this.props;
+    const { airconsole, side, sendMessage } = this.props;
 
     return (
       <Swipe
@@ -38,7 +38,11 @@ class Flipper extends Component {
             })
           );
 
-          airconsole.message(AirConsole.SCREEN, {
+          // airconsole.message(AirConsole.SCREEN, {
+          //   action: `swipe${side}End`
+          // });
+
+          sendMessage({
             action: `swipe${side}End`
           });
         }}

@@ -5,8 +5,31 @@ import Turtle from "../components/Turtle";
 class PlayView extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      previousInput: undefined
+    };
 
     props.airconsole.vibrate(500);
+  }
+
+  sendMessage(swipe) {
+    const { previousInput } = this.state;
+
+    if (previousInput === swipe.action) {
+      airconsole.message(AirConsole.SCREEN, {
+        action: swipe.action
+      });
+      // console.log(swipe.action);
+    } else {
+      airconsole.message(AirConsole.SCREEN, {
+        action: "swipeStraightEnd"
+      });
+      // console.log("straight");
+    }
+
+    this.setState({
+      previousInput: swipe.action
+    });
   }
 
   render() {
@@ -23,8 +46,16 @@ class PlayView extends Component {
           />
         </div>
         <div id="flippers">
-          <Flipper airconsole={airconsole} side="Left" />
-          <Flipper airconsole={airconsole} side="Right" />
+          <Flipper
+            airconsole={airconsole}
+            side="Left"
+            sendMessage={swipe => this.sendMessage(swipe)}
+          />
+          <Flipper
+            airconsole={airconsole}
+            side="Right"
+            sendMessage={swipe => this.sendMessage(swipe)}
+          />
         </div>
         <p>Swipe to the rhythm to move faster!</p>
       </div>
