@@ -170,8 +170,16 @@ img {
   position: absolute;
   left: 0;
   top: 0;
-  margin-left: -120px;
   transform: scaleY(-1);
+}
+
+.turtle .swipe-arrows.left {
+  margin-left: -120px;
+}
+
+.turtle .swipe-arrows.right {
+  margin-left: 360px;
+  animation-delay: 1s;
 }
 
 .flip {
