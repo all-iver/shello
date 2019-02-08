@@ -111,7 +111,7 @@ public class AirController : MonoBehaviour {
         if (GetConnectedPlayerCount() == 0)
             return "Waiting for players...";
         if (gameState == GameState.WaitingToStart && !AllPlayersAreHatched())
-            return "The game will start when everyone hatches (tap the egg on your phone)!";
+            return "The game will start when everyone hatches.\nTap the egg on your phone!";
         if (gameState == GameState.WaitingToStart)
             return "Get ready! The game is starting in " + Mathf.CeilToInt(hatchTimer) + " seconds!";
         if (gameState == GameState.WaitingToFinish)

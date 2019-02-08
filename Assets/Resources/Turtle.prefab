@@ -659,7 +659,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   swipedRightSide: 0
   swipedLeftSide: 0
-  lurchForce: 5
+  lurchForce: 10
   leftFlipper: {fileID: 1636180442}
   rightFlipper: {fileID: 1202873825}
   playerIDText: {fileID: 293733567}
