@@ -17,14 +17,18 @@ class PlayView extends Component {
     const { airconsole } = this.props;
     const { previousInput } = this.state;
 
+    const power = swipe.distance > 100 ? 2.0 : 1.0;
+
     if (previousInput === swipe.action) {
       airconsole.message(AirConsole.SCREEN, {
         action: swipe.action
       });
       // console.log(swipe.action);
     } else {
+      console.log("swipeStraightEnd", power);
       airconsole.message(AirConsole.SCREEN, {
-        action: "swipeStraightEnd"
+        action: "swipeStraightEnd",
+        power
       });
       // console.log("straight");
     }

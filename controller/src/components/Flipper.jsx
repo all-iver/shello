@@ -43,7 +43,11 @@ class Flipper extends Component {
           // });
 
           sendMessage({
-            action: `swipe${side}End`
+            action: `swipe${side}End`,
+            distance: distance(this.state.start, {
+              x: evt.changedTouches[0].pageX,
+              y: evt.changedTouches[0].pageY
+            })
           });
         }}
       >
