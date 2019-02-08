@@ -69,7 +69,9 @@ class Turtle extends Component {
           //   style={swipeArrowStyle}
           //   className={"swipe-arrows"}
           // />
-          <span className="dot swipe-arrows" />
+          <div className="dot-container swipe-arrows">
+            <span className="dot" />
+          </div>
         ) : (
           ""
         )}
