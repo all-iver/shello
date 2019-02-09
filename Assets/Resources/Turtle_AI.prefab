@@ -578,8 +578,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3b4ae05263ea3249b2d519e11fcc391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastSwipe: 0
   swipedRightSide: 0
   swipedLeftSide: 0
+  swipedStraight: 0
   lurchForce: 5
   leftFlipper: {fileID: 1636180442}
   rightFlipper: {fileID: 1202873825}
@@ -715,8 +717,12 @@ MonoBehaviour:
   rotationSpeed: 0.5
   timeReadjusting: 3
   timeBetweenReorients: 15
-  targetTransformsArray: []
-  isResettingTarget: 0
+  targetTransformsArray1: []
+  targetTransformsArray2: []
+  targetTransformsArray3: []
+  targetTransformsArray4: []
+  currentTargetNum: 1
+  isReorientingSelf: 0
 --- !u!1 &5108633467332682835
 GameObject:
   m_ObjectHideFlags: 0
@@ -788,16 +794,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7969382149714435983}
     m_Modifications:
-    - target: {fileID: 4940810150316950745, guid: 5e76ba64f0ad7c84f84eec4b11e86d44,
-        type: 3}
-      propertyPath: m_Name
-      value: Trails
-      objectReference: {fileID: 0}
-    - target: {fileID: 4940810150316950745, guid: 5e76ba64f0ad7c84f84eec4b11e86d44,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 6258906276816452932, guid: 5e76ba64f0ad7c84f84eec4b11e86d44,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -853,7 +849,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6879346855585308894, guid: 5e76ba64f0ad7c84f84eec4b11e86d44,
+    - target: {fileID: 4940810150316950745, guid: 5e76ba64f0ad7c84f84eec4b11e86d44,
+        type: 3}
+      propertyPath: m_Name
+      value: Trails
+      objectReference: {fileID: 0}
+    - target: {fileID: 4940810150316950745, guid: 5e76ba64f0ad7c84f84eec4b11e86d44,
         type: 3}
       propertyPath: m_Layer
       value: 8
@@ -863,12 +864,17 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 924631363366046011, guid: 5e76ba64f0ad7c84f84eec4b11e86d44,
+    - target: {fileID: 6879346855585308894, guid: 5e76ba64f0ad7c84f84eec4b11e86d44,
         type: 3}
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3854653211609167862, guid: 5e76ba64f0ad7c84f84eec4b11e86d44,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 924631363366046011, guid: 5e76ba64f0ad7c84f84eec4b11e86d44,
         type: 3}
       propertyPath: m_Layer
       value: 8

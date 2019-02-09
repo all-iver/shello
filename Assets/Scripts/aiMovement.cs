@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class aiMovement : MonoBehaviour
+public class AiMovement : MonoBehaviour
 {
     //public Vector3 currentTarget;
     //private float currentRotation;
@@ -14,33 +14,41 @@ public class aiMovement : MonoBehaviour
     public float rotationSpeed;
     public float timeReadjusting;
     public float timeBetweenReorients;
+	private Turtle turtleMotionController;
+	public bool isReorientingSelf;
+	private float distanceToAim;
+	private float rotationalStep;
 
-    private Turtle turtleMotionController;
-	public List<Transform> targetTransformsArray = new List<Transform>();
-    private Transform finishLineTarget;
-    public bool isResettingTarget;
-    private float distanceToAim;
-    private float rotationalStep;
+	[Header("AI Pathfinding")]
+	public GameObject currentPath;
+	public int currrentPathTargetNUM = 0;
+	[SerializeField] private Transform currentPathTargetTransform;
+	private AiTarget[] pathTargets;
+	public List<Transform> pathTargetTransforms = new List<Transform>();
+	private AiPathManager aiPaths;
 
     // Start is called before the first frame update
     void Start()
     {
         turtleMotionController = GetComponent<Turtle>();
-        //finishLineTarget = FindObjectOfType<EndGameTrigger>().gameObject.transform;
-        RotateTurtle();
+		aiPaths = FindObjectOfType<AiPathManager>();
+		//finishLineTarget = FindObjectOfType<EndGameTrigger>().gameObject.transform;
+		RotateTurtle();
 		//DrawTargetLine(transform.up, Color.red);
-		SetTarget();
+		SetPath();
+		BuildTargetList();
+		NextTarget();
         StartCoroutine("Move");
         StartCoroutine("PeriodicallyReorientSelf");
     }
 
 	public void FixedUpdate()
     {
-        if (isResettingTarget)
+        if (isReorientingSelf)
         {
 			//Debug.Log("ReSetting Target via UPDATE");
 			//Set Direction
-			Vector3 targetDir = finishLineTarget.position - transform.position;
+			Vector3 targetDir = currentPathTargetTransform.position - transform.position;
             rotationalStep = rotationSpeed * Time.deltaTime;
             Vector3 newDir = Vector3.RotateTowards(transform.up, targetDir, rotationalStep, 0.0f);
 			//Apply Direction
@@ -48,16 +56,27 @@ public class aiMovement : MonoBehaviour
         }
     }
 
-	void SetTarget()
+
+	void SetPath()
 	{
-		//Build Target List
-		foreach (AiTarget target in FindObjectsOfType<AiTarget>())
+		var pathCount = aiPaths.numOfPaths;
+		var currentPathNum = Random.Range(0, pathCount);
+		currentPath = aiPaths.PossiblePaths[currentPathNum];
+	}
+	
+	void BuildTargetList()
+	{
+		pathTargets = currentPath.GetComponentsInChildren<AiTarget>();
+
+		foreach (AiTarget target in pathTargets)
 		{
-			targetTransformsArray.Add(target.transform);
+			pathTargetTransforms.Add(target.transform);
 		}
-		//Set Target
-		int randomTarget = Random.Range(0, targetTransformsArray.Count);
-		finishLineTarget = targetTransformsArray[randomTarget];
+	}
+
+	public void NextTarget()
+	{
+		currentPathTargetTransform = pathTargetTransforms[currrentPathTargetNUM];
 	}
 
 	void RotateTurtle()
@@ -81,10 +100,10 @@ public class aiMovement : MonoBehaviour
     {
         while (true)
         {
-            isResettingTarget = false;
+            isReorientingSelf = false;
             yield return new WaitForSeconds(timeBetweenReorients);
             //Debug.Log("ReSetting Target VIA enumerator");
-            isResettingTarget = true;
+            isReorientingSelf = true;
             yield return new WaitForSeconds(timeReadjusting);
         }
     }
