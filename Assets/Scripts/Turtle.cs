@@ -37,9 +37,7 @@ public class Turtle : MonoBehaviour {
 		switch (action) {
         case "swipeStraightEnd":
             swipedStraight = true;
-            Debug.Log(data["power"].ToString());
             swipePower = float.Parse(data["power"].ToString());
-            Debug.Log(swipePower);
             break;
 		case "swipeRightEnd":
 			swipedRightSide = true;
