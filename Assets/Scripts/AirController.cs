@@ -460,7 +460,7 @@ public class AirController : MonoBehaviour {
                 PutPlayerInEgg(players[from]);
         } else {
             if (players[from].state == Player.PlayerState.InGame) {
-                players[from].turtle.ButtonInput(data["action"].ToString());
+                players[from].turtle.ButtonInput(data);
             }
         }
     }

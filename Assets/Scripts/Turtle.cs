@@ -8,6 +8,7 @@ public class Turtle : MonoBehaviour {
 
     public bool lastSwipe;
     public bool swipedRightSide, swipedLeftSide, swipedStraight;
+    float swipePower;
 	Rigidbody2D rb;
     public float lurchForce = 1;
     public Transform leftFlipper, rightFlipper;
@@ -31,10 +32,14 @@ public class Turtle : MonoBehaviour {
         playerIDText.text = "";
     }
 
-	public void ButtonInput(string input) {
-		switch (input) {
+	public void ButtonInput(Newtonsoft.Json.Linq.JToken data) {
+        string action = data["action"].ToString();
+		switch (action) {
         case "swipeStraightEnd":
             swipedStraight = true;
+            Debug.Log(data["power"].ToString());
+            swipePower = float.Parse(data["power"].ToString());
+            Debug.Log(swipePower);
             break;
 		case "swipeRightEnd":
 			swipedRightSide = true;
@@ -76,7 +81,7 @@ public class Turtle : MonoBehaviour {
 		if (swipedStraight) {
             turtleAnimController.SetTrigger("LeftFlipper");
             turtleAnimController.SetTrigger("RightFlipper");
-			rb.AddForceAtPosition(transform.up * lurchForce, transform.position, ForceMode2D.Impulse);
+			rb.AddForceAtPosition(transform.up * lurchForce * swipePower, transform.position, ForceMode2D.Impulse);
         }
         swipedLeftSide = swipedRightSide = swipedStraight = false;
 	}
