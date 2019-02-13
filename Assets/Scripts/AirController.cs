@@ -79,7 +79,6 @@ public class AirController : MonoBehaviour {
     float hatchTimer, finishTimer;
     Nest nest;
     float currentGameStartTime;
-    public Transform startCameraPosition;
     public Sprite[] turtleBodies;
     public Leaderboard leaderboard;
     public float leaderboardUpdateInterval = 0.5f;
@@ -229,7 +228,7 @@ public class AirController : MonoBehaviour {
         }
         if (cam) {
             cam.targets.Clear();
-            cam.AddCameraTarget(startCameraPosition);
+            cam.AddCameraTarget(GameObject.FindObjectOfType<Nest>().transform);
         }
         excitingText.text = logoText;
     }
