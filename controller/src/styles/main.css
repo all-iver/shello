@@ -220,16 +220,20 @@ img {
   background-color: #bbb;
   border-radius: 50%;
   display: inline-block;
-  /* animation: swipe 0.7s infinite, squish 0.35s infinite; */
+}
+
+.squish {
   animation-name: squish;
-  animation-duration: 1s;
+  animation-duration: 1s; /* must match duration of interval in Turtle */
   animation-iteration-count: infinite;
-  /* animation-timing-function: linear; */
 }
 
 .dot-container {
+}
+
+.swipe {
   animation-name: swipe;
-  animation-duration: 1s;
+  animation-duration: 1s; /* must match duration of interval in Turtle */
   animation-iteration-count: infinite;
 }
 

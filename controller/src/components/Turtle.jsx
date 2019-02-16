@@ -35,19 +35,19 @@ class Turtle extends Component {
     super(props);
 
     this.state = {
-      swipeArrowsFlipped: false
+      leftSide: false
     };
 
     setInterval(
       () =>
         this.setState({
-          swipeArrowsFlipped: !this.state.swipeArrowsFlipped
+          leftSide: !this.state.leftSide
         }),
-      1000
+      1000 // must match duration of CSS animations swipe & squish
     );
   }
   render() {
-    const { swipeArrowsFlipped } = this.state;
+    const { swipeArrowsFlipped, leftSide } = this.state;
     const { showSwipeArrows, body, number, hidden, showBow } = this.props;
 
     const style = hidden ? { display: "none" } : {};
@@ -70,11 +70,19 @@ class Turtle extends Component {
           //   className={"swipe-arrows"}
           // />
           <div>
-            <div className="dot-container swipe-arrows left">
-              <span className="dot" />
+            <div
+              className={`dot-container ${
+                leftSide ? "swipe" : ""
+              } swipe-arrows left`}
+            >
+              <span className={`dot ${leftSide ? "squish" : ""}`} />
             </div>
-            <div className="dot-container swipe-arrows right">
-              <span className="dot" />
+            <div
+              className={`dot-container ${
+                !leftSide ? "swipe" : ""
+              } swipe-arrows right`}
+            >
+              <span className={`dot ${!leftSide ? "squish" : ""}`} />
             </div>
           </div>
         ) : (
