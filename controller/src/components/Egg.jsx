@@ -85,7 +85,6 @@ class Egg extends Component {
               });
 
               setTimeout(() => ready(), 1000);
-              // ready();
             }
 
             this.audio[`tap${taps}`]

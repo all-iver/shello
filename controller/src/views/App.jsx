@@ -3,11 +3,13 @@ import AirConsole from "air-console";
 import IntroView from "./IntroView";
 import PlayView from "./PlayView";
 import WaitingView from "./WaitingView";
+import VictoryView from "./VictoryView";
 
 const views = {
   PlayView,
   IntroView,
-  WaitingView
+  WaitingView,
+  VictoryView
 };
 
 class App extends Component {
@@ -34,7 +36,9 @@ class App extends Component {
             body: data.color || prevState.body,
             number: data.number || prevState.number,
             turtleHidden: false,
-            showBow: data.showBow === "true" ? true : false
+            showBow: data.showBow === "true" ? true : false,
+            time: data.time,
+            place: data.place
           }));
           break;
       }
@@ -42,7 +46,7 @@ class App extends Component {
   }
 
   render() {
-    const { body, number, turtleHidden, showBow } = this.state;
+    const { body, number, turtleHidden, showBow, time, place } = this.state;
     const { airconsole } = this.props;
     const View = views[this.state.currentView];
 
@@ -58,6 +62,8 @@ class App extends Component {
           });
         }}
         showBow={showBow}
+        time={time}
+        place={place}
       />
     );
   }
