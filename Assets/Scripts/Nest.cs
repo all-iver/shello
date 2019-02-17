@@ -16,7 +16,7 @@ public class Nest : MonoBehaviour
         return eggs.childCount;
     }
 
-    public void StartSpawning() {
+    public void StartSpawningAI() {
         spawnTimer = Random.Range(aiSpawnMinRate, aiSpawnMaxRate);
         spawnAI = true;
     }
