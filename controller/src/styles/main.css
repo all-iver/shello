@@ -20,9 +20,9 @@ img {
 }
 
 #playView p {
-  position: absolute;
+  /* position: absolute; */
   bottom: 0;
-  width: 100%;
+  /* width: 100%; */
 }
 
 #flippers {
@@ -169,12 +169,12 @@ img {
 .turtle .swipe-arrows {
   position: absolute;
   left: 0;
-  top: 0;
-  transform: scaleY(-1);
+  top: 50%;
+  /* transform: scaleY(-1); */
 }
 
 .turtle .swipe-arrows.left {
-  margin-left: -120px;
+  margin-left: -90px;
 }
 
 .turtle .swipe-arrows.right {
@@ -215,11 +215,12 @@ img {
 }
 
 .dot {
-  height: 25px;
-  width: 25px;
-  background-color: #bbb;
+  height: 1px;
+  width: 1px;
+  /* background-color: #bbb; */
   border-radius: 50%;
   display: inline-block;
+  box-shadow: 1px 1px 0px 0px #bbb;
 }
 
 .squish {
@@ -228,13 +229,49 @@ img {
   animation-iteration-count: infinite;
 }
 
-.dot-container {
-}
-
 .swipe {
   animation-name: swipe;
   animation-duration: 1s; /* must match duration of interval in Turtle */
   animation-iteration-count: infinite;
+}
+
+.dot-container p {
+  margin: 0;
+  text-align: center;
+  font-size: 2em;
+}
+
+.dot-container svg {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -5.5px;
+  margin-top: -5.5px;
+}
+
+.pulse {
+  animation-name: pulse;
+  animation-duration: 1.2s;
+  animation-iteration-count: 1;
+  transform-origin: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.tapPopIn {
+  animation-name: tapPopIn;
+  animation-duration: 0.2s;
+  animation-iteration-count: 1;
+  transform-origin: center;
+}
+
+.scaleUp {
+  animation-name: scaleUp;
+  animation-duration: 0.4s;
+  animation-iteration-count: 1;
+  transform-origin: center;
 }
 
 @keyframes squish {
@@ -254,5 +291,35 @@ img {
 
   to {
     transform: translate3d(0, 250px, 0);
+  }
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(0, 0);
+  }
+
+  to {
+    transform: scale(15, 15);
+  }
+}
+
+@keyframes tapPopIn {
+  from {
+    transform: scale(0, 0);
+  }
+
+  to {
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(1, 1);
+  }
+
+  50% {
+    transform: scale(1.35, 1.35);
   }
 }

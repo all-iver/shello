@@ -64,7 +64,6 @@ class PlayView extends Component {
             sendMessage={swipe => this.sendMessage(swipe)}
           />
         </div>
-        <p>Swipe to the rhythm to move faster!</p>
       </div>
     );
   }
