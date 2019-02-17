@@ -42,7 +42,7 @@ class VictoryView extends Component {
           number={number}
           showBow={showBow}
         />
-        <div>
+        <div className="victoryViewTextContainer">
           <div className="placingContainer">
             <p>{`${place}${getOrdinalSuffix(place)}`}</p>
             <p>{`${time.toFixed(2)}s`}</p>
