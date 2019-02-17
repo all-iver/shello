@@ -49,18 +49,18 @@ const Dot = ({ pulse, side }) => (
         cy="5.5"
         r="5.25"
         stroke="white"
-        stroke-width="0.5"
+        strokeWidth="0.5"
         fill="none"
-        vector-effect="non-scaling-stroke"
+        vectorEffect="non-scaling-stroke"
       />
       <circle
         cx="5.5"
         cy="5.5"
         r="5.25"
         stroke="#058700"
-        stroke-width="0.25"
+        strokeWidth="0.25"
         fill="none"
-        vector-effect="non-scaling-stroke"
+        vectorEffect="non-scaling-stroke"
       />
     </svg>
     <p className={`${pulse ? "scaleUp" : ""}`}>Tap!</p>
@@ -80,7 +80,7 @@ class Turtle extends Component {
         this.setState({
           leftSide: !this.state.leftSide
         }),
-      1000
+      750
     );
   }
   render() {
