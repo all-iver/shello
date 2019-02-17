@@ -63,7 +63,8 @@ img {
 }
 
 #waitingView,
-#introView {
+#introView,
+#victoryView {
   background-image: url("../../assets/images/sand.png");
   background-repeat: repeat;
   padding: 10px;
@@ -322,4 +323,14 @@ img {
   50% {
     transform: scale(1.35, 1.35);
   }
+}
+
+.placingContainer p {
+  margin-right: 0.75em;
+  font-size: 2.5em;
+}
+
+.placingContainer {
+  display: flex;
+  justify-content: flex-start;
 }
