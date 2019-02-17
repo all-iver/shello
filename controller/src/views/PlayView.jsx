@@ -17,6 +17,7 @@ class PlayView extends Component {
     const { airconsole } = this.props;
     const { previousInput } = this.state;
 
+    // TODO: Make this relative to size of screen. AKA, boost if X% of the phone screen
     const power = swipe.distance > 100 ? 2.0 : 1.0;
 
     if (previousInput === swipe.action) {
@@ -63,7 +64,6 @@ class PlayView extends Component {
             sendMessage={swipe => this.sendMessage(swipe)}
           />
         </div>
-        <p>Swipe to the rhythm to move faster!</p>
       </div>
     );
   }

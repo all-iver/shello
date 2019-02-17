@@ -30,24 +30,61 @@ const turtles = {
   red: turtleRed
 };
 
+const Dot = ({ pulse, side }) => (
+  <div
+    className={`dot-container swipe-arrows ${
+      side === "left" ? "left" : "right"
+    }`}
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      version="1.1"
+      viewBox="0 0 11 11"
+      width="11px"
+      height="11px"
+      className={`${pulse ? "pulse" : "hidden"}`}
+    >
+      <circle
+        cx="5.5"
+        cy="5.5"
+        r="5.25"
+        stroke="white"
+        stroke-width="0.5"
+        fill="none"
+        vector-effect="non-scaling-stroke"
+      />
+      <circle
+        cx="5.5"
+        cy="5.5"
+        r="5.25"
+        stroke="#058700"
+        stroke-width="0.25"
+        fill="none"
+        vector-effect="non-scaling-stroke"
+      />
+    </svg>
+    <p className={`${pulse ? "scaleUp" : ""}`}>Tap!</p>
+  </div>
+);
+
 class Turtle extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      swipeArrowsFlipped: false
+      leftSide: false
     };
 
     setInterval(
       () =>
         this.setState({
-          swipeArrowsFlipped: !this.state.swipeArrowsFlipped
+          leftSide: !this.state.leftSide
         }),
       1000
     );
   }
   render() {
-    const { swipeArrowsFlipped } = this.state;
+    const { swipeArrowsFlipped, leftSide } = this.state;
     const { showSwipeArrows, body, number, hidden, showBow } = this.props;
 
     const style = hidden ? { display: "none" } : {};
@@ -70,12 +107,8 @@ class Turtle extends Component {
           //   className={"swipe-arrows"}
           // />
           <div>
-            <div className="dot-container swipe-arrows left">
-              <span className="dot" />
-            </div>
-            <div className="dot-container swipe-arrows right">
-              <span className="dot" />
-            </div>
+            <Dot side="left" pulse={leftSide} />
+            <Dot side="right" pulse={!leftSide} />
           </div>
         ) : (
           ""
