@@ -88,7 +88,9 @@ class Egg extends Component {
               // ready();
             }
 
-            this.audio[`tap${taps}`].play();
+            this.audio[`tap${taps}`]
+              ? this.audio[`tap${taps}`].play()
+              : this.audio.tap0.play();
 
             this.setState(prevState => ({
               wobbling: true,
