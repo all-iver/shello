@@ -23,7 +23,7 @@ public class WinScreen : MonoBehaviour
 
     IEnumerator Go() {
         sizer.anchoredPosition = new Vector2(0, -500);
-        Tween tween = sizer.DOAnchorPosY(0, 0.5f);
+        Tween tween = sizer.DOAnchorPosY(0, 0.5f).SetEase(Ease.OutCubic);
         yield return tween.WaitForCompletion();
         yield return new WaitForSeconds(1);
         LeaderboardTurtle turtle = winnersList.GetChild(0).GetComponent<LeaderboardTurtle>();
@@ -38,6 +38,7 @@ public class WinScreen : MonoBehaviour
         s.Append(bow.DOMove(center, 1).From());
         s.Join(bow.DOScale(new Vector2(10, 10), 1).From());
         s.SetDelay(1);
+        s.SetEase(Ease.OutCubic);
         yield return s.WaitForCompletion();
         bow.SetParent(oldParent);
     }

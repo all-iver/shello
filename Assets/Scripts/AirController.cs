@@ -13,7 +13,7 @@ public class AirController : MonoBehaviour {
             Initial,
             InEgg,
             Hatched,
-            InGame,
+            InRace,
             Finished,
             TooManyPlayers,
             Dropped
@@ -43,9 +43,9 @@ public class AirController : MonoBehaviour {
         public void GetReadyForNextRace() {
             state = PlayerState.Initial;
             finishTime = -1;
-            turtle.GetComponentInChildren<TurtleTrailManager>().sandTrail.Clear();
-            turtle.GetComponentInChildren<TurtleTrailManager>().waterTrail.Clear();
-            turtle.GetComponentInChildren<TurtleTrailManager>().waterTrail.enabled = false;
+            // turtle.GetComponentInChildren<TurtleTrailManager>().sandTrail.Clear();
+            // turtle.GetComponentInChildren<TurtleTrailManager>().waterTrail.Clear();
+            // turtle.GetComponentInChildren<TurtleTrailManager>().waterTrail.enabled = false;
         }
 
         public bool HasEgg() {
@@ -63,8 +63,9 @@ public class AirController : MonoBehaviour {
 
     public enum GameState {
         WaitingToStart, // waiting for all players to connect and ready up
-        InProgress, // the game has started and nobody has crossed the finish line
-        WaitingToFinish // at least one player has crossed the finish line
+        InProgress, // a race has started and nobody has crossed the finish line
+        WaitingToFinish, // at least one player has crossed the finish line
+        ShowingWinScreen // race is over, showing the win screen
     }
     GameState gameState;
 
@@ -78,11 +79,11 @@ public class AirController : MonoBehaviour {
     public float secondsToWaitForPlayersToFinish = 30;
     float hatchTimer, finishTimer;
     Nest nest;
-    float currentGameStartTime;
+    float currentRaceStartTime;
     public Sprite[] turtleBodies;
-    public Leaderboard leaderboard;
-    public float leaderboardUpdateInterval = 0.5f;
-    float leaderboardUpdateTimer;
+    // public Leaderboard leaderboard;
+    // public float leaderboardUpdateInterval = 0.5f;
+    // float leaderboardUpdateTimer;
     public AudioSource introMusic, raceMusic;
     string logoText = "MAKE for the WAVES!";
 
@@ -97,10 +98,12 @@ public class AirController : MonoBehaviour {
         gameState = GameState.WaitingToStart;
         nest = FindObjectOfType<Nest>();
 
-        ResetGame();
+        LoadLevel();
     }
 
     string GetJoiningText() {
+        if (!Application.isEditor)
+            return "";
         if (string.IsNullOrEmpty(code) || code == "0")
             return "To join, go to airconsole.com and enter the code.";
         return "To join, go to airconsole.com on your phone and enter code " + code + ".";
@@ -110,9 +113,9 @@ public class AirController : MonoBehaviour {
         if (GetConnectedPlayerCount() == 0)
             return "Waiting for players...";
         if (gameState == GameState.WaitingToStart && !AllPlayersAreHatched())
-            return "The game will start when everyone hatches.\nTap the egg on your phone!";
+            return "The race will start when everyone hatches.\nTap the egg on your phone!";
         if (gameState == GameState.WaitingToStart)
-            return "Get ready! The game is starting in " + Mathf.CeilToInt(hatchTimer) + " seconds!";
+            return "Get ready! The race is starting in " + Mathf.CeilToInt(hatchTimer) + " seconds!";
         if (gameState == GameState.WaitingToFinish)
             return "Hurry up! " + Mathf.CeilToInt(finishTimer) + "s";
         return "";
@@ -134,8 +137,9 @@ public class AirController : MonoBehaviour {
             AddNewPlayer(device, device == -1);
         Player player = players[device];
         // initialize this player into the nest.  note that this player could have already existed but just dropped
-        // and reconnected.  either way we put them into an egg.
-        PutPlayerInEgg(player);
+        // and reconnected.  if we're waiting to start the race, put them in an egg.
+        if (gameState == GameState.WaitingToStart)
+            PutPlayerInEgg(player);
         // if we're already in a game, tell the controller it needs to wait
         if (gameState != GameState.WaitingToStart) {
             Dictionary<string, string> data = new Dictionary<string, string>();
@@ -149,13 +153,18 @@ public class AirController : MonoBehaviour {
         Debug.Log("on disconnect for " + device);
         Player player = players[device];
         player.state = Player.PlayerState.Dropped;
-        ReleaseEgg(player);
+        if (gameState == GameState.WaitingToStart)
+            ReleaseEgg(player);
         player.HideTurtle();
-        if (cam)
+        try {
             cam.RemoveCameraTarget(player.turtle.transform);
+        } catch {
+        }
     }
 
     void PutPlayerInEgg(Player player) {
+        if (gameState != GameState.WaitingToStart)
+            throw new System.Exception("Wrong game state for putting player in an egg");
         player.GetReadyForNextRace();
         player.HideTurtle();
         // the player may already have an egg if they have hatched and are just waiting for the game to play - in that
@@ -213,9 +222,9 @@ public class AirController : MonoBehaviour {
         return data;
     }
 
-    void ResetGame() {
+    void LoadLevel() {
         StopAllCoroutines();
-        nest.ResetAI(); // remove all the AI and release all the eggs
+        nest.ResetAI(); // remove all the AI and release all their eggs
         // put everybody who hasn't dropped into an egg
         gameState = GameState.WaitingToStart;
         foreach (Player player in players.Values) {
@@ -242,26 +251,26 @@ public class AirController : MonoBehaviour {
         }
     }
 
-    void BeginGame() {
+    void StartRace() {
         if (cam)
             cam.targets.Clear();
         // all players currently ready/hatched are considered in the game
         foreach (Player player in players.Values) {
             if (player.state == Player.PlayerState.Hatched) {
-                player.state = Player.PlayerState.InGame;
+                player.state = Player.PlayerState.InRace;
                 player.isInCurrentRace = true; // this will keep track of whether they were playing even if they drop
                 if (cam)
                     cam.AddCameraTarget(player.turtle.transform);
             }
         }
-        currentGameStartTime = Time.time;
+        currentRaceStartTime = Time.time;
         gameState = GameState.InProgress;
         // tell the various devices to let the players start moving
         AirConsole.instance.Broadcast(GetGameStateData());
         StartCoroutine(BlinkExcitingText(logoText));
         introMusic.Stop();
         StartCoroutine(PlayRaceMusic());
-        nest.StartSpawning();
+        nest.StartSpawningAI();
     }
 
     IEnumerator PlayRaceMusic() {
@@ -270,9 +279,9 @@ public class AirController : MonoBehaviour {
             raceMusic.Play();
     }
 
-    void FinishGame() {
-        UpdateLeaderboard(true);
-        ResetGame();
+    void FinishRace() {
+        // UpdateLeaderboard(true);
+        LoadLevel();
         // tell the various devices to switch back to the intro screen
         AirConsole.instance.Broadcast(GetGameStateData());
         raceMusic.Stop();
@@ -285,11 +294,11 @@ public class AirController : MonoBehaviour {
                 // player.HideTurtle(); // this hides the trails too :/
                 player.turtle.transform.position = new Vector3(0, -5000, 0); // hack!  get them away
                 GameSounds.instance.PlayWinSound();
-                player.finishTime = Time.time - currentGameStartTime;
+                player.finishTime = Time.time - currentRaceStartTime;
                 player.state = Player.PlayerState.Finished; // set this after doing the above!
                 Debug.Log(string.Format("Turtle {0} finished at time {1}", player.deviceID, player.finishTime));
                 if (AllPlayersHaveFinished())
-                    FinishGame();
+                    FinishRace();
                 else
                     gameState = GameState.WaitingToFinish;
                 if (cam) {
@@ -310,9 +319,9 @@ public class AirController : MonoBehaviour {
         if (gameState == GameState.WaitingToStart && Input.GetKeyDown("r") && players.ContainsKey(-1) 
                 && players[-1].state == Player.PlayerState.InEgg)
             HatchPlayer(players[-1]);
-        if (gameState == GameState.WaitingToStart && Input.GetKeyDown("u") && players.ContainsKey(-1) 
-                && players[-1].state == Player.PlayerState.Hatched)
-            PutPlayerInEgg(players[-1]);
+        // if (gameState == GameState.WaitingToStart && Input.GetKeyDown("u") && players.ContainsKey(-1) 
+        //         && players[-1].state == Player.PlayerState.Hatched)
+        //     PutPlayerInEgg(players[-1]);
         if (Input.GetKeyDown("c") && (!players.ContainsKey(-1) || players[-1].state == Player.PlayerState.Dropped))
             OnConnect(-1);
         if (players.ContainsKey(-1) && Input.GetKeyDown("d") && players[-1].state != Player.PlayerState.Dropped)
@@ -333,60 +342,60 @@ public class AirController : MonoBehaviour {
                 GameSounds.instance.PlayBeep();
             if (hatchTimer <= 0) {
                 GameSounds.instance.PlayGoBeep();
-                BeginGame();
+                StartRace();
             }
         } else {
             hatchTimer = secondsToWaitWhenAllPlayersAreHatched;
         }
 
         // if everyone who was playing has dropped then finish the game
-        if (gameState == GameState.InProgress && GetInGamePlayerCount() == 0)
-            FinishGame();
+        if (gameState == GameState.InProgress && GetInRacePlayerCount() == 0)
+            FinishRace();
 
         // if everyone has finished or the timer is up then finish the game
         if (gameState == GameState.WaitingToFinish) {
             finishTimer -= Time.deltaTime;
             if (finishTimer <= 0 || AllPlayersHaveFinished())
-                FinishGame();
+                FinishRace();
         } else {
             finishTimer = secondsToWaitForPlayersToFinish;
         }
 
-        // update the leaderboard
-        if (gameState == GameState.InProgress || gameState == GameState.WaitingToFinish) {
-            leaderboardUpdateTimer += Time.deltaTime;
-            if (leaderboardUpdateTimer >= leaderboardUpdateInterval) {
-                leaderboardUpdateTimer = 0;
-                UpdateLeaderboard(false);
-            }
-        }
+        // // update the leaderboard
+        // if (gameState == GameState.InProgress || gameState == GameState.WaitingToFinish) {
+        //     leaderboardUpdateTimer += Time.deltaTime;
+        //     if (leaderboardUpdateTimer >= leaderboardUpdateInterval) {
+        //         leaderboardUpdateTimer = 0;
+        //         UpdateLeaderboard(false);
+        //     }
+        // }
     }
 
     float GetRankForPlayer(Player p) {
         if (p.state == Player.PlayerState.Finished)
             return p.finishTime;
-        if (p.state == Player.PlayerState.InGame)
+        if (p.state == Player.PlayerState.InRace)
             return -p.turtle.transform.position.y + 5000;
         return 9999999;
     }
 
-    void UpdateLeaderboard(bool setBow) {
-        if (setBow) {
-            foreach (Player p in players.Values)
-                p.isTheBest = false; 
-        }
-        Player[] sortedPlayers = players.Values.Where(
-                    p => p.state == Player.PlayerState.Finished || p.state == Player.PlayerState.InGame)
-                .OrderBy(p => GetRankForPlayer(p)).ToArray();
-        leaderboard.SetNumPlayers(sortedPlayers.Length);
-        for (int i = 0; i < sortedPlayers.Length; i++) {
-            if (i == 0 && setBow)
-                sortedPlayers[i].isTheBest = true;
-            leaderboard.SetRank(i, sortedPlayers[i].turtle.GetComponent<SpriteRenderer>().sprite, 
-                    sortedPlayers[i].deviceID, sortedPlayers[i].finishTime, sortedPlayers[i].isTheBest, 
-                    sortedPlayers[i].isKeyboard);
-        }
-    }
+    // void UpdateLeaderboard(bool setBow) {
+    //     if (setBow) {
+    //         foreach (Player p in players.Values)
+    //             p.isTheBest = false; 
+    //     }
+    //     Player[] sortedPlayers = players.Values.Where(
+    //                 p => p.state == Player.PlayerState.Finished || p.state == Player.PlayerState.InRace)
+    //             .OrderBy(p => GetRankForPlayer(p)).ToArray();
+    //     leaderboard.SetNumPlayers(sortedPlayers.Length);
+    //     for (int i = 0; i < sortedPlayers.Length; i++) {
+    //         if (i == 0 && setBow)
+    //             sortedPlayers[i].isTheBest = true;
+    //         leaderboard.SetRank(i, sortedPlayers[i].turtle.GetComponent<SpriteRenderer>().sprite, 
+    //                 sortedPlayers[i].deviceID, sortedPlayers[i].finishTime, sortedPlayers[i].isTheBest, 
+    //                 sortedPlayers[i].isKeyboard);
+    //     }
+    // }
 
     // returns true if all non-dropped, able-to-play players are hatched
     bool AllPlayersAreHatched() {
@@ -399,11 +408,11 @@ public class AirController : MonoBehaviour {
         return true;
     }
 
-    // returns true if all non-dropped players who are in the current race are finished -- anyone not InGame is either
+    // returns true if all non-dropped players who are in the current race are finished -- anyone not InRace is either
     // Finished or not in the race
     bool AllPlayersHaveFinished() {
         foreach (Player p in players.Values) {
-            if (p.state == Player.PlayerState.InGame)
+            if (p.state == Player.PlayerState.InRace)
                 return false;
         }
         return true;    
@@ -424,11 +433,11 @@ public class AirController : MonoBehaviour {
         return count;
     }
 
-    // returns the number of users who are InGame (not finished, not dropped)
-    int GetInGamePlayerCount() {
+    // returns the number of users who are InRace (not finished, not dropped)
+    int GetInRacePlayerCount() {
         int count = 0;
         foreach (Player player in players.Values)
-            if (player.state == Player.PlayerState.InGame)
+            if (player.state == Player.PlayerState.InRace)
                 count ++;
         return count;
     }
@@ -458,7 +467,7 @@ public class AirController : MonoBehaviour {
             if (data["action"].ToString() == "unready" && players[from].state == Player.PlayerState.Hatched)
                 PutPlayerInEgg(players[from]);
         } else {
-            if (players[from].state == Player.PlayerState.InGame) {
+            if (players[from].state == Player.PlayerState.InRace) {
                 players[from].turtle.ButtonInput(data);
             }
         }
