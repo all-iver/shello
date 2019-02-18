@@ -6,11 +6,12 @@ public class Nest : MonoBehaviour
 {
     Dictionary<int, int> ownership = new Dictionary<int, int>();
     public Transform eggs, ai;
-    public float aiSpawnMinRate = 0.5f;
-    public float aiSpawnMaxRate = 1f;
+    float aiSpawnMinRate = 0.25f;
+    float aiSpawnMaxRate = 0.75f;
     public bool spawnAI;
     public GameObject aiPrefab;
     float spawnTimer;
+    float spawnAvoidDistance = 0.25f;
 
     public int GetNumEggs() {
         return eggs.childCount;
@@ -79,6 +80,11 @@ public class Nest : MonoBehaviour
                 e = ClaimRandomEgg(true);
             } catch {
                 return; // no eggs left
+            }
+            if (Physics2D.OverlapCircle(eggs.GetChild(e).transform.position, spawnAvoidDistance, 
+                    LayerMask.NameToLayer("Player"))) {
+                ownership[e] = 0;
+                return;
             }
             GameObject go = Instantiate(aiPrefab);
             go.transform.SetParent(ai, true);

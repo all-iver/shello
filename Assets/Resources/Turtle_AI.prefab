@@ -796,7 +796,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 3deb28764b3394e8a8b3619162265348, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -847,6 +847,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7969382149714435983}
     m_Modifications:
+    - target: {fileID: 4940810150316950745, guid: 5e76ba64f0ad7c84f84eec4b11e86d44,
+        type: 3}
+      propertyPath: m_Name
+      value: Trails
+      objectReference: {fileID: 0}
+    - target: {fileID: 4940810150316950745, guid: 5e76ba64f0ad7c84f84eec4b11e86d44,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 6258906276816452932, guid: 5e76ba64f0ad7c84f84eec4b11e86d44,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -901,16 +911,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4940810150316950745, guid: 5e76ba64f0ad7c84f84eec4b11e86d44,
-        type: 3}
-      propertyPath: m_Name
-      value: Trails
-      objectReference: {fileID: 0}
-    - target: {fileID: 4940810150316950745, guid: 5e76ba64f0ad7c84f84eec4b11e86d44,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8236488690787566336, guid: 5e76ba64f0ad7c84f84eec4b11e86d44,
         type: 3}

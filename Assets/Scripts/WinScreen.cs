@@ -5,6 +5,7 @@ using DG.Tweening;
 
 public class WinScreen : MonoBehaviour
 {
+    public TMPro.TMP_Text levelName;
     public bool testStart;
     public RectTransform sizer, winnersList;
     public float secondsToShow = 10;

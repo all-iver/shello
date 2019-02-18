@@ -18,7 +18,7 @@ public class TrackingCamera : MonoBehaviour
     float zoomVelocity;
     Vector2 panVelocity;
 
-    void Start()
+    void Awake()
     {
         cam = GetComponent<Camera>();
     }
@@ -32,6 +32,16 @@ public class TrackingCamera : MonoBehaviour
         cam.orthographicSize = Mathf.SmoothDamp(cam.orthographicSize, desiredOrtho, ref zoomVelocity, zoomSmoothing);
         Vector2 newPos = Vector2.SmoothDamp(transform.position, desiredPos, ref panVelocity, panSmoothing);
         cam.transform.position = new Vector3(newPos.x, newPos.y, cam.transform.position.z);
+    }
+
+    public void Snap() {
+        if (targets.Count == 0)
+            return;
+        cam.orthographicSize = GetDesiredOrtho();
+        Vector2 newPos = GetDesiredPosition();
+        cam.transform.position = new Vector3(newPos.x, newPos.y, cam.transform.position.z);
+        zoomVelocity = 0;
+        panVelocity = Vector2.zero;
     }
 
     float GetDesiredOrtho()

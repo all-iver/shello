@@ -43,9 +43,7 @@ public class AirController : MonoBehaviour {
         public void GetReadyForNextRace() {
             state = PlayerState.Initial;
             finishTime = -1;
-            // turtle.GetComponentInChildren<TurtleTrailManager>().sandTrail.Clear();
-            // turtle.GetComponentInChildren<TurtleTrailManager>().waterTrail.Clear();
-            // turtle.GetComponentInChildren<TurtleTrailManager>().waterTrail.enabled = false;
+            ClearTrails();
         }
 
         public bool HasEgg() {
@@ -58,6 +56,12 @@ public class AirController : MonoBehaviour {
 
         public void HideTurtle() {
             turtle.gameObject.SetActive(false);
+        }
+
+        public void ClearTrails() {
+            turtle.GetComponentInChildren<TurtleTrailManager>().sandTrail.Clear();
+            turtle.GetComponentInChildren<TurtleTrailManager>().waterTrail.Clear();
+            turtle.GetComponentInChildren<TurtleTrailManager>().waterTrail.enabled = false;
         }
     }
 
@@ -87,6 +91,9 @@ public class AirController : MonoBehaviour {
     public AudioSource introMusic, raceMusic;
     string logoText = "MAKE for the WAVES!";
     public WinScreen winScreen;
+    public List<Level> levelPrefabs;
+    public int levelIndex = 0;
+    Level level;
 
     void Awake () {
         AirConsole.instance.onMessage += OnMessage;		
@@ -97,7 +104,6 @@ public class AirController : MonoBehaviour {
         statusText.text = "Loading...";
         joiningText.text = "";
         gameState = GameState.WaitingToStart;
-        nest = FindObjectOfType<Nest>();
 
         LoadLevel();
     }
@@ -244,7 +250,10 @@ public class AirController : MonoBehaviour {
 
     void LoadLevel() {
         StopAllCoroutines();
-        nest.ResetAI(); // remove all the AI and release all their eggs
+
+        // cleanup
+        if (nest)
+            nest.ResetAI(); // remove all the AI and release all their eggs
         // put everybody who hasn't dropped into an egg
         gameState = GameState.WaitingToStart;
         foreach (Player player in players.Values) {
@@ -252,14 +261,32 @@ public class AirController : MonoBehaviour {
                 continue;
             if (player.HasEgg())
                 ReleaseEgg(player);
-            PutPlayerInEgg(player);
             player.isInCurrentRace = false;
         }
+        excitingText.text = logoText;
+
+        // instantiate the level prefab and find the nest
+        if (levelIndex >= 0) {
+            if (level)
+                Destroy(level.gameObject);
+            level = Instantiate(levelPrefabs[levelIndex]);
+        }
+        nest = FindObjectOfType<Nest>();
+        if (!nest)
+            throw new System.Exception("Could not find a nest");
+        nest.ResetAI(); // needs to happen for game jam code related reasons
         if (cam) {
             cam.targets.Clear();
-            cam.AddCameraTarget(GameObject.FindObjectOfType<Nest>().transform);
+            cam.AddCameraTarget(nest.transform);
+            cam.Snap();
         }
-        excitingText.text = logoText;
+
+        // put any non-dropped players into eggs
+        foreach (Player player in players.Values) {
+            if (player.state == Player.PlayerState.Dropped)
+                continue;
+            PutPlayerInEgg(player);
+        }
     }
 
     IEnumerator BlinkExcitingText(string text, int times = 5, float onDuration = 0.5f, float offDuration = 0.1f) {
@@ -318,6 +345,11 @@ public class AirController : MonoBehaviour {
         }
 
         yield return winScreen.Show();
+        if (levelIndex >= 0) {
+            levelIndex ++;
+            if (levelIndex >= levelPrefabs.Count)
+                levelIndex = 0;
+        }
         LoadLevel();
         // tell the various devices to switch back to the intro screen
         try {
@@ -443,6 +475,8 @@ public class AirController : MonoBehaviour {
     }
 
     void UpdateWinScreenAndBow() {
+        if (level)
+            winScreen.levelName.text = level.displayName;
         foreach (Player p in players.Values)
             p.isTheBest = false; 
         Player[] sortedPlayers = players.Values.Where(
