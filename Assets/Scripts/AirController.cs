@@ -86,6 +86,7 @@ public class AirController : MonoBehaviour {
     // float leaderboardUpdateTimer;
     public AudioSource introMusic, raceMusic;
     string logoText = "MAKE for the WAVES!";
+    public WinScreen winScreen;
 
     void Awake () {
         AirConsole.instance.onMessage += OnMessage;		
@@ -279,13 +280,19 @@ public class AirController : MonoBehaviour {
             raceMusic.Play();
     }
 
-    void FinishRace() {
-        // UpdateLeaderboard(true);
+    IEnumerator ShowWinScreen() {
+        gameState = GameState.ShowingWinScreen;
+        UpdateWinScreenAndBow();
+        yield return winScreen.Show();
         LoadLevel();
         // tell the various devices to switch back to the intro screen
         AirConsole.instance.Broadcast(GetGameStateData());
+    }
+
+    void FinishRace() {
         raceMusic.Stop();
         introMusic.Play();
+        StartCoroutine(ShowWinScreen());
     }
 
     public void OnTurtleCrossedFinishLine(Turtle turtle) {
@@ -377,6 +384,22 @@ public class AirController : MonoBehaviour {
         if (p.state == Player.PlayerState.InRace)
             return -p.turtle.transform.position.y + 5000;
         return 9999999;
+    }
+
+    void UpdateWinScreenAndBow() {
+        foreach (Player p in players.Values)
+            p.isTheBest = false; 
+        Player[] sortedPlayers = players.Values.Where(
+                    p => p.state == Player.PlayerState.Finished || p.state == Player.PlayerState.InRace)
+                .OrderBy(p => GetRankForPlayer(p)).ToArray();
+        winScreen.SetNumPlayers(sortedPlayers.Length);
+        for (int i = 0; i < sortedPlayers.Length; i++) {
+            if (i == 0)
+                sortedPlayers[i].isTheBest = true;
+            winScreen.SetRank(i, sortedPlayers[i].turtle.GetComponent<SpriteRenderer>().sprite, 
+                    sortedPlayers[i].deviceID, sortedPlayers[i].finishTime, sortedPlayers[i].isTheBest, 
+                    sortedPlayers[i].isKeyboard);
+        }
     }
 
     // void UpdateLeaderboard(bool setBow) {

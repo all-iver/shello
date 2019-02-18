@@ -177,7 +177,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &969051292
 Transform:
   m_ObjectHideFlags: 0
@@ -228,8 +228,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 2f47efba32b38bb49a6cde1656ebbe3c, type: 3}
+  m_SortingOrder: 10
+  m_Sprite: {fileID: 21300000, guid: d516fdaff70ccf24a9251635666600e4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -657,8 +657,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3b4ae05263ea3249b2d519e11fcc391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastSwipe: 0
   swipedRightSide: 0
   swipedLeftSide: 0
+  swipedStraight: 0
   lurchForce: 10
   leftFlipper: {fileID: 1636180442}
   rightFlipper: {fileID: 1202873825}
@@ -913,22 +915,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6879346855585308894, guid: 5e76ba64f0ad7c84f84eec4b11e86d44,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 8236488690787566336, guid: 5e76ba64f0ad7c84f84eec4b11e86d44,
         type: 3}
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 924631363366046011, guid: 5e76ba64f0ad7c84f84eec4b11e86d44,
+    - target: {fileID: 6879346855585308894, guid: 5e76ba64f0ad7c84f84eec4b11e86d44,
         type: 3}
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3854653211609167862, guid: 5e76ba64f0ad7c84f84eec4b11e86d44,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 924631363366046011, guid: 5e76ba64f0ad7c84f84eec4b11e86d44,
         type: 3}
       propertyPath: m_Layer
       value: 8
