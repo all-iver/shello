@@ -32,6 +32,7 @@ import turtleLegsLeft2 from "../../assets/images/turtle_legs_left_2.png";
 import turtleLegsRight1 from "../../assets/images/turtle_legs_right_1.png";
 import turtleLegsRight2 from "../../assets/images/turtle_legs_right_2.png";
 import turtleWinnerBow from "../../assets/images/turtle_winner_bow.png";
+import circle from "../../assets/images/circle.png";
 
 class LoadingView extends Component {
   constructor(props) {
@@ -73,7 +74,8 @@ class LoadingView extends Component {
       turtleLegsLeft2,
       turtleLegsRight1,
       turtleLegsRight2,
-      turtleWinnerBow
+      turtleWinnerBow,
+      circle
     ];
 
     const imagePromises = this.images.map(

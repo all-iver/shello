@@ -17,6 +17,7 @@ import turtleLegsLeftClosed from "../../assets/images/turtle_legs_left_1.png";
 import turtleLegsRightClosed from "../../assets/images/turtle_legs_right_1.png";
 
 import bow from "../../assets/images/turtle_winner_bow.png";
+import circle from "../../assets/images/circle.png";
 
 const turtles = {
   teal: turtleTeal,
@@ -37,33 +38,8 @@ const Dot = ({ pulse, side }) => (
       side === "left" ? "left" : "right"
     }`}
   >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      version="1.1"
-      viewBox="0 0 11 11"
-      width="11px"
-      height="11px"
-      className={`${pulse ? "pulse" : "hidden"}`}
-    >
-      <circle
-        cx="5.5"
-        cy="5.5"
-        r="5.25"
-        stroke="white"
-        strokeWidth="0.5"
-        fill="none"
-        vectorEffect="non-scaling-stroke"
-      />
-      <circle
-        cx="5.5"
-        cy="5.5"
-        r="5.25"
-        stroke="#058700"
-        strokeWidth="0.25"
-        fill="none"
-        vectorEffect="non-scaling-stroke"
-      />
-    </svg>
+    <img src={circle} className={`${pulse ? "pulse" : "hidden"}`} />
+    {/* <img src={circle} /> */}
     <p className={`${pulse ? "scaleUp" : ""}`}>Tap!</p>
   </div>
 );

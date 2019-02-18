@@ -16,7 +16,7 @@ img {
 #playView {
   background-image: url("../../assets/images/sand.png");
   background-repeat: repeat;
-  text-align: center;
+  /* text-align: center; */
 }
 
 #playView p {
@@ -243,12 +243,14 @@ img {
   font-size: 2em;
 }
 
-.dot-container svg {
+.dot-container img {
   position: absolute;
-  left: 50%;
+  /* left: 50%;
   top: 50%;
   margin-left: -5.5px;
-  margin-top: -5.5px;
+  margin-top: -5.5px; */
+  width: 50px;
+  height: 50px;
 }
 
 .pulse {
@@ -302,7 +304,7 @@ img {
   }
 
   to {
-    transform: scale(15, 15);
+    transform: scale(4, 4);
   }
 }
 
