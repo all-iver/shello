@@ -176,11 +176,11 @@ img {
 }
 
 .turtle .swipe-arrows.left {
-  margin-left: -90px;
+  margin-left: -15vw;
 }
 
 .turtle .swipe-arrows.right {
-  margin-left: 360px;
+  margin-left: 50vw;
   animation-delay: 1s;
 }
 

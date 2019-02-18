@@ -110,7 +110,7 @@ class Turtle extends Component {
 
     const style = hidden ? { display: "none" } : {};
     const swipeArrowStyle = swipeArrowsFlipped ? { display: "none" } : {};
-    const showBowStyle = !showBow ? { display: "none" } : {};
+    const showBowStyle = {}; // !showBow ? { display: "none" } : {};
 
     if (swipe) {
       // TODO: change in sync to this
