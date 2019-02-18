@@ -64,7 +64,8 @@ img {
 
 #waitingView,
 #introView,
-#victoryView {
+#victoryView,
+#loadingView {
   background-image: url("../../assets/images/sand.png");
   background-repeat: repeat;
   padding: 10px;
@@ -341,4 +342,8 @@ img {
 
 #victoryView .victoryViewTextContainer {
   margin-right: 5.5em;
+}
+
+#loadingView progress {
+  background-color: white;
 }
