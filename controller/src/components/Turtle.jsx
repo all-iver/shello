@@ -39,7 +39,6 @@ const Dot = ({ pulse, side }) => (
     }`}
   >
     <img src={circle} className={`${pulse ? "pulse" : "hidden"}`} />
-    {/* <img src={circle} /> */}
     <p className={`${pulse ? "scaleUp" : ""}`}>Tap!</p>
   </div>
 );
@@ -110,7 +109,7 @@ class Turtle extends Component {
 
     const style = hidden ? { display: "none" } : {};
     const swipeArrowStyle = swipeArrowsFlipped ? { display: "none" } : {};
-    const showBowStyle = {}; // !showBow ? { display: "none" } : {};
+    const showBowStyle = !showBow ? { display: "none" } : {};
 
     if (swipe) {
       // TODO: change in sync to this
