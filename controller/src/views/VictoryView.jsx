@@ -32,7 +32,7 @@ class VictoryView extends Component {
   }
 
   render() {
-    const { time = 10.0, place = 1, body, number, showBow } = this.props;
+    const { time, place, body, number, showBow } = this.props;
 
     return (
       <div id="victoryView">
@@ -44,8 +44,8 @@ class VictoryView extends Component {
         />
         <div className="victoryViewTextContainer">
           <div className="placingContainer">
-            <p>{`${place}${getOrdinalSuffix(place)}`}</p>
-            <p>{`${time.toFixed(2)}s`}</p>
+            <p>{time ? `${place}${getOrdinalSuffix(place)}` : ""}</p>
+            <p>{place ? `${time.toFixed(2)}s` : ""}</p>
           </div>
           <p>Waiting for the next race to start...</p>
         </div>
