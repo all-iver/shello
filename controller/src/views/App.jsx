@@ -40,8 +40,8 @@ class App extends Component {
             number: data.number || prevState.number,
             turtleHidden: false,
             showBow: data.showBow === "true" ? true : false,
-            time: data.time,
-            place: data.place
+            time: parseFloat(data.time),
+            place: parseInt(data.place)
           }));
           break;
       }
