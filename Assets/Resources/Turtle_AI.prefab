@@ -689,9 +689,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialDegreeSpread: 168
   secondsBetweenMoves: 0.4
-  rotationSpeed: 0.5
-  timeReadjusting: 3
-  timeBetweenReorients: 15
+  rotationSpeed: 1
+  timeReadjusting: 5
+  timeBetweenReorients: 8
   isReorientingSelf: 0
   currentPath: {fileID: 0}
   currrentPathTargetNUM: 0
