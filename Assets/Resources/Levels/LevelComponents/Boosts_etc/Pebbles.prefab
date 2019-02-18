@@ -10,8 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5832305607124687808}
   - component: {fileID: 5832305607124687809}
-  - component: {fileID: 5832305607124687814}
-  - component: {fileID: 5832305607124687815}
   m_Layer: 0
   m_Name: Pebbles
   m_TagString: Untagged
@@ -81,65 +79,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &5832305607124687814
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5832305607124687810}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 1
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 8.71, y: 9.02}
-    newSize: {x: 8.71, y: 9.02}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 2.5403895, y: -1.9859469}
-      - {x: 2.76692, y: -1.1047204}
-      - {x: 3.2341843, y: 1.0422773}
-      - {x: 2.360888, y: 1.9232349}
-      - {x: 2.4291506, y: 3.2737315}
-      - {x: 0.74081135, y: 3.200184}
-      - {x: -0.7377181, y: 4.241151}
-      - {x: -2.6253958, y: 4.295708}
-      - {x: -2.5654705, y: 2.7570763}
-      - {x: -4.0677147, y: 1.8011496}
-      - {x: -3.8817296, y: 0.71069837}
-      - {x: -2.7340584, y: -0.15707755}
-      - {x: -3.127887, y: -1.113282}
-      - {x: -2.3633096, y: -1.7643526}
-      - {x: -0.39570236, y: -2.067732}
-      - {x: 1.1246667, y: -2.7359421}
-      - {x: 2.1387239, y: -3.2424395}
---- !u!249 &5832305607124687815
-AreaEffector2D:
-  serializedVersion: 2
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5832305607124687810}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 256
-  m_UseGlobalAngle: 0
-  m_ForceAngle: 0
-  m_ForceMagnitude: 0
-  m_ForceVariation: 0
-  m_ForceTarget: 0
-  m_Drag: 10
-  m_AngularDrag: 0
