@@ -23,7 +23,8 @@ class App extends Component {
       body: "green",
       number: "?",
       turtleHidden: true,
-      showBow: false
+      showBow: false,
+      loaded: false
     };
 
     props.airconsole.onMessage = (id, data) => {
@@ -48,9 +49,17 @@ class App extends Component {
   }
 
   render() {
-    const { body, number, turtleHidden, showBow, time, place } = this.state;
+    const {
+      body,
+      number,
+      turtleHidden,
+      showBow,
+      time,
+      place,
+      loaded
+    } = this.state;
     const { airconsole } = this.props;
-    const View = views[this.state.currentView];
+    const View = loaded ? views[this.state.currentView] : LoadingView;
 
     return (
       <View
@@ -66,9 +75,9 @@ class App extends Component {
         showBow={showBow}
         time={time}
         place={place}
-        setCurrentView={currentView =>
+        setLoaded={() =>
           this.setState({
-            currentView
+            loaded: true
           })
         }
       />

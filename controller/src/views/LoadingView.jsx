@@ -90,23 +90,16 @@ class LoadingView extends Component {
         })
     );
 
-    const { setCurrentView } = props;
+    const { setLoaded } = props;
 
     Promise.all(imagePromises)
       .then(() => {
         console.log("all images loaded");
-        setCurrentView("IntroView");
+        setLoaded();
       })
       .catch(() => {
         console.log("error loading images");
       });
-
-    // var images = ["button_1.png", "button_2.png", "character_1.png"];
-    // for (var i = 0; i < images.length; i++) {
-    //   var img = new Image();
-    //   img.onload = () => {};
-    //   img.src = "assets/images" + images[i];
-    // }
   }
 
   render() {
