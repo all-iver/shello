@@ -4,12 +4,14 @@ import IntroView from "./IntroView";
 import PlayView from "./PlayView";
 import WaitingView from "./WaitingView";
 import VictoryView from "./VictoryView";
+import LoadingView from "./LoadingView";
 
 const views = {
   PlayView,
   IntroView,
   WaitingView,
-  VictoryView
+  VictoryView,
+  LoadingView
 };
 
 class App extends Component {
@@ -17,7 +19,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      currentView: "IntroView",
+      currentView: "LoadingView",
       body: "green",
       number: "?",
       turtleHidden: true,
@@ -64,6 +66,11 @@ class App extends Component {
         showBow={showBow}
         time={time}
         place={place}
+        setCurrentView={currentView =>
+          this.setState({
+            currentView
+          })
+        }
       />
     );
   }
