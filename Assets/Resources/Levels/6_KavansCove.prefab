@@ -315,8 +315,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4979767747491110466}
   - component: {fileID: 2978063797074438514}
-  - component: {fileID: 3427977404253917559}
-  - component: {fileID: 9145657867214297289}
   m_Layer: 0
   m_Name: Pebbles (7)
   m_TagString: Untagged
@@ -386,68 +384,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &3427977404253917559
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 70237696488995111}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 1
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 8.71, y: 9.02}
-    newSize: {x: 8.71, y: 9.02}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 2.5403895, y: -1.9859469}
-      - {x: 2.76692, y: -1.1047204}
-      - {x: 3.2341843, y: 1.0422773}
-      - {x: 2.360888, y: 1.9232349}
-      - {x: 2.4291506, y: 3.2737315}
-      - {x: 0.74081135, y: 3.200184}
-      - {x: -0.7377181, y: 4.241151}
-      - {x: -2.6253958, y: 4.295708}
-      - {x: -2.5654705, y: 2.7570763}
-      - {x: -4.0677147, y: 1.8011496}
-      - {x: -3.8817296, y: 0.71069837}
-      - {x: -2.7340584, y: -0.15707755}
-      - {x: -3.127887, y: -1.113282}
-      - {x: -2.3633096, y: -1.7643526}
-      - {x: -0.39570236, y: -2.067732}
-      - {x: 1.1246667, y: -2.7359421}
-      - {x: 2.1387239, y: -3.2424395}
---- !u!249 &9145657867214297289
-AreaEffector2D:
-  serializedVersion: 2
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 70237696488995111}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 256
-  m_UseGlobalAngle: 0
-  m_ForceAngle: 0
-  m_ForceMagnitude: 0
-  m_ForceVariation: 0
-  m_ForceTarget: 0
-  m_Drag: 10
-  m_AngularDrag: 0
 --- !u!1 &114012649338583274
 GameObject:
   m_ObjectHideFlags: 0
@@ -6947,8 +6883,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2188964878326333884}
   - component: {fileID: 2188964878326333885}
-  - component: {fileID: 2188964878326333882}
-  - component: {fileID: 2188964878326333883}
   m_Layer: 0
   m_Name: Pebbles (1)
   m_TagString: Untagged
@@ -7018,68 +6952,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &2188964878326333882
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2188964878326333886}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 1
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 8.71, y: 9.02}
-    newSize: {x: 8.71, y: 9.02}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 2.5403895, y: -1.9859469}
-      - {x: 2.76692, y: -1.1047204}
-      - {x: 3.2341843, y: 1.0422773}
-      - {x: 2.360888, y: 1.9232349}
-      - {x: 2.4291506, y: 3.2737315}
-      - {x: 0.74081135, y: 3.200184}
-      - {x: -0.7377181, y: 4.241151}
-      - {x: -2.6253958, y: 4.295708}
-      - {x: -2.5654705, y: 2.7570763}
-      - {x: -4.0677147, y: 1.8011496}
-      - {x: -3.8817296, y: 0.71069837}
-      - {x: -2.7340584, y: -0.15707755}
-      - {x: -3.127887, y: -1.113282}
-      - {x: -2.3633096, y: -1.7643526}
-      - {x: -0.39570236, y: -2.067732}
-      - {x: 1.1246667, y: -2.7359421}
-      - {x: 2.1387239, y: -3.2424395}
---- !u!249 &2188964878326333883
-AreaEffector2D:
-  serializedVersion: 2
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2188964878326333886}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 256
-  m_UseGlobalAngle: 0
-  m_ForceAngle: 0
-  m_ForceMagnitude: 0
-  m_ForceVariation: 0
-  m_ForceTarget: 0
-  m_Drag: 10
-  m_AngularDrag: 0
 --- !u!1 &2217276514050120863
 GameObject:
   m_ObjectHideFlags: 0
@@ -7943,8 +7815,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2520622501787924280}
   - component: {fileID: 2520622501787924281}
-  - component: {fileID: 2520622501787924286}
-  - component: {fileID: 2520622501787924287}
   m_Layer: 0
   m_Name: Pebbles (2)
   m_TagString: Untagged
@@ -8014,68 +7884,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &2520622501787924286
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2520622501787924282}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 1
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 8.71, y: 9.02}
-    newSize: {x: 8.71, y: 9.02}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 2.5403895, y: -1.9859469}
-      - {x: 2.76692, y: -1.1047204}
-      - {x: 3.2341843, y: 1.0422773}
-      - {x: 2.360888, y: 1.9232349}
-      - {x: 2.4291506, y: 3.2737315}
-      - {x: 0.74081135, y: 3.200184}
-      - {x: -0.7377181, y: 4.241151}
-      - {x: -2.6253958, y: 4.295708}
-      - {x: -2.5654705, y: 2.7570763}
-      - {x: -4.0677147, y: 1.8011496}
-      - {x: -3.8817296, y: 0.71069837}
-      - {x: -2.7340584, y: -0.15707755}
-      - {x: -3.127887, y: -1.113282}
-      - {x: -2.3633096, y: -1.7643526}
-      - {x: -0.39570236, y: -2.067732}
-      - {x: 1.1246667, y: -2.7359421}
-      - {x: 2.1387239, y: -3.2424395}
---- !u!249 &2520622501787924287
-AreaEffector2D:
-  serializedVersion: 2
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2520622501787924282}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 256
-  m_UseGlobalAngle: 0
-  m_ForceAngle: 0
-  m_ForceMagnitude: 0
-  m_ForceVariation: 0
-  m_ForceTarget: 0
-  m_Drag: 10
-  m_AngularDrag: 0
 --- !u!114 &554875169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9263,7 +9071,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3219519436198731875}
   m_Layer: 0
-  m_Name: Level_k1
+  m_Name: 6_KavansCove
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10937,8 +10745,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4076745646687001334}
   - component: {fileID: 4076745646687001335}
-  - component: {fileID: 4076745646687001328}
-  - component: {fileID: 4076745646687001329}
   m_Layer: 0
   m_Name: Pebbles
   m_TagString: Untagged
@@ -11008,68 +10814,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &4076745646687001328
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4076745646687001332}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 1
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 8.71, y: 9.02}
-    newSize: {x: 8.71, y: 9.02}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 2.5403895, y: -1.9859469}
-      - {x: 2.76692, y: -1.1047204}
-      - {x: 3.2341843, y: 1.0422773}
-      - {x: 2.360888, y: 1.9232349}
-      - {x: 2.4291506, y: 3.2737315}
-      - {x: 0.74081135, y: 3.200184}
-      - {x: -0.7377181, y: 4.241151}
-      - {x: -2.6253958, y: 4.295708}
-      - {x: -2.5654705, y: 2.7570763}
-      - {x: -4.0677147, y: 1.8011496}
-      - {x: -3.8817296, y: 0.71069837}
-      - {x: -2.7340584, y: -0.15707755}
-      - {x: -3.127887, y: -1.113282}
-      - {x: -2.3633096, y: -1.7643526}
-      - {x: -0.39570236, y: -2.067732}
-      - {x: 1.1246667, y: -2.7359421}
-      - {x: 2.1387239, y: -3.2424395}
---- !u!249 &4076745646687001329
-AreaEffector2D:
-  serializedVersion: 2
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4076745646687001332}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 256
-  m_UseGlobalAngle: 0
-  m_ForceAngle: 0
-  m_ForceMagnitude: 0
-  m_ForceVariation: 0
-  m_ForceTarget: 0
-  m_Drag: 10
-  m_AngularDrag: 0
 --- !u!1 &4128886948310665127
 GameObject:
   m_ObjectHideFlags: 0
@@ -12708,8 +12452,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4758275096090049762}
   - component: {fileID: 4758275096090049763}
-  - component: {fileID: 4758275096090049764}
-  - component: {fileID: 4758275096090049765}
   m_Layer: 0
   m_Name: Pebbles (6)
   m_TagString: Untagged
@@ -12779,68 +12521,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &4758275096090049764
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4758275096090049760}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 1
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 8.71, y: 9.02}
-    newSize: {x: 8.71, y: 9.02}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 2.5403895, y: -1.9859469}
-      - {x: 2.76692, y: -1.1047204}
-      - {x: 3.2341843, y: 1.0422773}
-      - {x: 2.360888, y: 1.9232349}
-      - {x: 2.4291506, y: 3.2737315}
-      - {x: 0.74081135, y: 3.200184}
-      - {x: -0.7377181, y: 4.241151}
-      - {x: -2.6253958, y: 4.295708}
-      - {x: -2.5654705, y: 2.7570763}
-      - {x: -4.0677147, y: 1.8011496}
-      - {x: -3.8817296, y: 0.71069837}
-      - {x: -2.7340584, y: -0.15707755}
-      - {x: -3.127887, y: -1.113282}
-      - {x: -2.3633096, y: -1.7643526}
-      - {x: -0.39570236, y: -2.067732}
-      - {x: 1.1246667, y: -2.7359421}
-      - {x: 2.1387239, y: -3.2424395}
---- !u!249 &4758275096090049765
-AreaEffector2D:
-  serializedVersion: 2
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4758275096090049760}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 256
-  m_UseGlobalAngle: 0
-  m_ForceAngle: 0
-  m_ForceMagnitude: 0
-  m_ForceVariation: 0
-  m_ForceTarget: 0
-  m_Drag: 10
-  m_AngularDrag: 0
 --- !u!1 &4795711841064927450
 GameObject:
   m_ObjectHideFlags: 0
@@ -19087,8 +18767,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6762660373909732455}
   - component: {fileID: 6762660373909732454}
-  - component: {fileID: 6762660373909732449}
-  - component: {fileID: 6762660373909732448}
   m_Layer: 0
   m_Name: Pebbles (4)
   m_TagString: Untagged
@@ -19158,68 +18836,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &6762660373909732449
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6762660373909732453}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 1
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 8.71, y: 9.02}
-    newSize: {x: 8.71, y: 9.02}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 2.5403895, y: -1.9859469}
-      - {x: 2.76692, y: -1.1047204}
-      - {x: 3.2341843, y: 1.0422773}
-      - {x: 2.360888, y: 1.9232349}
-      - {x: 2.4291506, y: 3.2737315}
-      - {x: 0.74081135, y: 3.200184}
-      - {x: -0.7377181, y: 4.241151}
-      - {x: -2.6253958, y: 4.295708}
-      - {x: -2.5654705, y: 2.7570763}
-      - {x: -4.0677147, y: 1.8011496}
-      - {x: -3.8817296, y: 0.71069837}
-      - {x: -2.7340584, y: -0.15707755}
-      - {x: -3.127887, y: -1.113282}
-      - {x: -2.3633096, y: -1.7643526}
-      - {x: -0.39570236, y: -2.067732}
-      - {x: 1.1246667, y: -2.7359421}
-      - {x: 2.1387239, y: -3.2424395}
---- !u!249 &6762660373909732448
-AreaEffector2D:
-  serializedVersion: 2
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6762660373909732453}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 256
-  m_UseGlobalAngle: 0
-  m_ForceAngle: 0
-  m_ForceMagnitude: 0
-  m_ForceVariation: 0
-  m_ForceTarget: 0
-  m_Drag: 10
-  m_AngularDrag: 0
 --- !u!1 &6830987597354534901
 GameObject:
   m_ObjectHideFlags: 0
@@ -20707,8 +20323,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7246087285723749129}
   - component: {fileID: 7246087285723749128}
-  - component: {fileID: 7246087285723749135}
-  - component: {fileID: 7246087285723749134}
   m_Layer: 0
   m_Name: Pebbles (5)
   m_TagString: Untagged
@@ -20778,68 +20392,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &7246087285723749135
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7246087285723749131}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 1
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 8.71, y: 9.02}
-    newSize: {x: 8.71, y: 9.02}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 2.5403895, y: -1.9859469}
-      - {x: 2.76692, y: -1.1047204}
-      - {x: 3.2341843, y: 1.0422773}
-      - {x: 2.360888, y: 1.9232349}
-      - {x: 2.4291506, y: 3.2737315}
-      - {x: 0.74081135, y: 3.200184}
-      - {x: -0.7377181, y: 4.241151}
-      - {x: -2.6253958, y: 4.295708}
-      - {x: -2.5654705, y: 2.7570763}
-      - {x: -4.0677147, y: 1.8011496}
-      - {x: -3.8817296, y: 0.71069837}
-      - {x: -2.7340584, y: -0.15707755}
-      - {x: -3.127887, y: -1.113282}
-      - {x: -2.3633096, y: -1.7643526}
-      - {x: -0.39570236, y: -2.067732}
-      - {x: 1.1246667, y: -2.7359421}
-      - {x: 2.1387239, y: -3.2424395}
---- !u!249 &7246087285723749134
-AreaEffector2D:
-  serializedVersion: 2
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7246087285723749131}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 256
-  m_UseGlobalAngle: 0
-  m_ForceAngle: 0
-  m_ForceMagnitude: 0
-  m_ForceVariation: 0
-  m_ForceTarget: 0
-  m_Drag: 10
-  m_AngularDrag: 0
 --- !u!1 &7289969672031957650
 GameObject:
   m_ObjectHideFlags: 0
@@ -26079,8 +25631,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8119753914136459999}
   - component: {fileID: 8119753914136459998}
-  - component: {fileID: 8119753914136459993}
-  - component: {fileID: 8119753914136459992}
   m_Layer: 0
   m_Name: Pebbles (3)
   m_TagString: Untagged
@@ -26150,68 +25700,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &8119753914136459993
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8119753914136459997}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 1
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 8.71, y: 9.02}
-    newSize: {x: 8.71, y: 9.02}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 2.5403895, y: -1.9859469}
-      - {x: 2.76692, y: -1.1047204}
-      - {x: 3.2341843, y: 1.0422773}
-      - {x: 2.360888, y: 1.9232349}
-      - {x: 2.4291506, y: 3.2737315}
-      - {x: 0.74081135, y: 3.200184}
-      - {x: -0.7377181, y: 4.241151}
-      - {x: -2.6253958, y: 4.295708}
-      - {x: -2.5654705, y: 2.7570763}
-      - {x: -4.0677147, y: 1.8011496}
-      - {x: -3.8817296, y: 0.71069837}
-      - {x: -2.7340584, y: -0.15707755}
-      - {x: -3.127887, y: -1.113282}
-      - {x: -2.3633096, y: -1.7643526}
-      - {x: -0.39570236, y: -2.067732}
-      - {x: 1.1246667, y: -2.7359421}
-      - {x: 2.1387239, y: -3.2424395}
---- !u!249 &8119753914136459992
-AreaEffector2D:
-  serializedVersion: 2
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8119753914136459997}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 256
-  m_UseGlobalAngle: 0
-  m_ForceAngle: 0
-  m_ForceMagnitude: 0
-  m_ForceVariation: 0
-  m_ForceTarget: 0
-  m_Drag: 10
-  m_AngularDrag: 0
 --- !u!1 &8221588964750399915
 GameObject:
   m_ObjectHideFlags: 0
@@ -31385,6 +30873,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3219519436198731875}
     m_Modifications:
+    - target: {fileID: 8705266159267040620, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 5397513002039097145, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 33
+      objectReference: {fileID: 0}
+    - target: {fileID: 7954672402632853113, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400583304429962427, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5844469303990589447, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
         type: 3}
       propertyPath: m_Name
@@ -31489,17 +30997,157 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 06c92ab5e3c9e0745ad2472dd691caa6,
         type: 3}
+    - target: {fileID: 2581343939572934190, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581343937924227414, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581343939483063663, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 37
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581343939160893543, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 38
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581343939748249029, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 39
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581343938811472985, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581343939296462149, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 41
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581343938244871762, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 42
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581343939444524321, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 43
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581343939459555325, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 44
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581343938562803748, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581343939780303523, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 46
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581343938436098040, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 47
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581343939171870406, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581343939064977602, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 49
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581343938730544514, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581343938478823383, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 51
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581343939766933899, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 52
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581343938759496493, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 53
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581343939809731291, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 54
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581343939187657674, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581343938953571510, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581343938940839963, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 57
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581343938293337146, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581343938574208366, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 59
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581343938914655357, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581343939373697823, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 61
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581343939622199120, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 62
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d, type: 3}
---- !u!4 &8304421964089384406 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5962139752254233928, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
-    type: 3}
-  m_PrefabInstance: {fileID: 2414770814431166622}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8113591652790966431 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5844469303990589441, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
+    type: 3}
+  m_PrefabInstance: {fileID: 2414770814431166622}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8304421964089384406 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5962139752254233928, guid: 5cdd7e4559e9c4cf39b69dbae041cb6d,
     type: 3}
   m_PrefabInstance: {fileID: 2414770814431166622}
   m_PrefabAsset: {fileID: 0}
