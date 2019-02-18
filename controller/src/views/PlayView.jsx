@@ -7,7 +7,8 @@ class PlayView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      previousInput: undefined
+      previousInput: undefined,
+      turtleSwipe: "noSwipe"
     };
 
     props.airconsole.vibrate(500);
@@ -18,7 +19,8 @@ class PlayView extends Component {
     const { previousInput } = this.state;
 
     // TODO: Make this relative to size of screen. AKA, boost if X% of the phone screen
-    const power = swipe.distance > 100 ? 2.0 : 1.0;
+    // const power = swipe.distance > 100 ? 2.0 : 1.0;
+    const power = 2.0; // We got rid of swipe power boost, tapping only now
 
     if (previousInput === swipe.action) {
       airconsole.message(AirConsole.SCREEN, {
@@ -34,13 +36,19 @@ class PlayView extends Component {
       // console.log("straight");
     }
 
+    setTimeout(() => {
+      this.setState({ turtleSwipe: "noSwipe" });
+    }, 250);
+
     this.setState({
+      turtleSwipe: swipe.action,
       previousInput: swipe.action
     });
   }
 
   render() {
     const { airconsole, body, number, showBow } = this.props;
+    const { turtleSwipe } = this.state;
 
     return (
       <div id="playView">
@@ -50,6 +58,7 @@ class PlayView extends Component {
             body={body}
             number={number}
             showBow={showBow}
+            swipe={turtleSwipe}
           />
         </div>
         <div id="flippers">

@@ -13,7 +13,8 @@ import turtleRed from "../../assets/images/bodies/turtle_red_1.png";
 
 import turtleLegsLeft from "../../assets/images/turtle_legs_left_2.png";
 import turtleLegsRight from "../../assets/images/turtle_legs_right_2.png";
-import swipeArrows from "../../assets/images/swipe_arrows.png";
+import turtleLegsLeftClosed from "../../assets/images/turtle_legs_left_1.png";
+import turtleLegsRightClosed from "../../assets/images/turtle_legs_right_1.png";
 
 import bow from "../../assets/images/turtle_winner_bow.png";
 
@@ -67,6 +68,42 @@ const Dot = ({ pulse, side }) => (
   </div>
 );
 
+function getSwipeImage({ showSwipeArrows, swipe, side }) {
+  // This means the turtle cannot move right now, so don't show swipes
+  if (!showSwipeArrows) {
+    switch (side) {
+      case "left":
+        return turtleLegsLeft;
+      case "right":
+        return turtleLegsRight;
+    }
+  }
+
+  switch (swipe) {
+    case "swipeLeftEnd":
+      switch (side) {
+        case "left":
+          return turtleLegsLeftClosed;
+        case "right":
+          return turtleLegsRight;
+      }
+    case "swipeRightEnd":
+      switch (side) {
+        case "left":
+          return turtleLegsLeft;
+        case "right":
+          return turtleLegsRightClosed;
+      }
+    case "noSwipe":
+      switch (side) {
+        case "left":
+          return turtleLegsLeft;
+        case "right":
+          return turtleLegsRight;
+      }
+  }
+}
+
 class Turtle extends Component {
   constructor(props) {
     super(props);
@@ -83,13 +120,25 @@ class Turtle extends Component {
       750
     );
   }
+
   render() {
     const { swipeArrowsFlipped, leftSide } = this.state;
-    const { showSwipeArrows, body, number, hidden, showBow } = this.props;
+    const {
+      showSwipeArrows,
+      body,
+      number,
+      hidden,
+      showBow,
+      swipe
+    } = this.props;
 
     const style = hidden ? { display: "none" } : {};
     const swipeArrowStyle = swipeArrowsFlipped ? { display: "none" } : {};
     const showBowStyle = !showBow ? { display: "none" } : {};
+
+    if (swipe) {
+      // TODO: change in sync to this
+    }
 
     return (
       <div className={`turtle ${hidden ? "" : "slideInUp"}`} style={style}>
@@ -98,8 +147,14 @@ class Turtle extends Component {
         <div className="numberContainer">
           <p className="number">{number}</p>
         </div>
-        <img src={turtleLegsLeft} className="left-legs" />
-        <img src={turtleLegsRight} className="right-legs" />
+        <img
+          src={getSwipeImage({ showSwipeArrows, swipe, side: "left" })}
+          className="left-legs"
+        />
+        <img
+          src={getSwipeImage({ showSwipeArrows, swipe, side: "right" })}
+          className="right-legs"
+        />
         {showSwipeArrows ? (
           // <img
           //   src={swipeArrows}

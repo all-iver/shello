@@ -334,3 +334,11 @@ img {
   display: flex;
   justify-content: flex-start;
 }
+
+#victoryView .turtle {
+  margin-right: 2em;
+}
+
+#victoryView .victoryViewTextContainer {
+  margin-right: 5.5em;
+}
