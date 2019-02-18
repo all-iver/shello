@@ -139,14 +139,18 @@ public class AirController : MonoBehaviour {
         Player player = players[device];
         // initialize this player into the nest.  note that this player could have already existed but just dropped
         // and reconnected.  if we're waiting to start the race, put them in an egg.
-        if (gameState == GameState.WaitingToStart)
+        if (gameState == GameState.WaitingToStart) {
             PutPlayerInEgg(player);
-        // if we're already in a game, tell the controller it needs to wait
-        if (gameState != GameState.WaitingToStart) {
-            Dictionary<string, string> data = new Dictionary<string, string>();
-            data.Add("action", "gameState");
-            data.Add("view", "WaitingView");
-            AirConsole.instance.Message(player.deviceID, data);
+        } else {
+            player.HideTurtle();
+            player.state = Player.PlayerState.Initial;
+            // if we're already in a game, tell the controller it needs to wait
+            if (gameState != GameState.WaitingToStart) {
+                Dictionary<string, string> data = new Dictionary<string, string>();
+                data.Add("action", "gameState");
+                data.Add("view", "WaitingView");
+                AirConsole.instance.Message(player.deviceID, data);
+            }
         }
     }
 
@@ -174,19 +178,34 @@ public class AirController : MonoBehaviour {
             try {
                 player.eggIndex = nest.ClaimRandomEgg();
             } catch {
+                Debug.Log(string.Format("Too many players for player {0}", player.deviceID));
                 player.state = Player.PlayerState.TooManyPlayers;
+                if (!player.isKeyboard) {
+                    Dictionary<string, string> data = new Dictionary<string, string>();
+                    data.Add("action", "gameState");
+                    data.Add("view", "WaitingView");
+                    AirConsole.instance.Message(player.deviceID, data);
+                }
                 return;
             }
         }
         player.state = Player.PlayerState.InEgg;
         player.egg = nest.GetEggAtIndex(player.eggIndex);
         player.egg.GetComponent<Egg>().Reset();
+        Debug.Log(string.Format("Put player {0} in an egg", player.deviceID));
+        if (!player.isKeyboard) {
+            Dictionary<string, string> data = new Dictionary<string, string>();
+            data.Add("action", "gameState");
+            data.Add("view", "IntroView");
+            AirConsole.instance.Message(player.deviceID, data);
+        }
     }
 
     // this makes it so a player is ready to play and their turtle is visible rather than their egg
     void HatchPlayer(Player player) {
         if (player.state != Player.PlayerState.InEgg)
             throw new System.Exception("Player is not in an egg");
+        Debug.Log(string.Format("Player {0} hatched", player.deviceID));
         player.state = Player.PlayerState.Hatched;
         player.turtle.GetComponent<SpriteRenderer>().sprite = turtleBodies[Random.Range(0, turtleBodies.Length)];
         player.ShowTurtle();
@@ -267,7 +286,11 @@ public class AirController : MonoBehaviour {
         currentRaceStartTime = Time.time;
         gameState = GameState.InProgress;
         // tell the various devices to let the players start moving
-        AirConsole.instance.Broadcast(GetGameStateData());
+        try {
+            AirConsole.instance.Broadcast(GetGameStateData());
+        } catch (AirConsole.NotReadyException) {
+            // only keyboard players exist
+        }
         StartCoroutine(BlinkExcitingText(logoText));
         introMusic.Stop();
         StartCoroutine(PlayRaceMusic());
@@ -283,10 +306,25 @@ public class AirController : MonoBehaviour {
     IEnumerator ShowWinScreen() {
         gameState = GameState.ShowingWinScreen;
         UpdateWinScreenAndBow();
+
+        // broadcast victory view
+        Dictionary<string, string> data = new Dictionary<string, string>();
+        data.Add("action", "gameState");
+        data.Add("view", "VictoryView");
+        try {
+            AirConsole.instance.Broadcast(data);
+        } catch (AirConsole.NotReadyException) {
+            // only keyboard players exist
+        }
+
         yield return winScreen.Show();
         LoadLevel();
         // tell the various devices to switch back to the intro screen
-        AirConsole.instance.Broadcast(GetGameStateData());
+        try {
+            AirConsole.instance.Broadcast(GetGameStateData());
+        } catch (AirConsole.NotReadyException) {
+            // only keyboard players exist
+        }
     }
 
     void FinishRace() {
@@ -302,6 +340,11 @@ public class AirController : MonoBehaviour {
                 player.turtle.transform.position = new Vector3(0, -5000, 0); // hack!  get them away
                 GameSounds.instance.PlayWinSound();
                 player.finishTime = Time.time - currentRaceStartTime;
+                // get their rank
+                int rank = 1;
+                foreach (Player p in players.Values)
+                    if (p.state == Player.PlayerState.Finished)
+                        rank ++;
                 player.state = Player.PlayerState.Finished; // set this after doing the above!
                 Debug.Log(string.Format("Turtle {0} finished at time {1}", player.deviceID, player.finishTime));
                 if (AllPlayersHaveFinished())
@@ -313,6 +356,19 @@ public class AirController : MonoBehaviour {
                         cam.RemoveCameraTarget(player.turtle.transform);
                     } catch {
                     }
+                }
+                // send the turtle their time and place
+                if (!player.isKeyboard) {
+                    Dictionary<string, string> data = new Dictionary<string, string>();
+                    data.Add("action", "gameState");
+                    data.Add("view", "VictoryView");
+                    AirConsole.instance.Message(player.deviceID, data);
+                    data = new Dictionary<string, string>();
+                    data.Add("action", "turtle");
+                    data.Add("time", string.Format("{0:F2}s", player.finishTime));
+                    data.Add("place", "" + rank);
+                    data.Add("showBow", (rank == 1) ? "true" : "false");
+                    AirConsole.instance.Message(player.deviceID, data);
                 }
             }
         }
@@ -487,8 +543,8 @@ public class AirController : MonoBehaviour {
         if (gameState == GameState.WaitingToStart) {
             if (data["action"].ToString() == "ready" && players[from].state == Player.PlayerState.InEgg)
                 HatchPlayer(players[from]);
-            if (data["action"].ToString() == "unready" && players[from].state == Player.PlayerState.Hatched)
-                PutPlayerInEgg(players[from]);
+            // if (data["action"].ToString() == "unready" && players[from].state == Player.PlayerState.Hatched)
+            //     PutPlayerInEgg(players[from]);
         } else {
             if (players[from].state == Player.PlayerState.InRace) {
                 players[from].turtle.ButtonInput(data);

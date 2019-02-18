@@ -96,8 +96,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targets: []
-  zoomSmoothing: 1
-  panSmoothing: 1
+  zoomSmoothing: 0.5
+  panSmoothing: 0.5
   padding: 3
   minOrtho: 5
   maxOrtho: 30

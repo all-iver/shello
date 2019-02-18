@@ -106,6 +106,7 @@ public class WinScreen : MonoBehaviour
         turtle.gameObject.SetActive(true);
         turtle.body.sprite = body;
         turtle.number.text = isKeyboard ? "K" : ("" + number);
+        turtle.rank.text = "" + (rank + 1);
         turtle.bow.gameObject.SetActive(false);
         if (time <= 0) {
             turtle.time.gameObject.SetActive(true);

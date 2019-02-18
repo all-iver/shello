@@ -49,7 +49,7 @@ public class Nest : MonoBehaviour
                 c -= eggs.childCount;
             if (ownership[c] == 0) {
                 ownership[c] = isAI ? 2 : 1;
-                Debug.Log("Got egg at " + c);
+                // Debug.Log("Got egg at " + c);
                 return c;
             }
         }
@@ -63,7 +63,7 @@ public class Nest : MonoBehaviour
     public void ReleaseEgg(int egg) {
         if (ownership[egg] == 2)
             throw new System.Exception("Trying to release an AI egg");
-        Debug.Log("Released egg at " + egg);
+        // Debug.Log("Released egg at " + egg);
         ownership[egg] = 0;
         eggs.GetChild(egg).GetComponent<Egg>().Reset();
         // eggs.GetChild(egg).gameObject.SetActive(false);
