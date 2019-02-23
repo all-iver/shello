@@ -48,6 +48,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: foreground
+  - name: Rocks
+    uniqueID: 1318732213
+    locked: 0
+  - name: Foreground
     uniqueID: 1914821571
     locked: 0
