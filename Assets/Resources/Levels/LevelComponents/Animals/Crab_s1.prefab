@@ -202,8 +202,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  startMarker: {fileID: 3274826932197298133}
-  endMarker: {fileID: 8227352890870921307}
+  startMarker: {fileID: 8227352890870921307}
+  endMarker: {fileID: 3274826932197298133}
   targetTransformsArray:
   - {fileID: 8227352890870921307}
   - {fileID: 3274826932197298133}

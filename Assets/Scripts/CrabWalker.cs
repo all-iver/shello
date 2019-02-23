@@ -67,7 +67,7 @@ public class CrabWalker : MonoBehaviour
 		
 		if (isResettingTarget)
 		{
-			SetNewTarget();
+			ResetTarget();
 			isResettingTarget = false;
 
 			//Debug.Log("ReSetting Target via UPDATE");
@@ -82,21 +82,39 @@ public class CrabWalker : MonoBehaviour
 
 	void SetNewTarget()
 	{
-		//Build Target List
-		//foreach (AiTarget target in FindObjectsOfType<AiTarget>())
-		//{
-		//	targetTransformsArray.Add(target.transform);
-		//}
-		//Set Target
 		int randomTarget = Random.Range(0, targetTransformsArray.Count);
+
+		while (currentTarget == targetTransformsArray[randomTarget])
+		{
+			randomTarget = Random.Range(0, targetTransformsArray.Count);
+		}
+
 		currentTarget = targetTransformsArray[randomTarget];
 		
+		// Keep a note of the time the movement started.
+		startTime = Time.time;
+		
+		// Calculate the journey length.
+		journeyLength = Vector3.Distance(startMarker.position, endMarker.position);
+	}
+
+	void ResetTarget()
+	{
+		int randomTarget = Random.Range(0, targetTransformsArray.Count);
+
+		while (currentTarget == targetTransformsArray[randomTarget])
+		{
+			randomTarget = Random.Range(0, targetTransformsArray.Count);
+		}
+
+		currentTarget = targetTransformsArray[randomTarget];
+
 		// Keep a note of the time the movement started.
 		startTime = Time.time;
 
 		startMarker = endMarker;
 		endMarker = currentTarget;
-		
+
 		// Calculate the journey length.
 		journeyLength = Vector3.Distance(startMarker.position, endMarker.position);
 	}
