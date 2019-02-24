@@ -1,27 +1,28 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SeagullShadow : MonoBehaviour
 {
-    public GameObject seagullShadow;
-    private SpriteRenderer spriteRenderer;
+    //public GameObject seagullShadow;
+    public SpriteRenderer spriteRenderer;
 
-    public Transform[] positions;
+    public Transform[] startingPos;
+	public Transform[] targetPos;
 
-    public float speed;
+	public float speed;
     public float waitTime;
 
-    //public bool movingLeft;
-
-    public Transform target;
+	//public bool movingLeft;
+	//public Transform currentPos;
+	public Transform target;
     public float step;
     public int x = 0;
 
     void Start()
     {
         StartCoroutine("WaitAndFly");
-        spriteRenderer = seagullShadow.GetComponent<SpriteRenderer>();
+       //spriteRenderer = seagullShadow.GetComponent<SpriteRenderer>();
     }
 
 
@@ -29,61 +30,38 @@ public class SeagullShadow : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(waitTime);
+			UpdateSeagull();
+			yield return new WaitForSeconds(waitTime);
             x++;
-            UpdateSeagull();
             //movingLeft = !movingLeft; //toggle
         }
     }
 
     void UpdateSeagull()
     {
-        if (x >= positions.Length)
+        if (x >= startingPos.Length)
         {
             x = 0;
         }
+	
+		if (x == 1)
+		{
+			spriteRenderer.flipX = true;
+		}
+		else
+		{
+			spriteRenderer.flipX = false;
+		}
 
-        if (x == 0)
-        {
-            target = positions[x];
-            spriteRenderer.flipX = false;
-            spriteRenderer.flipY = false;
-        }
-
-        if (x == 1)
-        {
-            target = positions[x];
-            spriteRenderer.flipX = true;
-            spriteRenderer.flipY = true;
-        }
-
-        if (x == 2)
-        {
-            target = positions[x];
-            spriteRenderer.flipX = false;
-            spriteRenderer.flipY = false;
-        }
-
-        if (x == 3)
-        {
-            target = positions[x];
-            spriteRenderer.flipX = true;
-            spriteRenderer.flipY = true;
-        }
-
-        if (x == 4)
-        {
-            target = positions[x];
-            spriteRenderer.flipX = true;
-            spriteRenderer.flipY = false;
-        }
-    }
+		transform.position = startingPos[x].position;
+		target = targetPos[x];
+	}
 
     private void Update()
     {
-        step = speed * Time.deltaTime; // calculate distance to move
-        seagullShadow.transform.position = Vector3.MoveTowards(seagullShadow.transform.position, target.position, step);
-    }
+        step = speed * Time.deltaTime;
+        transform.position = Vector3.MoveTowards(transform.position, target.position, step);
+	}
 }
 
 
