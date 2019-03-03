@@ -24,10 +24,15 @@ class App extends Component {
       number: "?",
       turtleHidden: true,
       showBow: false,
-      loaded: false
+      loaded: false,
+      hasAnyMessageBeenReceived: false
     };
 
     props.airconsole.onMessage = (id, data) => {
+      this.setState({
+        hasAnyMessageBeenReceived: true
+      });
+
       switch (data.action) {
         case "gameState":
           this.setState(prevState => ({
@@ -56,7 +61,8 @@ class App extends Component {
       showBow,
       time,
       place,
-      loaded
+      loaded,
+      hasAnyMessageBeenReceived
     } = this.state;
     const { airconsole } = this.props;
     const View = loaded ? views[this.state.currentView] : LoadingView;
@@ -80,6 +86,7 @@ class App extends Component {
             loaded: true
           })
         }
+        hasAnyMessageBeenReceived={hasAnyMessageBeenReceived}
       />
     );
   }

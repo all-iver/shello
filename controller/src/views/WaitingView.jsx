@@ -11,7 +11,7 @@ class IntroView extends Component {
     };
   }
   render() {
-    const { airconsole } = this.props;
+    const { airconsole, hasAnyMessageBeenReceived } = this.props;
 
     return (
       <div id="waitingView">
@@ -23,7 +23,11 @@ class IntroView extends Component {
             })
           }
           crackable={false}
-          text="Waiting for other players to finish the race!"
+          text={
+            hasAnyMessageBeenReceived
+              ? "Waiting for other players to finish the race!"
+              : "Waiting for game to load..."
+          }
         />
       </div>
     );
