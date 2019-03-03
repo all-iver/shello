@@ -349,3 +349,10 @@ img {
 #loadingView progress {
   background-color: white;
 }
+
+#playView .instructions {
+  position: absolute;
+  text-align: center;
+  bottom: 0;
+  width: 100%;
+}
