@@ -1863,7 +1863,7 @@ PrefabInstance:
     - target: {fileID: 661980906, guid: 3053b17ad9e28ef4db0091c4883fd2f4, type: 3}
       propertyPath: sounds.winSound
       value: 
-      objectReference: {fileID: 8300000, guid: 41bdc1651f715482486c062d3ab0b12a, type: 3}
+      objectReference: {fileID: 8300000, guid: a4e30b1cca96ca54f9f539f0d86f355c, type: 3}
     - target: {fileID: 661980906, guid: 3053b17ad9e28ef4db0091c4883fd2f4, type: 3}
       propertyPath: sounds.tadaSound
       value: 
