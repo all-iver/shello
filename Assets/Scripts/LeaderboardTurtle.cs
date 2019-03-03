@@ -5,6 +5,6 @@ using UnityEngine.UI;
 
 public class LeaderboardTurtle : MonoBehaviour
 {
-    public Image body, bow;
-    public TMPro.TextMeshProUGUI rank, time, number;
+    public Image body, bow, trophy;
+    public TMPro.TextMeshProUGUI rank, time, number, wins;
 }
