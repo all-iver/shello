@@ -77,7 +77,8 @@ public class AirController : MonoBehaviour {
     public Dictionary<int, Player> players = new Dictionary<int, Player> (); 
     TrackingCamera cam;
     public Image instructionsPanel;
-    public TMPro.TMP_Text statusText, joiningText, excitingText;
+    public TMPro.TMP_Text statusText, joiningText, excitingText, levelName, levelNumber, waitingReminder, 
+            countdownText;
     string code;
     public float secondsToWaitWhenAllPlayersAreHatched = 10;
     public float secondsToWaitForPlayersToFinish = 30;
@@ -103,6 +104,8 @@ public class AirController : MonoBehaviour {
         cam = FindObjectOfType<TrackingCamera>();
         statusText.text = "Loading...";
         joiningText.text = "";
+        excitingText.gameObject.SetActive(false);
+        countdownText.gameObject.SetActive(false);
         gameState = GameState.WaitingToStart;
 
         LoadLevel();
@@ -117,10 +120,10 @@ public class AirController : MonoBehaviour {
     }
 
     string GetStatusText() {
-        if (GetConnectedPlayerCount() == 0)
+        if (GetConnectedPlayerCount() == 0 && gameState == GameState.WaitingToStart)
             return "Waiting for players...";
         if (gameState == GameState.WaitingToStart && !AllPlayersAreHatched())
-            return "The race will start when everyone hatches.\nTap the egg on your phone!";
+            return "Tap the egg on your phone to hatch!";
         if (gameState == GameState.WaitingToStart)
             return "Get ready! The race is starting in " + Mathf.CeilToInt(hatchTimer) + " seconds!";
         if (gameState == GameState.WaitingToFinish)
@@ -263,7 +266,6 @@ public class AirController : MonoBehaviour {
                 ReleaseEgg(player);
             player.isInCurrentRace = false;
         }
-        excitingText.text = logoText;
 
         // instantiate the level prefab and find the nest
         if (levelIndex >= 0) {
@@ -290,12 +292,14 @@ public class AirController : MonoBehaviour {
     }
 
     IEnumerator BlinkExcitingText(string text, int times = 5, float onDuration = 0.5f, float offDuration = 0.1f) {
+        excitingText.gameObject.SetActive(true);
         for (int i = 0; i < times; i++) {
             excitingText.text = text;
             yield return new WaitForSeconds(onDuration);
             excitingText.text = "";
             yield return new WaitForSeconds(offDuration);
         }
+        excitingText.gameObject.SetActive(false);
     }
 
     void StartRace() {
@@ -406,9 +410,42 @@ public class AirController : MonoBehaviour {
         }
     }
 
-    void Update() {
+    void UpdateUI() {
         statusText.text = GetStatusText();
-        joiningText.text = GetJoiningText();
+
+        // joiningText.text = GetJoiningText();
+        joiningText.gameObject.SetActive(false);
+
+        if (gameState == GameState.WaitingToStart) {
+            if (level) {
+                levelName.text = level.displayName;
+                levelNumber.text = "LEVEL " + (levelIndex + 1);
+            } else {
+                levelName.text = "";
+                levelNumber.text = "";
+            }
+        } else {
+            levelName.text = "";
+            levelNumber.text = "";
+        }
+
+        if (gameState == GameState.WaitingToStart && AllPlayersAreHatched() && GetConnectedPlayerCount() >= 1
+                && hatchTimer <= 5) {
+            countdownText.gameObject.SetActive(true);
+            countdownText.text = "" + Mathf.CeilToInt(hatchTimer);
+        } else {
+            countdownText.gameObject.SetActive(false);
+        }
+
+        if (gameState == GameState.WaitingToStart && !AllPlayersAreHatched()) {
+            waitingReminder.gameObject.SetActive(true);
+        } else {
+            waitingReminder.gameObject.SetActive(false);
+        }
+    }
+
+    void Update() {
+        UpdateUI();
 
         // testing keyboard player stuff
         if (gameState == GameState.WaitingToStart && Input.GetKeyDown("r") && players.ContainsKey(-1) 

@@ -79,7 +79,7 @@ public class Turtle : MonoBehaviour {
 		if (swipedStraight) {
             turtleAnimController.SetTrigger("LeftFlipper");
             turtleAnimController.SetTrigger("RightFlipper");
-			rb.AddForceAtPosition(transform.up * lurchForce * 2f, transform.position, ForceMode2D.Impulse);
+			rb.AddForceAtPosition(transform.up * lurchForce * 1.8f, transform.position, ForceMode2D.Impulse);
         }
         swipedLeftSide = swipedRightSide = swipedStraight = false;
 	}
