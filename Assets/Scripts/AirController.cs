@@ -27,6 +27,7 @@ public class AirController : MonoBehaviour {
         public bool isKeyboard;
         public bool isInCurrentRace; // in case the player drops, this will let us know if they were in the race
         public float finishTime;
+        public int wins;
         bool _isTheBest;
         public bool isTheBest {
             get { return _isTheBest; }
@@ -380,10 +381,12 @@ public class AirController : MonoBehaviour {
                 foreach (Player p in players.Values)
                     if (p.state == Player.PlayerState.Finished)
                         rank ++;
-                if (rank == 1)
+                if (rank == 1) {
                     GameSounds.instance.PlayWinSound();
-                else
+                    player.wins ++;
+                } else {
                     GameSounds.instance.PlayTadaSound();
+                }
                 player.state = Player.PlayerState.Finished; // set this after doing the above!
                 Debug.Log(string.Format("Turtle {0} finished at time {1}", player.deviceID, player.finishTime));
                 if (AllPlayersHaveFinished())
@@ -523,13 +526,19 @@ public class AirController : MonoBehaviour {
                     p => p.state == Player.PlayerState.Finished || p.state == Player.PlayerState.InRace)
                 .OrderBy(p => GetRankForPlayer(p)).ToArray();
         winScreen.SetNumPlayers(sortedPlayers.Length);
+        bool resetWinCounts = false;
         for (int i = 0; i < sortedPlayers.Length; i++) {
             if (i == 0)
                 sortedPlayers[i].isTheBest = true;
             winScreen.SetRank(i, sortedPlayers[i].turtle.GetComponent<SpriteRenderer>().sprite, 
                     sortedPlayers[i].deviceID, sortedPlayers[i].finishTime, sortedPlayers[i].isTheBest, 
-                    sortedPlayers[i].isKeyboard);
+                    sortedPlayers[i].wins, sortedPlayers[i].isKeyboard);
+            if (sortedPlayers[i].wins >= 5)
+                resetWinCounts = true;
         }
+        if (resetWinCounts)
+            foreach (Player p in players.Values)
+                p.wins = 0;
     }
 
     // void UpdateLeaderboard(bool setBow) {

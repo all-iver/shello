@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public class WinScreen : MonoBehaviour
 {
-    public TMPro.TMP_Text levelName;
+    public TMPro.TMP_Text levelName, rules;
     public bool testStart;
     public RectTransform sizer, winnersList;
     public float secondsToShow = 10;
@@ -16,11 +16,13 @@ public class WinScreen : MonoBehaviour
     public int maxTurtlesToShow = 5;
     public TMPro.TMP_Text nextRaceTimer;
     float waitToCloseTimer;
+    public bool showTrophy;
+    int winningPlayer;
 
     // Start is called before the first frame update
     void Start()
     {
-        sizer.anchoredPosition = new Vector2(0, -500);
+        sizer.anchoredPosition = new Vector2(0, -700);
         backdrop.SetActive(false);
         sizer.gameObject.SetActive(false);
     }
@@ -41,33 +43,40 @@ public class WinScreen : MonoBehaviour
         if (showing)
             throw new System.Exception("Win screen is already showing");
 
+        if (showTrophy)
+            rules.text = string.Format("Congratulations Player {0}!", winningPlayer);
+        else
+            rules.text = string.Format("First to 5 wins is the champion!");
+
         // show
         waitToCloseTimer = secondsToShow;
         showing = true;
         backdrop.SetActive(true);
         sizer.gameObject.SetActive(true);
-        sizer.anchoredPosition = new Vector2(0, -500);
+        sizer.anchoredPosition = new Vector2(0, -700);
         Tween tween = sizer.DOAnchorPosY(0, 0.5f).SetEase(Ease.OutCubic);
         yield return tween.WaitForCompletion();
 
-        // put the bow on the winner
+        // put the bow (or trophy) on the winner
         if (winnersList.childCount > 0) {
             yield return new WaitForSeconds(1);
             LeaderboardTurtle turtle = winnersList.GetChild(0).GetComponent<LeaderboardTurtle>();
-            RectTransform bow = turtle.bow.GetComponent<RectTransform>();
-            bow.gameObject.SetActive(true);
+            RectTransform award = turtle.bow.GetComponent<RectTransform>();
+            if (showTrophy)
+                award = turtle.trophy.GetComponent<RectTransform>();
+            award.gameObject.SetActive(true);
             Vector3[] corners = new Vector3[4];
             sizer.GetWorldCorners(corners);
-            Transform oldParent = bow.parent;
-            bow.SetParent(sizer);
+            Transform oldParent = award.parent;
+            award.SetParent(sizer);
             Vector2 center = (corners[0] + corners[1] + corners[2] + corners[3]) / 4;
             Sequence s = DOTween.Sequence();
-            s.Append(bow.DOMove(center, 1).From());
-            s.Join(bow.DOScale(new Vector2(10, 10), 1).From());
-            s.SetDelay(1);
+            s.Append(award.DOMove(center, 1).From());
+            s.Join(award.DOScale(new Vector2(10, 10), 1).From());
+            s.SetDelay(showTrophy ? 3 : 1);
             s.SetEase(Ease.OutCubic);
             yield return s.WaitForCompletion();
-            bow.SetParent(oldParent);
+            award.SetParent(oldParent);
         }
 
         // wait
@@ -75,7 +84,7 @@ public class WinScreen : MonoBehaviour
             yield return new WaitForEndOfFrame();
 
         // hide
-        tween = sizer.DOAnchorPosY(-500, 0.5f).SetEase(Ease.OutCubic);
+        tween = sizer.DOAnchorPosY(-700, 0.5f).SetEase(Ease.OutCubic);
         yield return tween.WaitForCompletion();
         backdrop.SetActive(false);
         sizer.gameObject.SetActive(false);
@@ -85,6 +94,7 @@ public class WinScreen : MonoBehaviour
     // call this first to reset and prep, then call SetRank() for each turtle
     public void SetNumPlayers(int numPlayers) {
         Debug.Log("Num players = " + numPlayers);
+        showTrophy = false;
         while (turtlesParent.childCount > 0) {
             Transform t = turtlesParent.GetChild(0);
             t.SetParent(null);
@@ -100,7 +110,8 @@ public class WinScreen : MonoBehaviour
     }
 
     // rank is 0-based here
-    public void SetRank(int rank, Sprite body, int number, float time, bool hasBow, bool isKeyboard = false) {
+    public void SetRank(int rank, Sprite body, int number, float time, bool hasBow, int wins, 
+            bool isKeyboard = false) {
         if (rank >= maxTurtlesToShow)
             return;
         if (rank >= turtlesParent.childCount)
@@ -111,6 +122,12 @@ public class WinScreen : MonoBehaviour
         turtle.number.text = isKeyboard ? "K" : ("" + number);
         turtle.rank.text = "" + (rank + 1);
         turtle.bow.gameObject.SetActive(false);
+        turtle.trophy.gameObject.SetActive(false);
+        turtle.wins.text = "" + wins + "/5";
+        if (wins >= 5) {
+            showTrophy = true;
+            winningPlayer = number;
+        }
         if (time <= 0) {
             turtle.time.gameObject.SetActive(true);
             turtle.time.text = "---";
