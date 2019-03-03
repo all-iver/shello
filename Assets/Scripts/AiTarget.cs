@@ -17,6 +17,7 @@ public class AiTarget : MonoBehaviour
 			{
 				aiTurtle.currrentPathTargetNUM = targetNum + 1;
 				aiTurtle.NextTarget();
+                aiTurtle.isReorientingSelf = true;
 			}
 		}
 	}
