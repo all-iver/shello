@@ -7,7 +7,7 @@ public class GameSounds : MonoBehaviour {
 
     [System.Serializable]
     public class SoundFiles {
-        public AudioClip beep, goBeep, eggCrack, winSound;
+        public AudioClip beep, goBeep, eggCrack, winSound, tadaSound;
     }
     public SoundFiles sounds; 
     private List<AudioSource> sources;
@@ -52,6 +52,10 @@ public class GameSounds : MonoBehaviour {
 
     public void PlayWinSound() {
         PlayClip(sounds.winSound);
+    }
+
+    public void PlayTadaSound() {
+        PlayClip(sounds.tadaSound);
     }
 
 }

@@ -374,13 +374,16 @@ public class AirController : MonoBehaviour {
             if (player.turtle == turtle) {
                 // player.HideTurtle(); // this hides the trails too :/
                 player.turtle.transform.position = new Vector3(0, -5000, 0); // hack!  get them away
-                GameSounds.instance.PlayWinSound();
                 player.finishTime = Time.time - currentRaceStartTime;
                 // get their rank
                 int rank = 1;
                 foreach (Player p in players.Values)
                     if (p.state == Player.PlayerState.Finished)
                         rank ++;
+                if (rank == 1)
+                    GameSounds.instance.PlayWinSound();
+                else
+                    GameSounds.instance.PlayTadaSound();
                 player.state = Player.PlayerState.Finished; // set this after doing the above!
                 Debug.Log(string.Format("Turtle {0} finished at time {1}", player.deviceID, player.finishTime));
                 if (AllPlayersHaveFinished())

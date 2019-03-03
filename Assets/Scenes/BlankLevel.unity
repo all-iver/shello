@@ -244,7 +244,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 57.35
+  m_fontSize: 56.75
   m_fontSizeBase: 120.01
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1845,6 +1845,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -93.850586
       objectReference: {fileID: 0}
+    - target: {fileID: 661980906, guid: 3053b17ad9e28ef4db0091c4883fd2f4, type: 3}
+      propertyPath: sounds.winSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 41bdc1651f715482486c062d3ab0b12a, type: 3}
+    - target: {fileID: 661980906, guid: 3053b17ad9e28ef4db0091c4883fd2f4, type: 3}
+      propertyPath: sounds.tadaSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 902c7bd868db72b4da155ee62c30ae58, type: 3}
     - target: {fileID: 686446887, guid: 3053b17ad9e28ef4db0091c4883fd2f4, type: 3}
       propertyPath: m_IsActive
       value: 1
