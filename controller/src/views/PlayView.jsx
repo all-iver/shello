@@ -61,6 +61,9 @@ class PlayView extends Component {
             swipe={turtleSwipe}
           />
         </div>
+        <div className="instructions">
+          <p>Tap to turn in that direction, alternate to go straight.</p>
+        </div>
         <div id="flippers">
           <Flipper
             airconsole={airconsole}
