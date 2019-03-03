@@ -29,8 +29,7 @@ class Egg extends Component {
     this.state = {
       taps: 0,
       cracks: 0,
-      wobbling: false,
-      shattering: false
+      wobbling: false
     };
 
     this.audio = {
@@ -47,16 +46,16 @@ class Egg extends Component {
   }
   render() {
     const { ready, crackable = true } = this.props;
-    const { taps, wobbling, cracks, shattering } = this.state;
+    const { taps, wobbling, cracks } = this.state;
 
     let frame;
 
     switch (true) {
-      case Boolean(taps >= 9): // needs to be +1 of the onClick taps because its triggered by them
+      case Boolean(taps >= 3): // needs to be +1 of the onClick taps because its triggered by them
         frame = egg4;
         break;
 
-      case Boolean(taps >= 5):
+      case Boolean(taps >= 2):
         frame = egg3;
         break;
 
@@ -70,6 +69,12 @@ class Egg extends Component {
         break;
     }
 
+    const shattering = taps >= 3;
+
+    if (shattering) {
+      setTimeout(() => ready(), 1000);
+    }
+
     return (
       <div className="egg">
         <img
@@ -79,14 +84,6 @@ class Egg extends Component {
         <img
           src={frame}
           onClick={() => {
-            if (taps >= 8) {
-              this.setState({
-                shattering: true
-              });
-
-              setTimeout(() => ready(), 1000);
-            }
-
             this.audio[`tap${taps}`]
               ? this.audio[`tap${taps}`].play()
               : this.audio.tap0.play();
