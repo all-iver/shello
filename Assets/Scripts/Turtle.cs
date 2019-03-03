@@ -69,17 +69,17 @@ public class Turtle : MonoBehaviour {
 		if (swipedLeftSide) {
             //turtleAnimController.ResetTrigger("RightFlipper");
             turtleAnimController.SetTrigger("LeftFlipper");
-			rb.AddForceAtPosition(transform.up * lurchForce * 0.5f, rightFlipper.position, ForceMode2D.Impulse);
+			rb.AddForceAtPosition(transform.up * lurchForce * 0.35f, rightFlipper.position, ForceMode2D.Impulse);
 		}
 		if (swipedRightSide) {
             //turtleAnimController.ResetTrigger("LeftFlipper");
             turtleAnimController.SetTrigger("RightFlipper");
-			rb.AddForceAtPosition(transform.up * lurchForce * 0.5f, leftFlipper.position, ForceMode2D.Impulse);
+			rb.AddForceAtPosition(transform.up * lurchForce * 0.35f, leftFlipper.position, ForceMode2D.Impulse);
 		}
 		if (swipedStraight) {
             turtleAnimController.SetTrigger("LeftFlipper");
             turtleAnimController.SetTrigger("RightFlipper");
-			rb.AddForceAtPosition(transform.up * lurchForce * 2, transform.position, ForceMode2D.Impulse);
+			rb.AddForceAtPosition(transform.up * lurchForce * 2f, transform.position, ForceMode2D.Impulse);
         }
         swipedLeftSide = swipedRightSide = swipedStraight = false;
 	}

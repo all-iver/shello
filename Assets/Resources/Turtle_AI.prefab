@@ -670,7 +670,7 @@ MonoBehaviour:
   swipedRightSide: 0
   swipedLeftSide: 0
   swipedStraight: 0
-  lurchForce: 15
+  lurchForce: 20
   leftFlipper: {fileID: 1636180442}
   rightFlipper: {fileID: 1202873825}
   playerIDText: {fileID: 293733567}
@@ -687,11 +687,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00d431dab6ac34cfe84f5ca178b44657, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialDegreeSpread: 168
+  initialDegreeSpread: 90
   secondsBetweenMoves: 0.3
   rotationSpeed: 1
   timeReadjusting: 5
-  timeBetweenReorients: 8
+  timeBetweenReorients: 5
   isReorientingSelf: 0
   currentPath: {fileID: 0}
   currrentPathTargetNUM: 0
