@@ -83,7 +83,8 @@ public class AirController : MonoBehaviour {
     string code;
     public float secondsToWaitWhenAllPlayersAreHatched = 10;
     public float secondsToWaitForPlayersToFinish = 30;
-    float hatchTimer, finishTimer;
+    public float secondsBeforeAutoHatch = 10;
+    float hatchTimer, finishTimer, autoHatchTimer;
     Nest nest;
     float currentRaceStartTime;
     public Sprite[] turtleBodies;
@@ -259,6 +260,7 @@ public class AirController : MonoBehaviour {
         if (nest)
             nest.ResetAI(); // remove all the AI and release all their eggs
         // put everybody who hasn't dropped into an egg
+        autoHatchTimer = 0;
         gameState = GameState.WaitingToStart;
         foreach (Player player in players.Values) {
             if (player.state == Player.PlayerState.Dropped)
@@ -466,6 +468,13 @@ public class AirController : MonoBehaviour {
             OnDisconnect(-1);
         // end test keyboard stuff
 
+        // if it's been too long since the first player hatched, auto-hatch everybody
+        if (gameState == GameState.WaitingToStart && AnyPlayersAreHatched()) {
+            autoHatchTimer += Time.deltaTime;
+            if (autoHatchTimer >= secondsBeforeAutoHatch)
+                HatchAllUnhatchedPlayers();
+        }
+
         // if everyone has hatched then start the game
         if (GetConnectedPlayerCount() > 0 && AllPlayersAreHatched() && gameState == GameState.WaitingToStart) {
             float oldHatchTimer = hatchTimer;
@@ -536,9 +545,12 @@ public class AirController : MonoBehaviour {
             if (sortedPlayers[i].wins >= 5)
                 resetWinCounts = true;
         }
-        if (resetWinCounts)
-            foreach (Player p in players.Values)
+        if (resetWinCounts) {
+            foreach (Player p in players.Values) {
                 p.wins = 0;
+                p.isTheBest = false;
+            }
+        }
     }
 
     // void UpdateLeaderboard(bool setBow) {
@@ -568,6 +580,17 @@ public class AirController : MonoBehaviour {
                 return false;
         }
         return true;
+    }
+
+    // returns true if all non-dropped, able-to-play players are hatched
+    bool AnyPlayersAreHatched() {
+        foreach (Player p in players.Values) {
+            if (!p.IsAbleToPlay())
+                continue;
+            if (p.state == Player.PlayerState.Hatched)
+                return true;
+        }
+        return false;
     }
 
     // returns true if all non-dropped players who are in the current race are finished -- anyone not InRace is either
@@ -618,6 +641,12 @@ public class AirController : MonoBehaviour {
         if (isKeyboard)
             player.turtle.useKeyboardInput = true;
         players.Add(deviceID, player);
+    }
+
+    void HatchAllUnhatchedPlayers() {
+        foreach (Player p in players.Values)
+            if (p.state == Player.PlayerState.InEgg)
+                HatchPlayer(p);
     }
 
     void OnMessage(int from, JToken data){
