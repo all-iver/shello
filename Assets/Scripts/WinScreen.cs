@@ -62,8 +62,14 @@ public class WinScreen : MonoBehaviour
             yield return new WaitForSeconds(1);
             LeaderboardTurtle turtle = winnersList.GetChild(0).GetComponent<LeaderboardTurtle>();
             RectTransform award = turtle.bow.GetComponent<RectTransform>();
-            if (showTrophy)
+            if (showTrophy) {
                 award = turtle.trophy.GetComponent<RectTransform>();
+                // if (GameSounds.instance)
+                //     GameSounds.instance.PlayWinSound();
+            } else {
+            }
+            if (GameSounds.instance)
+                GameSounds.instance.PlayTadaSound();
             award.gameObject.SetActive(true);
             Vector3[] corners = new Vector3[4];
             sizer.GetWorldCorners(corners);
