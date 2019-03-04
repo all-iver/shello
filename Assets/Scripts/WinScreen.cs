@@ -78,7 +78,10 @@ public class WinScreen : MonoBehaviour
             Vector2 center = (corners[0] + corners[1] + corners[2] + corners[3]) / 4;
             Sequence s = DOTween.Sequence();
             s.Append(award.DOMove(center, 1).From());
-            s.Join(award.DOScale(new Vector2(10, 10), 1).From());
+            if (showTrophy)
+                s.Join(award.DOScale(new Vector2(8, 8), 1).From());
+            else
+                s.Join(award.DOScale(new Vector2(10, 10), 1).From());
             s.SetDelay(showTrophy ? 3 : 1);
             s.SetEase(Ease.OutCubic);
             yield return s.WaitForCompletion();

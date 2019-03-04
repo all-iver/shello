@@ -18,7 +18,7 @@ public class GameSounds : MonoBehaviour {
         instance = this;
     }
     
-    public void PlayClip(AudioClip clip) {
+    public void PlayClip(AudioClip clip, float volume = 1) {
         AudioSource source = null;
         for (int i = 0; i < sources.Count; i++) {
             if (!sources[i].isPlaying) {
@@ -33,6 +33,7 @@ public class GameSounds : MonoBehaviour {
             sources.Add(source);
         }
         source.clip = clip;
+        source.volume = volume;
         source.Play();
     }
 
@@ -47,7 +48,7 @@ public class GameSounds : MonoBehaviour {
     }
 
     public void PlayEggCrack() {
-        PlayClip(sounds.eggCrack);
+        PlayClip(sounds.eggCrack, 0.5f);
     }
 
     public void PlayWinSound() {
