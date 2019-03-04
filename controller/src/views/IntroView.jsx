@@ -23,7 +23,7 @@ class IntroView extends Component {
 
     return (
       <div id="introView">
-        {this.state.ready ? (
+        {this.state.ready || number !== "?" ? (
           <ReadyView
             airconsole={airconsole}
             unready={() => {
