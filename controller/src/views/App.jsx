@@ -36,7 +36,8 @@ class App extends Component {
       switch (data.action) {
         case "gameState":
           this.setState(prevState => ({
-            currentView: data.view
+            currentView: data.view,
+            number: data.view === "IntroView" ? "?" : prevState.number // reset number on entry to IntroView
           }));
           break;
         case "turtle":
