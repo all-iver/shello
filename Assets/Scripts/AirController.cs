@@ -352,6 +352,9 @@ public class AirController : MonoBehaviour {
         }
 
         yield return winScreen.Show();
+
+        introMusic.Play();
+
         if (levelIndex >= 0) {
             levelIndex ++;
             if (levelIndex >= levelPrefabs.Count)
@@ -368,7 +371,6 @@ public class AirController : MonoBehaviour {
 
     void FinishRace() {
         raceMusic.Stop();
-        introMusic.Play();
         StartCoroutine(ShowWinScreen());
     }
 

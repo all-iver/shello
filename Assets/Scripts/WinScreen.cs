@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using NDream.AirConsole;
 
 public class WinScreen : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class WinScreen : MonoBehaviour
     float waitToCloseTimer;
     public bool showTrophy;
     int winningPlayer;
+    bool adCompleteTrigger, showingAd;
+    public AudioSource ambientSounds;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +28,16 @@ public class WinScreen : MonoBehaviour
         sizer.anchoredPosition = new Vector2(0, -700);
         backdrop.SetActive(false);
         sizer.gameObject.SetActive(false);
+
+        AirConsole.instance.onAdComplete += OnAdComplete;
+        AirConsole.instance.onAdShow += OnAdShow;
+    }
+
+    void OnDestroy() {
+        if (AirConsole.instance) {
+            AirConsole.instance.onAdComplete -= OnAdComplete;
+            AirConsole.instance.onAdShow -= OnAdShow;
+        }
     }
 
     void Update() {
@@ -37,15 +50,47 @@ public class WinScreen : MonoBehaviour
             waitToCloseTimer -= Time.deltaTime;
             nextRaceTimer.text = string.Format("Next race in {0}...", Mathf.CeilToInt(waitToCloseTimer));
         }
+
+        if (showingAd) 
+            nextRaceTimer.text = "Waiting for ad...";
+    }
+
+    // note this doesn't always get called if AirConsole decides not to show an ad
+    void OnAdShow() {
+        Debug.Log("OnAdShow");
+        showingAd = true;
+        Time.timeScale = 0;
+        if (ambientSounds)
+            ambientSounds.Pause();
+    }
+
+    // afaik this always gets called after calling AirConsole.instance.ShowAd()
+    void OnAdComplete(bool adWasShown) {
+        Debug.Log("OnAdComplete " + adWasShown);
+        showingAd = false;
+        adCompleteTrigger = true;
+        Time.timeScale = 1;
+        if (ambientSounds)
+            ambientSounds.UnPause();
+    }
+
+    IEnumerator ShowAd() {
+        adCompleteTrigger = false;
+        Debug.Log("Calling ShowAd()");
+        AirConsole.instance.ShowAd();
+        while (!adCompleteTrigger)
+            yield return new WaitForEndOfFrame();
+        Debug.Log("Got ad complete trigger");
     }
 
     public IEnumerator Show() {
         if (showing)
             throw new System.Exception("Win screen is already showing");
 
-        if (showTrophy)
-            rules.text = string.Format("Congratulations Player {0}!", winningPlayer);
-        else
+        if (showTrophy) {
+            var nickname = winningPlayer >= 0 ? AirConsole.instance.GetNickname(winningPlayer) : "Keyboard Player";
+            rules.text = string.Format("Congratulations {0}!", nickname);
+        } else
             rules.text = string.Format("First to 5 wins is the champion!");
 
         // show
@@ -91,6 +136,9 @@ public class WinScreen : MonoBehaviour
         // wait
         while (waitToCloseTimer > 0)
             yield return new WaitForEndOfFrame();
+
+        // show an ad, maybe
+        yield return ShowAd();
 
         // hide
         tween = sizer.DOAnchorPosY(-700, 0.5f).SetEase(Ease.OutCubic);
